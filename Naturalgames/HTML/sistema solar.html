@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>SISTEMA SOLAR</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Necesito tu ayuda para retirar los planetas dañados y colocar los nuevos de cada ejemplo del museo que existe en el planeta
+		  </li>
+
+		  <li>
+		      Los planetas tienen una forma diferente pero los planetas siempre estan colocados en su sitio 
+		  </li>
+
+		  <li>
+		      si necesitas saber sobre el sistema solar puedes consultarlo en mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		      no importa que forma tiene el sistema solar, el lugar de los planetas siempre es lo mismo
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>
+          	El Sistema Solar es un sistema planetario donde una estrella, el Sol, ejerce su fuerza gravitacional para mantener en órbita a los planetas, planetas enanos, lunas, asteroides, cometas y otros cuerpos celestes. Está compuesto por el Sol en el centro, los ocho planetas (Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno), y también incluye planetas enanos como Plutón, además de cientos de lunas, miles de asteroides y cometas. 
+          </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/sistema solar.jpg" class="img3">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/sistema solar.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba9.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

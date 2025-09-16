@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ESTADOS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+          El estado de los cuerpo pueden cambiar segun la temperatura del ambiente, los solidos pueden pasarse a liquidos si se calienta lo suficiente el liquido puede pasarse a gaseoso si se calienta tambien
+      </li>
+
+      <li>
+          Necesito que cambies el estado de un objeto que yo quiero analizar, eso para ver mas de cerca como su origen
+      </li>
+
+      <li>
+          Si necesitas saber mas, puedes leer mi libro
+      </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+      </ul>
+
+          <div class="consejos">CONSEJOS</div>
+
+    <ul>
+
+		  <li>
+		      mira la imagen al cambiar la temperatura
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>
+          La materia puede cambiar de estado sólido a líquido (fusión), de líquido a gas (vaporización) o viceversa, mediante la aplicación de calor o frío. 
+          </li>
+
+          <li>
+          Fusión: El paso de un sólido a un líquido al aumentar la temperatura. 
+          </li>
+
+          <li>
+          Vaporización: El paso de un líquido a un gas al aumentar la temperatura. 
+          </li>
+
+          <li>
+          Solidificación: El paso de un líquido a un sólido al disminuir la temperatura. 
+          </li>
+
+          <li>
+          Condensación: El paso de un gas a un líquido al disminuir la temperatura. 
+          </li>
+
+          <li>
+          Para cambiar el estado de un objeto a plasma, necesitas ionizar un gas, es decir, quitarle electrones a sus átomos. Al aumentar la temperatura, las partículas de gas se mueven más rápidamente y pueden ganar energía suficiente para que los electrones se separen de los átomos, creando iones y electrones libres. 
+          </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+           <img src="../imagenes/imagen4,2.png" class="img2">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/estados2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba7,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

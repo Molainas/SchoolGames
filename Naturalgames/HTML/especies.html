@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ESPECIES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      A mi me gusta organizar unas de mis fotos de los animales, plantas
+		      y bacterias en su resptiva pagina gracias al sistema de especies  
+		  </li>
+
+		  <li>
+		      Tu tambien puedes participar, lo que tienes que hacer es colocar la foto en el cuadro que pertenece
+		  </li>
+
+		  <li>
+		      Si quieres saber sobre los especies de los seres vivios puedes consultar con mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Es facil si figas en la imagen
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+            <li>
+            	Una especie es un grupo de seres vivos que se parecen mucho entre sí y que pueden tener crías que también se parecen a ellos.
+            </li>
+
+            <li>Animales (perro, gato, pez)</li>
+
+            <li>Plantas (árbol, flor)</li>
+
+            <li>Hongos (seta)</li>
+
+            <li>Bacterias (invisibles a simple vista)</li>
+
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen1.png" class="tablero">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/especies.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

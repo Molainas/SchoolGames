@@ -1,0 +1,144 @@
+body{background-color: blue;}
+
+input{border: 1px solid;
+height: 86px;
+width: 192px;
+color: blue;
+font-size: 40px;
+font-family: cursive;
+text-align: center;}
+
+.boton1{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 640px;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.game{border: 3px solid blue;
+height: 600px;
+width: 700px;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+flex-direction: column;}
+
+.pequeñin{
+height: 190px;
+width: 700px;
+display: flex;
+align-items: center;
+background-color: gray;}
+
+.peque{height: 200px;}
+
+.teclado{border: 3px solid blue;
+height: 600px;
+width: 400px;}
+
+.escribir{border: 1px solid blue;
+height: 90px;
+display: flex;}
+
+.puntos{border: 1px solid blue;
+height: 414px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.correcto{border: 3px solid blue;
+height: 100px;
+width: 100px;
+color: white;
+font-size: 30px;
+font-family: cursive;
+background-color: blue;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 3px solid blue;
+height: 100px;
+width: 100px;
+color: white;
+font-size: 30px;
+font-family: cursive;
+background-color: blue;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid blue;
+height: 90px; 
+background-color: blue;
+color: white;
+font-family: cursive;
+font-size: 50px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 27%; 
+    left: 75%; 
+    transform: translate(-50%, -50%); 
+    background: blue; 
+    padding: 50px; 
+    border: 2px solid red; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+        .game {
+            position: relative;
+            height: 600px;
+            width: 700px;
+           
+        }
+
+        .casota{
+            width: 55%;
+            display: block;
+        }
+
+        #personas-container {
+            position: absolute;
+            top: 55%; 
+            width: 50%;
+            height: 40%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #personas-container img {
+            width: 50px; 
+            margin: 5px;
+        }

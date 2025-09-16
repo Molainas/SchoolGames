@@ -1,0 +1,150 @@
+body{background-color: #FE8330;}
+
+.cubo{border: 1px solid white;
+	background-color: white;
+height: 625px;
+display: flex;
+justify-content: space-around;}
+
+.cubo1{border: 1px solid #FE8330;
+width: 100%;
+display: flex;
+justify-content: space-around;
+flex-direction: row;
+}
+
+.mesa{border: 5px solid #FE8330;
+height: 600px;
+width: 50%;
+margin: 5px;}
+
+.lugar{border: 1px solid #FE8330;
+height: 200px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: cursive;
+font-size: 50px;
+color: purple;}
+
+.empezar{border: 1px solid #FE8330;
+background-color: #FE8330;
+color: white;
+font-family: cursive;
+font-size: 50px;
+width: 100%;
+height: 100%;}
+
+.pequeñin{border: 1px solid #FE8330;
+height: 400px;}
+
+.peque{height: 400px;
+width: 100%;}
+
+.ejemplo{
+height: 500px;
+width: 50%;
+margin: 5px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+justify-content: space-around;}
+
+.letra{ position: absolute;
+            cursor: grab;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background-color: #FE8330;
+            border: 1px solid #FE8330;
+            color: white;}
+
+.cubo2{border: 1px solid #FE8330;
+width: 50%;}
+
+.verificacion{border: 1px solid #FE8330;
+background-color: white;
+color: purple;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 100%;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 422px;
+}
+
+.correcto{border: 1px solid #FE8330;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FE8330;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid #FE8330; 
+height: 100px;
+width: 400px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 25%; 
+    left: 76.5%; 
+    transform: translate(-50%, -50%); 
+    background: #FE8330;; 
+    padding: 50px; 
+    border: 2px solid purple; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid #FE8330;;
+background-color: white;
+color: purple;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FE8330;;
+background-color: white;
+color: purple;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

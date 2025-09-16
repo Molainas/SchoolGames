@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MateGames</title>
+</head>
+<body>
+<div class="cubo">
+    <div class="cubo1">
+        <div class="dialogo"><span id="fraccion"></span></div>
+        <div class="peque"><img src="../imagenes/67.png" class="pequeñin"></div>
+        <div class="abajo">AFUERA</div>
+    </div>
+
+    <div class="cubo2">
+        <div class="correcto"> C: 0</div>
+        <div class="incorrecto"> F: 0</div>
+    </div>
+
+    <div class="cubo3">
+        <div class="tiempo"><span id="tiempo">5:00</span></div>
+        <div class="cocina">
+            <div class="pizza">
+                <canvas id="pizza" width="300" height="300"></canvas>
+            </div>
+            <button class="verificar" onclick="verificar()">VERIFICAR</button>
+        </div>
+        <div class="abajo">COCINA</div>
+    </div>
+</div>
+
+<div id="resultadoFinal" class="res">
+    <div class="contenido">
+        <h2>Juego Terminado</h2>
+        <p>Puntuación Final: <span id="notaFinal">0</span></p>
+        <p id="mensajeFinal"></p>
+        <div class="sepa">
+            <button class="reinicio" onclick="reiniciarJuego()">Reiniciar</button>
+            <button class="salir" onclick="salir()">Escoger otro</button>
+        </div>
+    </div>
+</div>
+
+ <style>
+        @import url("../CSS/prueba7.css");
+    </style>
+
+<script>
+let tiempoRestante = 300;
+let temporizador;
+let juegoActivo = true;
+let mousePresionado = false;
+let ultimoSector = null;
+let totalPartes;
+let fraccionCorrecta;
+let respuestasCorrectas = 0;
+let respuestasIncorrectas = 0;
+let seleccionadas = [];
+
+const posiblesPartes = [4, 6, 8, 10, 12];
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+let canvas, ctx, centroX, centroY, radio;
+
+function iniciarTemporizador() {
+    temporizador = setInterval(() => {
+        if (tiempoRestante > 0) {
+            tiempoRestante--;
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById("tiempo").textContent = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+        } else {
+            clearInterval(temporizador);
+            juegoActivo = false;
+            mostrarResultados();
+        }
+    }, 1000);
+}
+
+function mostrarResultados() {
+    let notaFinal = respuestasCorrectas - respuestasIncorrectas;
+    document.getElementById("notaFinal").textContent = notaFinal;
+
+    let mensaje = '';
+    if (notaFinal >= 20) mensaje = "Nota: A";
+    else if (notaFinal >= 10) mensaje = "Nota: B";
+    else if (notaFinal >= 5) mensaje = "Nota: C";
+    else mensaje = "Nota: F";
+
+    document.getElementById("mensajeFinal").textContent = mensaje;
+    document.getElementById("resultadoFinal").style.display = "flex";
+}
+
+function salir() {
+    window.location.href = "mategames.html";
+}
+
+function dibujarPizza() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const anguloPorcion = (2 * Math.PI) / totalPartes;
+
+    for (let i = 0; i < totalPartes; i++) {
+        const inicio = i * anguloPorcion;
+        const fin = inicio + anguloPorcion;
+
+        ctx.beginPath();
+        ctx.moveTo(centroX, centroY);
+        ctx.arc(centroX, centroY, radio, inicio, fin);
+        ctx.closePath();
+        ctx.fillStyle = seleccionadas.includes(i) ? "red" : "blue";
+        ctx.fill();
+        ctx.stroke();
+    }
+}
+
+function generarFraccion() {
+    totalPartes = posiblesPartes[Math.floor(Math.random() * posiblesPartes.length)];
+    fraccionCorrecta = Math.floor(Math.random() * totalPartes) + 1;
+    seleccionadas = [];
+    document.getElementById("fraccion").textContent = `${fraccionCorrecta}/${totalPartes}`;
+    dibujarPizza();
+}
+
+function manejarClick(e) {
+    if (!juegoActivo) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left - centroX;
+    const y = e.clientY - rect.top - centroY;
+    const angulo = Math.atan2(y, x);
+    const anguloPositivo = angulo < 0 ? angulo + 2 * Math.PI : angulo;
+    const sector = Math.floor(anguloPositivo / ((2 * Math.PI) / totalPartes));
+
+    if (sector !== ultimoSector) {
+        if (seleccionadas.includes(sector)) {
+            seleccionadas = seleccionadas.filter(i => i !== sector); // deselecciona
+        } else {
+            seleccionadas.push(sector); // selecciona
+        }
+        dibujarPizza();
+        ultimoSector = sector;
+    }
+}
+
+function verificar() {
+    if (!juegoActivo) return;
+
+    if (seleccionadas.length === fraccionCorrecta) {
+        respuestasCorrectas++;
+        sonidoCorrecto.play();
+    } else {
+        respuestasIncorrectas++;
+        sonidoIncorrecto.play();
+    }
+
+    document.querySelector(".correcto").textContent = "C: " + respuestasCorrectas;
+    document.querySelector(".incorrecto").textContent = "F: " + respuestasIncorrectas;
+    generarFraccion();
+}
+
+function reiniciarJuego() {
+    tiempoRestante = 300;
+    respuestasCorrectas = 0;
+    respuestasIncorrectas = 0;
+    document.querySelector(".correcto").textContent = "C: 0";
+    document.querySelector(".incorrecto").textContent = "F: 0";
+    document.getElementById("tiempo").textContent = "5:00";
+    document.getElementById("resultadoFinal").style.display = "none";
+    juegoActivo = true;
+    generarFraccion();
+    if (!temporizador) {
+        iniciarTemporizador();
+    }
+}
+
+window.onload = function () {
+    canvas = document.getElementById("pizza");
+    ctx = canvas.getContext("2d");
+    centroX = canvas.width / 2;
+    centroY = canvas.height / 2;
+    radio = 130;
+
+    canvas.addEventListener("mousedown", (e) => {
+        mousePresionado = true;
+        manejarClick(e);
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (mousePresionado) {
+            manejarClick(e);
+        }
+    });
+
+   canvas.addEventListener("mouseup", () => {
+    mousePresionado = false;
+    ultimoSector = null;
+});
+
+canvas.addEventListener("mouseleave", () => {
+    mousePresionado = false;
+    ultimoSector = null;
+});
+
+
+    generarFraccion();
+    iniciarTemporizador();
+};
+</script>
+
+</body>
+</html>

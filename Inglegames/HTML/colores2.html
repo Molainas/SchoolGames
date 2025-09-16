@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>COLORES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      En mi casa tengo un kit de pintura que utilizo para pintar algunas cosas que veo, pero puede ser dificil en intercambiar colores porque las pinturas estan accidentalmente pegadas con pegamento y no puedo moverlas ya que se romper con facilidad
+		  </li>
+
+		  <li>
+		      Pero como estas aqui podre pintar un paisaje en un solo dia, yo dijo los colores y tu me pasas el pinsel con el color mesclado 
+		  </li>
+
+		  <li>
+		      Aqui tienes mi libro para que puedas aprender los colores en ingles
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      si te memorisas los colores sera mas facil	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem3,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           	   <img src="../imagenes/imagen30.png" class="img2">
+          
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+        
+           <img src="../imagenes/imagen31.png" class="img3">
+
+           <img src="../imagenes/imagen32.png" class="img4">
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/colores2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba3,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

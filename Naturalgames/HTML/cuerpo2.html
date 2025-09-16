@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CUERPO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+          El cuerpo humano esta compuesto por varias partes que lo comforman gracias a las celulas que ayudan a los tejidos del cuerpo, donde dentro de su cuerpo pose varios organos que ayudan con un sistema especifico del ser humano para que pueda vivir
+      </li>
+		     
+		  <li>
+		      Utilizando un esquema simple pero identificable tienes que estraer los organos de un sistema en especifico, puede tener mas de un organo pero si un organo no es parte del sistema sera como malo 
+		  </li>
+
+		  <li>
+		      Antes de nada te dare mi libro para que sepas los sistemas que tiene el ser humano
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		     utiliza el color para identificar las partes
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul class="text">
+          
+          <li>El cuerpo humano está compuesto por 11 sistemas de órganos que trabajan juntos para mantener la vida y realizar funciones específicas. Estos sistemas son: tegumentario, esquelético, muscular, nervioso, endocrino, cardiovascular, linfático, respiratorio, digestivo, urinario y reproductor.</li>
+
+          <li>
+          Sistema esquelético: Proporciona soporte, protección y movimiento al cuerpo, y produce células sanguíneas. 
+          </li>
+
+          <li>
+          Sistema nervioso: Coordina y controla las actividades del cuerpo, incluyendo el pensamiento, las sensaciones y los movimientos. 
+          </li>
+
+          <li>
+          Sistema cardiovascular: Transporta sangre, oxígeno y nutrientes a todas las células del cuerpo. 
+          </li>
+
+          <li>
+          Sistema respiratorio: Permite la entrada de oxígeno y la salida de dióxido de carbono. 
+          </li>
+
+          <li>
+          Sistema digestivo: Procesa los alimentos y extrae los nutrientes. 
+          </li>
+
+          <li>
+          Sistema urinario: Elimina desechos y regula el equilibrio hídrico del cuerpo. 
+          </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+           
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/cuerpo2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba6,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

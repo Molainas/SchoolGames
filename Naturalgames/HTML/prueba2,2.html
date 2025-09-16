@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="fila">
+        <!-- Categoría Animales -->
+        <div class="cuadro" id="categoria-animales" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="nombre">Animales</div>
+            <div class="semicuadro">
+                <div class="semifila">
+                    <div class="cubito" id="mamiferos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Mamíferos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="aves" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Aves</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+                <div class="semifila">
+                    <div class="cubito" id="reptiles" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Reptiles</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="peces" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Peces</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="correcto">C: <span id="correctos">0</span></div>
+        <div class="tiempo" id="tiempo">5:00</div>
+        <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+
+        <!-- Categoría Plantas -->
+        <div class="cuadro" id="categoria-plantas" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="nombre">Plantas</div>
+            <div class="semicuadro">
+                <div class="semifila">
+                    <div class="cubito" id="flores" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Flores</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="arboles" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Árboles</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+                <div class="semifila">
+                    <div class="cubito" id="hierbas" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Hierbas</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="trepadoras" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Trepadoras</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fila">
+        <!-- Categoría Hongos -->
+        <div class="cuadro" id="categoria-hongos" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="nombre">Hongos</div>
+            <div class="semicuadro">
+                <div class="semifila">
+                    <div class="cubito" id="setas" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Setas</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="microscopicos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Microscópicos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+                <div class="semifila">
+                    <div class="cubito" id="mohos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Alucinógenos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="trufas" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Trufas</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Imagen para arrastrar -->
+        <div class="espacio">
+            <div class="foto" draggable="true" ondragstart="drag(event)">
+                <canvas id="canvas-1" width="200" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Categoría Bacterias -->
+        <div class="cuadro" id="categoria-bacterias" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="nombre">Bacterias</div>
+            <div class="semicuadro">
+                <div class="semifila">
+                    <div class="cubito" id="cocos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Cocos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="bacilos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Bacilos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+                <div class="semifila">
+                    <div class="cubito" id="vibrios" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Vibrios</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                    <div class="cubito" id="espirilos" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="seminombre">Espirilos</div>
+                        <img src="../imagenes/fotos2.png" class="img1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resultado -->
+<div id="resultado" class="res" style="display:none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+ <style>
+        @import url("../CSS/prueba2,2.css");
+    </style>
+
+<script>
+// === LISTA DE OBJETOS ===
+   const objetos = [
+    { nombre: "Perro", categoriaPrincipal: "categoria-animales", subcategoria: "mamiferos", dibujo: dibujarPerro },
+     { nombre: "Kiwi", categoriaPrincipal: "categoria-animales", subcategoria: "aves", dibujo: dibujarKiwi },
+    { nombre: "Tortuga", categoriaPrincipal: "categoria-animales", subcategoria: "reptiles", dibujo: dibujarTortuga },
+    { nombre: "Pez dorado", categoriaPrincipal: "categoria-animales", subcategoria: "pez", dibujo: dibujarPez },
+
+    { nombre: "Rosa", categoriaPrincipal: "categoria-plantas", subcategoria: "flores", dibujo: dibujarFlor },
+    { nombre: "Roble", categoriaPrincipal: "categoria-plantas", subcategoria: "arboles", dibujo: dibujarArbol },
+     { nombre: "hierbas", categoriaPrincipal: "categoria-plantas", subcategoria: "Hierbas", dibujo: dibujarHierbas },
+      { nombre: "trepadora", categoriaPrincipal: "categoria-plantas", subcategoria: "Trepadoras", dibujo: dibujarPlantaTrepadora },
+
+
+    { nombre: "Seta", categoriaPrincipal: "categoria-hongos", subcategoria: "setas", dibujo: dibujarHongo },
+     { nombre: "Microscópicos", categoriaPrincipal: "categoria-hongos", subcategoria: "microscopicos", dibujo: dibujarHongoMicroscopico },
+      { nombre: "Alucinógenos", categoriaPrincipal: "categoria-hongos", subcategoria: "Alucinógeno", dibujo: dibujarHongoAlucinogeno },
+      { nombre: "Trufas", categoriaPrincipal: "categoria-hongos", subcategoria: "trufas", dibujo: dibujarTrufa },
+
+    { nombre: "Bacilo", categoriaPrincipal: "categoria-bacterias", subcategoria: "bacilos", dibujo: dibujarBacteria },
+    { nombre: "Cocos", categoriaPrincipal: "categoria-bacterias", subcategoria: "cocos", dibujo: dibujarBacteriasCocos },
+     { nombre: "Vibrios", categoriaPrincipal: "categoria-bacterias", subcategoria: "vibrios", dibujo: dibujarBacteriasVibrios },
+     { nombre: "Espirilos", categoriaPrincipal: "categoria-bacterias", subcategoria: "espirilos", dibujo: dibujarBacteriasEspirilos }
+
+];
+
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let objetoActual;
+
+// === AJUSTE DEL CANVAS (Responsive) ===
+function ajustarCanvas() {
+    const canvas = document.getElementById('canvas-1');
+    const contenedor = document.querySelector('.foto');
+    const tamaño = Math.min(contenedor.clientWidth * 0.9, 300); // máximo 300px
+    canvas.width = tamaño;
+    canvas.height = tamaño;
+    if (objetoActual) objetoActual.dibujo(canvas.getContext('2d'));
+}
+
+window.addEventListener('resize', ajustarCanvas);
+
+// === FUNCIONES DE JUEGO ===
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function mostrarObjeto() {
+    ajustarCanvas();
+    const canvas = document.getElementById('canvas-1');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    objetoActual = objetos[Math.floor(Math.random() * objetos.length)];
+    objetoActual.dibujo(ctx);
+}
+
+function drag(event) {
+    event.dataTransfer.setData("text/plain", objetoActual.nombre);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function drop(event) {
+    event.preventDefault();
+    const categoriaDrop = event.currentTarget.id;
+    const nombre = event.dataTransfer.getData("text/plain");
+    const objeto = objetos.find(o => o.nombre === nombre);
+    if (!objeto) return;
+
+    if (categoriaDrop === objeto.categoriaPrincipal || categoriaDrop === objeto.subcategoria) {
+        correctos++;
+        document.getElementById('correctos').innerText = correctos;
+        mostrarObjeto(); 
+        sonidoCorrecto.play(); 
+    } else {
+        incorrectos++;
+        document.getElementById('incorrectos').innerText = incorrectos;
+         sonidoIncorrecto.play(); 
+    }
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = `${resultadoFinal}`;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Naturalgames2.html";
+}
+
+function iniciarJuego() {
+    ajustarCanvas();
+    iniciarTemporizador();
+    mostrarObjeto();
+}
+
+// ==== DIBUJOS DE PRUEBA ====
+function dibujarPerro(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2;
+    const cy = h / 2;
+    const r = w / 4; // radio de la cabeza
+
+    // Cabeza
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Orejas
+    ctx.beginPath();
+    ctx.ellipse(cx - r * 0.8, cy - r * 0.4, r * 0.4, r * 0.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.ellipse(cx + r * 0.8, cy - r * 0.4, r * 0.4, r * 0.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Hocico
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy + r * 0.4, r * 0.5, r * 0.3, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Nariz
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(cx, cy + r * 0.25, r * 0.1, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ojos
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(cx - r * 0.3, cy - r * 0.2, r * 0.08, 0, Math.PI * 2);
+    ctx.arc(cx + r * 0.3, cy - r * 0.2, r * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Perro", cx, cy + r + 65);
+}
+
+function dibujarKiwi(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2;
+    const cy = h / 2;
+    const r = w / 5; // Tamaño base del cuerpo
+
+    // Cuerpo (marrón)
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy + 10, r * 1.1, r * 0.9, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Cabeza (más pequeña)
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(cx + r * 0.9, cy - r * 0.3, r * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Pico largo y delgado
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.moveTo(cx + r * 1.3, cy - r * 0.3);
+    ctx.lineTo(cx + r * 2, cy - r * 0.25);
+    ctx.lineTo(cx + r * 1.3, cy - r * 0.1);
+    ctx.closePath();
+    ctx.fill();
+
+    // Ojo
+    ctx.beginPath();
+    ctx.arc(cx + r * 0.9, cy - r * 0.3, r * 0.08, 0, Math.PI * 2);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+
+    // Patas (dos líneas con "garras")
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 3;
+    for (let i = -1; i <= 1; i += 2) {
+        const px = cx - r * 0.2 * i;
+        const py = cy + r * 0.9;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px, py + r * 0.6);
+        ctx.stroke();
+
+        // Garras
+        ctx.beginPath();
+        ctx.moveTo(px, py + r * 0.6);
+        ctx.lineTo(px - 5, py + r * 0.6 + 5);
+        ctx.moveTo(px, py + r * 0.6);
+        ctx.lineTo(px + 5, py + r * 0.6 + 5);
+        ctx.stroke();
+    }
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 25px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("kiwi", cx, cy + r + 65);
+}
+
+
+function dibujarTortuga(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2;
+    const cy = h / 2;
+    const r = w / 5; // Radio del caparazón
+
+    // Cabeza
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(cx + r + 10, cy, r * 0.4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ojo
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(cx + r + 20, cy - 5, r * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+
+     // Patas
+    const pataR = r * 0.3;
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+
+    ctx.arc(cx - r * 0.7, cy - r * 0.7, pataR, 0, Math.PI * 2);
+    ctx.arc(cx + r * 0.7, cy - r * 0.7, pataR, 0, Math.PI * 2);
+    ctx.arc(cx - r * 0.7, cy + r * 0.7, pataR, 0, Math.PI * 2);
+    ctx.arc(cx + r * 0.7, cy + r * 0.7, pataR, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Cola
+    ctx.beginPath();
+    ctx.arc(cx - r - 8, cy, pataR * 0.6, 0, Math.PI * 2);
+    ctx.fill();
+
+
+    // Caparazón principal
+    ctx.fillStyle = "green"; 
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Patrón del caparazón (hexágonos simulados)
+    ctx.strokeStyle = "yellow";
+    ctx.lineWidth = 2;
+    ctx.fillStyle = "green";
+
+    // Hexágono central
+    dibujarHexagono(ctx, cx, cy, r * 0.4);
+
+    // Anillo de hexágonos alrededor
+    const angulos = [0, 60, 120, 180, 240, 300];
+    for (let ang of angulos) {
+        const rad = (Math.PI / 180) * ang;
+        dibujarHexagono(
+            ctx, 
+            cx + Math.cos(rad) * r * 0.6, 
+            cy + Math.sin(rad) * r * 0.6, 
+            r * 0.3
+        );
+    }
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 25px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Tortuga", cx, h - 10);
+}
+
+// Función auxiliar para dibujar un hexágono
+function dibujarHexagono(ctx, x, y, size) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 180) * (60 * i - 30);
+        const px = x + size * Math.cos(angle);
+        const py = y + size * Math.sin(angle);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+}
+
+function dibujarPez(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2;
+    const cy = h / 2;
+    const cuerpoLargo = w / 2.5;
+    const cuerpoAlto = h / 4;
+
+    // Cuerpo del pez
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, cuerpoLargo / 2, cuerpoAlto / 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Cola
+    ctx.beginPath();
+    ctx.moveTo(cx - cuerpoLargo / 2, cy);
+    ctx.lineTo(cx - cuerpoLargo / 2 - 40, cy - 30);
+    ctx.lineTo(cx - cuerpoLargo / 2 - 40, cy + 30);
+    ctx.closePath();
+    ctx.fillStyle = "green";
+    ctx.fill();
+
+    // Ojo
+    ctx.beginPath();
+    ctx.arc(cx + cuerpoLargo / 3, cy - 5, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(cx + cuerpoLargo / 3, cy - 5, 4, 0, Math.PI * 2);
+    ctx.fillStyle = "green";
+    ctx.fill();
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Pez dorado",cx, h - 10);
+}
+
+
+
+function dibujarFlor(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2; // Centro horizontal
+    const cy = h / 2; // Centro vertical
+    const petaloRadio = w / 6;
+    const centroRadio = w / 10;
+
+    // Pétalos (5 pétalos en círculo)
+    ctx.fillStyle = "green";
+    for (let i = 0; i < 5; i++) {
+        const angle = (i * 2 * Math.PI) / 5;
+        const px = cx + Math.cos(angle) * petaloRadio * 1.2;
+        const py = cy + Math.sin(angle) * petaloRadio * 1.2;
+        ctx.beginPath();
+        ctx.arc(px, py, petaloRadio, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Centro de la flor
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(cx, cy, centroRadio, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Texto opcional
+    ctx.fillStyle = "green";
+    ctx.font = "bold 20px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Gerbera", cx, cy + petaloRadio * 2.7);
+}
+
+function dibujarArbol(ctx) {
+
+     ctx.fillStyle = "green";
+    ctx.fillRect(ctx.canvas.width/2 - 10, ctx.canvas.height/2 + 15, 20, ctx.canvas.height/4);
+    ctx.fillStyle = "green";
+        ctx.beginPath(); ctx.arc(150, 100, 70, 0, Math.PI * 2); ctx.fill();
+   
+    ctx.fillStyle = "green"; ctx.font = "bold 30px Cursive"; ctx.fillText("Roble", ctx.canvas.width/2 - 35, ctx.canvas.height/2 + 130);
+}
+
+function dibujarHierbas(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Fondo opcional (suelo)
+    ctx.fillStyle = "green"; // Marrón tierra
+    ctx.fillRect(0, h - 20, w, 20);
+
+    // Dibujar múltiples "hojas" de hierba
+    for (let i = 0; i < 50; i++) {
+        const x = Math.random() * w;
+        const altura = 10 + Math.random() * 30;
+        const grosor = 1 + Math.random() * 2;
+
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = grosor;
+
+        ctx.beginPath();
+        ctx.moveTo(x, h - 20); 
+        ctx.lineTo(x - 3 + Math.random() * 6, h - 20 - altura);
+        ctx.stroke();
+    }
+
+    // Texto opcional
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("cesped", w / 2, 20);
+}
+
+function dibujarPlantaTrepadora(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const baseX = w / 2;
+    const baseY = h - 20;
+
+    // Dibujar el tallo principal
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(baseX, baseY);
+
+    let altura = baseY;
+    let direccion = 1;
+
+    // Crear una línea ondulada (simula que trepa)
+    for (let y = baseY; y > 40; y -= 15) {
+        const x = baseX + Math.sin((baseY - y) / 20) * 20 * direccion;
+        ctx.lineTo(x, y);
+        altura = y;
+        direccion *= -1;
+    }
+    ctx.stroke();
+
+    // Dibujar hojas en el tallo
+    const hojas = 10;
+    for (let i = 0; i < hojas; i++) {
+        const y = baseY - (i * (h / hojas)) * 0.8;
+        const x = baseX + Math.sin((baseY - y) / 20) * 20 * (i % 2 === 0 ? 1 : -1);
+        dibujarHoja(ctx, x, y, 12);
+    }
+
+    // Texto opcional
+    ctx.fillStyle = "green";
+    ctx.font = "bold 20px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Planta del dinero", w / 2, 20);
+}
+
+// Función auxiliar para dibujar una hoja
+function dibujarHoja(ctx, x, y, size) {
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.ellipse(x, y, size, size / 2, Math.PI / 4, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+
+
+function dibujarHongo(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Sombrero del hongo
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(cx, cy - 0, w / 6, Math.PI, 0); // semicircular
+    ctx.closePath();
+    ctx.fill();
+
+    // Manchas blancas en el sombrero
+    ctx.fillStyle = "yellow";
+    const manchas = [
+        { x: cx - 30, y: cy - 20, r: 6 },
+        { x: cx + 20, y: cy - 30, r: 8 },
+        { x: cx, y: cy - 10, r: 5 }
+    ];
+    manchas.forEach(m => {
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // Tallo del hongo
+    ctx.fillStyle = "green"; // beige
+    ctx.beginPath();
+    ctx.moveTo(cx - 15, cy);
+    ctx.quadraticCurveTo(cx - 20, cy + 40, cx, cy + 40);
+    ctx.quadraticCurveTo(cx + 20, cy + 40, cx + 15, cy);
+    ctx.closePath();
+    ctx.fill();
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Amanita muscaria", cx, cy + 100);
+}
+
+function dibujarHongoMicroscopico(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+
+
+   
+
+    // Dibujar varias hifas (ramificaciones)
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 3;
+
+    for (let i = 0; i < 6; i++) {
+        let startX = cx + (Math.random() * 80 - 40);
+        let startY = cy + (Math.random() * 30 + 20);
+        let endX = startX + (Math.random() * 50 - 25);
+        let endY = startY - (60 + Math.random() * 50);
+
+        // Dibuja una hifa
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+        // Racimo de esporas en la punta
+        ctx.fillStyle = "green";
+        for (let j = 0; j < 4; j++) {
+            let angle = (Math.PI * 2 / 4) * j;
+            let x = endX + Math.cos(angle) * 8;
+            let y = endY + Math.sin(angle) * 8;
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        // Espora central
+        ctx.beginPath();
+        ctx.arc(endX, endY, 5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Cunninghamella", cx, h - 10);
+}
+
+function dibujarHongoAlucinogeno(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Sombrero del hongo (azul violáceo)
+    const gradSombrero = ctx.createRadialGradient(cx, cy - 40, 10, cx, cy - 40, w / 4);
+    gradSombrero.addColorStop(0, "green");
+    gradSombrero.addColorStop(1, "yellow");
+    ctx.fillStyle = gradSombrero;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - 20, w / 4, w / 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Puntos brillantes en el sombrero
+    ctx.fillStyle = "yellow";
+    const puntos = [
+        { x: cx - 20, y: cy - 25, r: 3 },
+        { x: cx, y: cy - 30, r: 4 },
+        { x: cx + 20, y: cy - 15, r: 2 },
+        { x: cx - 10, y: cy - 10, r: 3 }
+    ];
+    puntos.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    // Tallo (violeta claro)
+    const gradTallo = ctx.createLinearGradient(cx - 10, cy, cx + 10, cy + 50);
+    gradTallo.addColorStop(0, "green");
+    gradTallo.addColorStop(1, "green");
+    ctx.fillStyle = gradTallo;
+    ctx.beginPath();
+    ctx.moveTo(cx - 10, cy);
+    ctx.quadraticCurveTo(cx, cy + 40, cx + 10, cy);
+    ctx.lineTo(cx + 10, cy + 40);
+    ctx.lineTo(cx - 10, cy + 40);
+    ctx.closePath();
+    ctx.fill();
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 16px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Entoloma hochstetteri", cx, h - 10);
+}
+
+function dibujarTrufa(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Base de la trufa con forma irregular
+    ctx.fillStyle = "green"; // Marrón muy oscuro
+    ctx.beginPath();
+    ctx.moveTo(cx - 35, cy);
+    ctx.bezierCurveTo(cx - 40, cy - 20, cx - 10, cy - 35, cx + 10, cy - 30);
+    ctx.bezierCurveTo(cx + 35, cy - 25, cx + 30, cy + 10, cx + 10, cy + 25);
+    ctx.bezierCurveTo(cx - 20, cy + 40, cx - 35, cy + 10, cx - 35, cy);
+    ctx.closePath();
+    ctx.fill();
+
+    // Textura rugosa: círculos oscuros y claros superpuestos
+    for (let i = 0; i < 25; i++) {
+        let x = cx + (Math.random() * 60 - 30);
+        let y = cy + (Math.random() * 50 - 25);
+        ctx.beginPath();
+        ctx.fillStyle = (Math.random() > 0.5) ? "yellow" : "yellow";
+        ctx.arc(x, y, Math.random() * 4 + 1, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.textAlign = "center";
+    ctx.fillText("Trufa negra", cx, h - 10);
+}
+
+
+
+function dibujarBacteria(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const cx = w / 2;
+    const cy = h / 2;
+    const radioX = w / 4;
+    const radioY = h / 8;
+
+    // Cuerpo del bacilo (óvalo)
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, radioX, radioY, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Contorno del bacilo
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Flagelos (pelitos alrededor)
+    ctx.strokeStyle = "green";
+    for (let i = 0; i < 12; i++) {
+        const angle = (Math.PI * 2 / 12) * i;
+        const x1 = cx + Math.cos(angle) * radioX;
+        const y1 = cy + Math.sin(angle) * radioY;
+        const x2 = cx + Math.cos(angle) * (radioX + 10);
+        const y2 = cy + Math.sin(angle) * (radioY + 10);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+    }
+
+    // Núcleo/estructura interna (círculo interno)
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(cx, cy, radioY / 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 20px Cursive";
+    ctx.fillText("Bacillus anthracis", cx - 80, cy + radioY + 70);
+}
+
+function dibujarBacteriasCocos(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Función auxiliar para dibujar un coco (círculo con contorno)
+    function dibujarCoco(x, y, r) {
+        ctx.beginPath();
+        ctx.fillStyle = "yellow";
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+    }
+
+    // Dibujar un grupo de cocos en diferentes posiciones
+    const grupos = [
+        { x: w * 0.3, y: h * 0.4, n: 4 },
+        { x: w * 0.7, y: h * 0.5, n: 3 },
+        { x: w * 0.5, y: h * 0.7, n: 5 }
+    ];
+
+    grupos.forEach(g => {
+        const r = 10; // radio de cada coco
+        for (let i = 0; i < g.n; i++) {
+            const offsetX = (Math.random() - 0.5) * 30;
+            const offsetY = (Math.random() - 0.5) * 30;
+            dibujarCoco(g.x + offsetX, g.y + offsetY, r);
+        }
+    });
+
+    // Texto
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.fillText("Micrococcus luteus", w - 280, h - 20);
+}
+
+function dibujarBacteriasVibrios(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Función para dibujar un vibrio (forma de coma)
+    function dibujarVibrio(x, y, size, angle) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "green";
+        ctx.arc(0, 0, size, Math.PI * 0.2, Math.PI * 0.8); // Arco curvo
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    // Dibujar varios vibrios en posiciones aleatorias
+    for (let i = 0; i < 6; i++) {
+        const x = Math.random() * (w - 40) + 20;
+        const y = Math.random() * (h - 40) + 20;
+        const size = 15 + Math.random() * 10;
+        const angle = Math.random() * Math.PI * 2;
+        dibujarVibrio(x, y, size, angle);
+    }
+
+    // Texto descriptivo
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.fillText("Aliivibrio fischeri", w - 270, h - 20);
+}
+
+function dibujarBacteriasEspirilos(ctx) {
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Función para dibujar un espirilo
+    function dibujarEspirilo(x, y, size, vueltas, angle) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        ctx.beginPath();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "green";
+
+        // Dibujar una espiral usando varias ondas sinusoidales
+        const amplitud = size / 3;
+        const largo = size * 3;
+        ctx.moveTo(-largo / 2, 0);
+        for (let i = -largo / 2; i <= largo / 2; i += 2) {
+            const yPos = Math.sin((i / largo) * vueltas * Math.PI * 2) * amplitud;
+            ctx.lineTo(i, yPos);
+        }
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    // Dibujar varios espirilos en posiciones aleatorias
+    for (let i = 0; i < 4; i++) {
+        const x = Math.random() * (w - 60) + 30;
+        const y = Math.random() * (h - 60) + 30;
+        const size = 20 + Math.random() * 10;
+        const vueltas = 3; // número de ondulaciones
+        const angle = Math.random() * Math.PI * 2;
+        dibujarEspirilo(x, y, size, vueltas, angle);
+    }
+
+    // Texto descriptivo
+    ctx.fillStyle = "green";
+    ctx.font = "bold 30px Cursive";
+    ctx.fillText("Spirillum volutans", w - 270, h - 20);
+}
+
+
+window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Espagames</title>    
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="cuadro">
+            <canvas id="canvasIzq" width="372" height="525" style="border:1px solid black;"></canvas>
+        </div>
+
+        <div class="cuadro">
+            <canvas id="canvasDer" width="372" height="525" style="border:1px solid black;"></canvas>
+        </div>
+    </div>
+
+    <div class="cubo2">
+        <button class="verificacion" onclick="verificarRespuesta()">VERIFICAR</button>
+
+        <div class="puntos">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+
+        <img src="../imagenes/pequenin46.png">
+        <div class="tiempo" id="tiempo">05:00</div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba2.css");
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let letraActual = "";
+let ctxIzq, ctxDer;
+let dibujando = false;
+
+// Letras a practicar
+const letras = ["A","E","I","O","U","B","C","D","F","G"];
+
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText =
+                `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function mostrarNuevaLetra() {
+    ctxIzq.clearRect(0, 0, 372, 525);
+    ctxIzq.font = "200px Arial";
+    ctxIzq.textAlign = "center";
+    ctxIzq.textBaseline = "middle";
+    ctxIzq.fillStyle = "black";
+    letraActual = letras[Math.floor(Math.random()*letras.length)];
+    ctxIzq.fillText(letraActual, 186, 260);
+}
+
+function habilitarDibujo() {
+    let canvas = document.getElementById("canvasDer");
+
+    canvas.addEventListener("mousedown", () => { dibujando = true; });
+    canvas.addEventListener("mouseup", () => { dibujando = false; ctxDer.beginPath(); });
+    canvas.addEventListener("mousemove", dibujar);
+}
+
+function dibujar(e) {
+    if (!dibujando) return;
+
+    ctxDer.lineWidth = 8;
+    ctxDer.lineCap = "round";
+    ctxDer.strokeStyle = "black";
+
+    let rect = e.target.getBoundingClientRect();
+    ctxDer.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctxDer.stroke();
+    ctxDer.beginPath();
+    ctxDer.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarRespuesta() {
+    // Reducimos ambos canvas a 50x50
+    let miniIzq = reducirCanvas(document.getElementById("canvasIzq"), 50, 50);
+    let miniDer = reducirCanvas(document.getElementById("canvasDer"), 50, 50);
+
+    // Comparamos las matrices
+    let similitud = compararMatrices(miniIzq, miniDer);
+
+    if (similitud > 0.6) { // 60% de coincidencia
+        correctos++;
+        document.getElementById("correctos").innerText = correctos;
+        sonidoCorrecto.play();
+
+    } else {
+        incorrectos++;
+        document.getElementById("incorrectos").innerText = incorrectos;
+         sonidoIncorrecto.play();
+    }
+
+    // limpiar y mostrar nueva letra
+    ctxDer.clearRect(0, 0, 372, 525);
+    mostrarNuevaLetra();
+}
+
+function reducirCanvas(canvas, ancho, alto) {
+    let tempCanvas = document.createElement("canvas");
+    tempCanvas.width = ancho;
+    tempCanvas.height = alto;
+    let ctxTemp = tempCanvas.getContext("2d");
+    ctxTemp.drawImage(canvas, 0, 0, ancho, alto);
+    let imgData = ctxTemp.getImageData(0, 0, ancho, alto).data;
+
+    let matriz = [];
+    for (let y = 0; y < alto; y++) {
+        let fila = [];
+        for (let x = 0; x < ancho; x++) {
+            let i = (y * ancho + x) * 4;
+            let r = imgData[i], g = imgData[i+1], b = imgData[i+2];
+            fila.push((r+g+b < 400) ? 1 : 0); // 1 = pintado
+        }
+        matriz.push(fila);
+    }
+    return matriz;
+}
+
+function compararMatrices(m1, m2) {
+    let iguales = 0, total = 0;
+    for (let y = 0; y < m1.length; y++) {
+        for (let x = 0; x < m1[0].length; x++) {
+            if (m1[y][x] === m2[y][x]) iguales++;
+            total++;
+        }
+    }
+    return iguales / total; // porcentaje de coincidencia
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = resultadoFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Espagames.html";
+}
+
+function iniciarJuego() {
+    ctxIzq = document.getElementById("canvasIzq").getContext("2d");
+    ctxDer = document.getElementById("canvasDer").getContext("2d");
+    mostrarNuevaLetra();
+    habilitarDibujo();
+    iniciarTemporizador();
+}
+
+window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

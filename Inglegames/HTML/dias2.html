@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>DIAS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      A parte de la hora necesito tener marcado los dias importantes para que no se me olvide por el tiempo y estar preparado
+		  </li>
+
+		  <li>
+		      Necesito que marcas con una x el dia que tengo algo importante, la hora no es necesaria ya que la escribire yo despues de terminar, y como yo tengo el papel que escribo los dias importantes yo sere que dija el dia y revisare si esta bien o esta mal
+		  </li>
+
+		  <li>
+		      Para esto necesito que sepas los dias de la semana por lo que te doy mi libro para que lo aprendas
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      El dia es que importa no la hora	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem6,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>No importa qué idioma hables o cuál estés aprendiendo, las fechas son un básico en cualquier lengua. ¿Por qué? Simple: muchas conversaciones las incluyen. Por ejemplo, cuando hablas de tu cumpleaños, de días especiales como Navidad o algún aniversario.</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen445.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/dias2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba6,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

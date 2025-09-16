@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+	
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>PARES Y IMPARES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+				<li>
+					ahora que estamos en mi casa, ¿que tal si me ayudas con algo?, tengo algunas tablas en el cobertiso y necesito tener mas espacio porque son muchas 
+				</li>
+
+				<li>
+					no te preocupes por la medida ya tengo registrada en cada tabla, solo necesito que me digas cual es par o impar o decimal, los impares van al cobertiso y los pares los utilisares para costruir otro cobertiso, pero los decimales son tirados a la basura
+				</li>
+
+                <li>
+                	si necesitas saber mas puedes consultar en mi libro
+                </li>
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+
+			</ul>
+		<div class="consejos">CONSEJO</div>
+		    <ul>
+		    	<li>
+		    		solo utiliza el ultimo numero osea la unidad (si has visto la descomposicion de numeros)
+		    	</li>
+
+                <li>
+                	los decimales siempres tienen un punto o una coma
+                </li>
+		    </ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem5,2.gif" class="img4"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+
+<li>Los números decimales son números que tienen una parte entera y una parte decimal. Se usan para representar números que son más pequeños que la unidad. </li>
+
+<li>Se escriben con un separador decimal, que normalmente es un punto (.) o una coma (,).</li>
+
+<li>Los dígitos después del separador decimal se llaman décimas, centésimas, milésimas, etc.</li> 
+
+<li>Los dígitos cero después del separador decimal indican la precisión de un valor.</li> 
+
+<li>Los decimales no son números pares o impares porque no son números enteros. Los números pares son aquellos que se pueden dividir en dos partes iguales, es decir, que tienen como múltiplo al número dos. </li>
+
+<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+          </ul>
+        </div>
+        <div class="mucho-texto2">
+        	<img src="../imagenes/decimales.png" class="img2">
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/par-impar2.css")
+</style>
+
+<script>
+
+function irse() {
+
+window.location.href = "../HTML/mategames2.html"
+
+}
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba5,2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+</script>
+</body>
+</html>

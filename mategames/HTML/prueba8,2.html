@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mategames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">   
+        <div class="cubo2">
+            <div class="fraccion-container">
+                <div class="fraccion">
+                    <span id="numerador1"></span>
+                    <div class="linea1"></div>
+                    <span id="denominador1"></span>
+                </div>
+                <div class="dibujo">
+                    <canvas id="diagrama1"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="operador" id="operador"></div>
+
+        <div class="cubo3">
+            <div class="fraccion">
+                <span id="numerador2"></span>
+                <div class="linea1"></div>
+                <span id="denominador2"></span>
+            </div>
+            <div class="dibujo">
+                <canvas id="diagrama2"></canvas>
+            </div>
+        </div>
+
+        <div class="igual">=</div>
+
+        <div class="cubo4">
+            <div class="respuesta">
+                <div class="cubiculo">
+                    <input type="number" id="numeradorUsuario">
+                    <div class="linea2"></div>
+                    <input type="number" id="denominadorUsuario">
+                </div> 
+            </div>
+            <div class="tiempo">
+                <button class="verificacion" onclick="verificarRespuesta()">Verificar</button>
+                <div class="puntuacion">
+                    <div class="correcto">C: <span id="correctos">0</span></div>
+                    <span id="tiempo">3:00</span>
+                    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pequeñin">
+    <img src="../imagenes/16.png" class="peque">
+</div>
+</div>
+
+<div id="resultado" class="res">
+        <h2>Juego terminado</h2>
+        <p>Puntuación final: <span id="puntajeFinal"></span></p>
+        <p>Nota: <span id="nota"></span></p>
+        <div class="botones">
+            <button class="boton2" onclick="location.reload()">Reiniciar</button>
+            <button class="boton2" onclick="salir()">Escoger otro</button>
+        </div>
+    </div>
+
+<style>
+    @import url("../CSS/prueba8,2.css")
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 180; 
+let interval;
+let operacionActual;
+
+function mostrarFracciones() {
+    let fraccion1 = generarFraccion();
+    let fraccion2 = generarFraccion();
+    let operador = generarOperacion();
+
+    operacionActual = { fraccion1, fraccion2, operador };
+
+    document.getElementById('numerador1').innerText = fraccion1.numerador;
+    document.getElementById('denominador1').innerText = fraccion1.denominador;
+    document.getElementById('numerador2').innerText = fraccion2.numerador;
+    document.getElementById('denominador2').innerText = fraccion2.denominador;
+    document.getElementById('operador').innerText = operador;
+
+    dibujarDiagrama("diagrama1", fraccion1);
+    dibujarDiagrama("diagrama2", fraccion2);
+}
+
+
+function iniciarTemporizador() {
+    interval = setInterval(() => {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego(); 
+        }
+    }, 1000);
+}
+
+function generarFraccion() {
+    let numerador = Math.floor(Math.random() * 9) + 1;
+    let denominador = Math.floor(Math.random() * 9) + 2;
+    return { numerador, denominador };
+}
+
+function generarOperacion() {
+    const operadores = ['+', '-', '*', '/'];
+    return operadores[Math.floor(Math.random() * operadores.length)];
+}
+
+function calcularResultado(frac1, frac2, operador) {
+    let resultado = { numerador: 0, denominador: 0 };
+
+    switch (operador) {
+        case '+':
+            resultado.denominador = frac1.denominador * frac2.denominador;
+            resultado.numerador = (frac1.numerador * frac2.denominador) + (frac2.numerador * frac1.denominador);
+            break;
+        case '-':
+            resultado.denominador = frac1.denominador * frac2.denominador;
+            resultado.numerador = Math.abs((frac1.numerador * frac2.denominador) - (frac2.numerador * frac1.denominador));
+            break;
+        case '*':
+            resultado.numerador = frac1.numerador * frac2.numerador;
+            resultado.denominador = frac1.denominador * frac2.denominador;
+            break;
+        case '/':
+            resultado.numerador = frac1.numerador * frac2.denominador;
+            resultado.denominador = frac1.denominador * frac2.numerador;
+            break;
+    }
+
+    return simplificarFraccion(resultado);
+}
+
+function simplificarFraccion(frac) {
+    function mcd(a, b) {
+        return b === 0 ? a : mcd(b, a % b);
+    }
+    let divisor = mcd(frac.numerador, frac.denominador);
+    return {
+        numerador: frac.numerador / divisor,
+        denominador: frac.denominador / divisor
+    };
+}
+
+function finalizarJuego() {
+        clearInterval(interval); 
+        const resultadoFinal = correctos - incorrectos; 
+        let nota;
+        
+        if (puntajeFinal >= 20) {
+            nota = "A";
+        } else if (puntajeFinal >= 10) {
+            nota = "B";
+        } else if (puntajeFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block'; 
+    }
+
+    function salir() {
+        window.location.href = "mategames2.html";
+    }
+
+
+ const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarRespuesta() {
+    let numUsuario = document.getElementById('numeradorUsuario').value.trim();
+    let denUsuario = document.getElementById('denominadorUsuario').value.trim();
+
+    if (numUsuario === "" || denUsuario === "") {
+        return;
+    }
+
+    numUsuario = parseInt(numUsuario);
+    denUsuario = parseInt(denUsuario);
+
+    if (isNaN(numUsuario) || isNaN(denUsuario) || denUsuario === 0) {
+        return;
+    }
+
+    let resultadoCorrecto = calcularResultado(operacionActual.fraccion1, operacionActual.fraccion2, operacionActual.operador);
+
+    if (numUsuario * resultadoCorrecto.denominador === resultadoCorrecto.numerador * denUsuario) {
+        correctos++;
+        document.getElementById('correctos').innerText = correctos;
+        sonidoCorrecto.play(); 
+    } else {
+        incorrectos++;
+        document.getElementById('incorrectos').innerText = incorrectos;
+        sonidoIncorrecto.play(); 
+    }
+
+    document.getElementById('numeradorUsuario').value = "";
+    document.getElementById('denominadorUsuario').value = "";
+    mostrarFracciones();
+}
+
+function dibujarDiagrama(canvasId, fraccion) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const partes = fraccion.denominador;
+    const coloreadas = fraccion.numerador;
+    const ancho = canvas.width;
+    const alto = canvas.height / partes;
+
+    for (let i = 0; i < partes; i++) {
+        ctx.fillStyle = i < coloreadas ? 'blue' : 'red';
+        ctx.fillRect(0, i * alto, ancho, alto);
+        ctx.strokeRect(0, i * alto, ancho, alto);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    mostrarFracciones();
+    iniciarTemporizador();
+});
+</script>
+
+</body>
+</html>

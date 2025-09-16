@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>PESO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      El peso es una manera de medir la cantidad de masa, en caso de que no se puede hacer de la manera tradicional
+		  </li>
+
+		  <li>
+		      Lo digo porque hay que medir el peso de estas bolsas de comidad para los animales, ojo no me refiero a medir con una valansa, sino registras cuantos puede tener una bolsa de comida, por ejemplo 1Kg son 1000g y 1000g equivale 1kg
+		  </li>
+
+		  <li>
+		      En mi libro esta el metodo de como ver como lo digo
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Solo corre el punto de izquierda a derecha segun lo que quiere el juego
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+
+          <li>
+          El peso es una medida de la fuerza gravitatoria que actúa sobre un objeto.​ El peso equivale a la fuerza que ejerce un cuerpo sobre un punto de apoyo, originada por la acción del campo gravitatorio local sobre la masa del cuerpo.
+          </li>
+
+          <li>
+          	La conversión de unidades es la transformación del valor numérico de una magnitud física, expresado en una cierta unidad de medida, en otro valor numérico equivalente y expresado en otra unidad de medida de la misma naturaleza.
+          </li>
+
+          <li>
+          	  Si es de mayor a menor unidad es una multiplicacion, pero si es de menor a mayor es una division
+          </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen5.png" class="img2">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/peso.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba8.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

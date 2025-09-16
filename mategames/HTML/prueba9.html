@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mategames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="cubo2">
+            <div class="pequeñin"><img src="../imagenes/57.png" class="peque"></div>
+            <div class="dibujo">
+            <canvas id="diagrama" width="100px" height="200px"></canvas> 
+            </div>   
+            <div class="fraccion">
+                <div class="numerador">2</div>
+                <div class="linea"></div>
+                <div class="denominador">5</div>
+            </div>
+            <div class="numero">20</div>
+        </div> 
+
+        <div class="igual"><p>=</p></div>
+
+        <div class="cubo3">
+            <div class="cubiculo1">
+                <input type="number">
+                <button class="verificacion">VERIFICAR</button>
+            </div>
+
+            <div class="cubiculo2">
+                <div class="correcto">C: 0</div>
+                <div class="tiempo"><span id="tiempo">5:00</span></div>
+                <div class="incorrecto">F: 0</div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba9.css");
+</style>
+
+<script>
+    let correctas = 0;
+    let incorrectas = 0;
+    let tiempo = 300; 
+    let interval;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const numeroElemento = document.querySelector(".numero");
+        const numeradorElemento = document.querySelector(".numerador");
+        const denominadorElemento = document.querySelector(".denominador");
+        const input = document.querySelector("input");
+        const botonVerificar = document.querySelector(".verificacion");
+        const correcto = document.querySelector(".correcto");
+        const incorrecto = document.querySelector(".incorrecto");
+        const tiempoElemento = document.getElementById("tiempo"); 
+
+        function generarNumeros() {
+            let denominador = Math.floor(Math.random() * 9) + 2; 
+            let numerador = Math.floor(Math.random() * (denominador - 1)) + 1; 
+            let numero = (Math.floor(Math.random() * 10) + 1) * denominador; 
+
+            numeroElemento.textContent = numero;
+            numeradorElemento.textContent = numerador;
+            denominadorElemento.textContent = denominador;
+
+           
+            dibujarDiagrama("diagrama", numerador, denominador);
+        }
+
+        function actualizarTiempo() {
+            tiempoElemento.textContent = tiempo; 
+        }
+
+       function iniciarTemporizador() {
+        interval = setInterval(function() {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego(); 
+            }
+        }, 1000);
+    }
+
+        function finalizarJuego() {
+            clearInterval(interval); 
+            const resultadoFinal = correctas - incorrectas; 
+            let nota;
+
+            if (resultadoFinal >= 20) {
+                nota = "A";
+            } else if (resultadoFinal >= 10) {
+                nota = "B";
+            } else if (resultadoFinal >= 5) {
+                nota = "C";
+            } else {
+                nota = "F";
+            }
+
+            document.getElementById('puntajeFinal').innerText = resultadoFinal;
+            document.getElementById('nota').innerText = nota;
+            document.getElementById('resultado').style.display = 'block'; 
+        }
+
+        function salir() {
+            window.location.href = "mategames.html";
+        }
+
+        function dibujarDiagrama(canvasId, numerador, denominador) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const partes = denominador;
+            const coloreadas = numerador;
+            const ancho = canvas.width;
+            const alto = canvas.height / partes;
+
+            for (let i = 0; i < partes; i++) {
+                ctx.fillStyle = i < coloreadas ? 'red' : 'blue';
+                ctx.fillRect(0, i * alto, ancho, alto);
+                ctx.strokeRect(0, i * alto, ancho, alto);
+            }
+        }
+
+        const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+        const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+        botonVerificar.addEventListener("click", function () {
+            const numero = parseInt(numeroElemento.textContent);
+            const numerador = parseInt(numeradorElemento.textContent);
+            const denominador = parseInt(denominadorElemento.textContent);
+            const resultadoCorrecto = (numero * numerador) / denominador;
+            const respuestaJugador = parseInt(input.value);
+
+            if (respuestaJugador === resultadoCorrecto) {
+                correctas++;
+                correcto.textContent = `C: ${correctas}`;
+                sonidoCorrecto.play(); 
+            } else {
+                incorrectas++;
+                incorrecto.textContent = `F: ${incorrectas}`;
+                sonidoIncorrecto.play(); 
+            }
+
+            input.value = ""; 
+            generarNumeros(); 
+        });
+
+        generarNumeros();
+        iniciarTemporizador(); 
+    });
+</script>
+
+</body>
+</html>

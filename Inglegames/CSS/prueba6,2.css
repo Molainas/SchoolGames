@@ -1,0 +1,267 @@
+body{background-color: purple;}
+
+button{background-color: purple;
+border: none;
+color: #FE8330;
+font-family: cursive;
+font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 625px;}
+
+.cubo1{border: 1px solid purple;
+height: 622px;
+display: flex;
+flex-direction: column;}
+
+.cubo2{
+height: 70%;
+display: flex;
+flex-direction: column;
+background-image: url("../imagenes/fondo2,4.png");
+background-size: 100% 100%;
+background-repeat: no-repeat;}
+
+.meses{border: 1px solid purple;
+display: flex;
+align-items: center;
+justify-content: space-around;
+background-color: purple;
+width: 248px;}
+
+.empezar{border: 1px solid purple;
+background-color: purple;
+color: white;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 180px;}
+
+.mes{color: #FE8330;
+font-family: cursive;}
+
+.cambiar{display: flex;}
+
+.semana{
+height: 70%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.dias{
+width: 250px;
+display: flex;
+flex-direction: row;
+justify-content: left;}
+
+.lunes{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.martes{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.miercoles{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.jueves{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.viernes{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.sabado{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.domingo{border: 3px solid purple;
+background-color: white;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.casilla {border: 3px solid purple; 
+background-color: white;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+cursor: pointer;
+font-weight: bold;
+font-family: cursive;
+font-size: 20px;
+color: #FE8330;
+    }
+
+.texto{
+height: 28.5%;
+display: flex;
+align-items: center;
+justify-content: end;
+}
+
+.burbuja{border: 6px solid #FE8330;
+background-color: white;
+border-radius: 50px;
+height: 100%;
+width: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: cursive;
+font-size: 60px;
+color: #FE8330;}
+
+.cubo3{
+height: 30%;
+display: flex;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 100%;
+    width: 70%;
+}
+
+.correcto{border: 1px solid purple;
+height: 150px;
+width: 150px;
+color: white;
+font-family: cursive;
+font-size: 40px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid purple; 
+height: 100px;
+width: 190px;
+color: white;
+font-family: cursive;
+font-size: 40px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid purple;
+height: 150px;
+width: 150px;
+color: white;
+font-family: cursive;
+font-size: 40px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.pequeñin{
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.img1{height: 100%;
+width: 100%;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: purple; 
+    height: 400px;
+    width: 550px;
+    border: 2px solid #FE8330; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid  #FE8330;
+background-color: white;
+color: purple;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid  #FE8330;
+background-color: white;
+color: purple;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 550px;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+
+        <div class="auto">
+            <div class="texto" id="textoNumero"></div>
+            <img src="../imagenes/imagen74.png">
+        </div>
+
+        <div class="libreta">
+            <button class="verificacion">VERIFICACION</button>
+            <div class="arriba">
+                <div class="metal"></div>
+            </div>
+            <div class="madera">
+                <div class="papel">
+                    <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+                    <input type="number" id="respuestaUsuario">
+                </div>
+            </div>
+            <div class="puntos">
+                <div class="correcto">C: <span id="correctos">0</span></div>
+                <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+            </div>
+            <div class="tiempo" id="tiempo">5:00</div>
+        </div>
+
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba2.css")
+</style>
+
+<script>
+    let tiempo = 300;
+    let interval;
+    let correctos = 0;
+    let incorrectos = 0;
+    let numeroActual = 0;
+    let racha = 0;
+    let modoDoblePuntos = false;
+
+    const numeros = [
+        "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"
+    ];
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        nuevoNumero();
+    }
+
+ function nuevoNumero() {
+    numeroActual = Math.floor(Math.random() * 10) + 1;
+    let palabra = numeros[numeroActual];
+
+    const textoElem = document.getElementById('textoNumero');
+
+    if (modoDoblePuntos) {
+        textoElem.innerText = `#######`;
+        textoElem.style.color = "white"; // Naranja si está en racha
+    } else {
+        textoElem.innerText = palabra;
+        textoElem.style.color = ""; // Color normal
+    }
+
+    reproducirTexto(palabra);
+}
+
+
+    function reproducirTexto(texto) {
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = "en-US"; // Voz en inglés estadounidense
+        speechSynthesis.speak(utterance);
+    }
+
+  document.querySelector(".verificacion").addEventListener("click", function () {
+    let respuestaUsuario = parseInt(document.getElementById("respuestaUsuario").value);
+    const textoElem = document.getElementById('textoNumero');
+
+    if (respuestaUsuario === numeroActual) {
+        racha++;
+        if (modoDoblePuntos) {
+            correctos += 2;
+        } else {
+            correctos += 1;
+        }
+
+        if (racha >= 5 && !modoDoblePuntos) {
+            modoDoblePuntos = true;
+
+            // Mostrar mensaje especial
+            textoElem.innerText = "¡Racha! Doble puntaje";
+            textoElem.style.color = "purple"; // naranja
+            
+
+            setTimeout(() => {
+                nuevoNumero();
+            }, 1500);
+            document.getElementById("correctos").innerText = correctos;
+            document.getElementById("incorrectos").innerText = incorrectos;
+            document.getElementById("respuestaUsuario").value = '';
+            return; // Evitar continuar a 'Correct' abajo
+        }
+
+        textoElem.innerText = "¡Correcto!";
+        textoElem.style.color = "purple";
+        
+    } else {
+        incorrectos++;
+        racha = 0;
+        if (modoDoblePuntos) {
+            modoDoblePuntos = false;
+        }
+
+        textoElem.innerText = "Incorrecto";
+        textoElem.style.color = "purple";
+        
+    }
+
+    document.getElementById("correctos").innerText = correctos;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    document.getElementById("respuestaUsuario").value = '';
+
+    setTimeout(() => {
+        textoElem.style.color = "";
+        nuevoNumero();
+    }, 1000);
+});
+
+
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText =
+                    `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames.html";
+    }
+</script>
+
+</body>
+</html>

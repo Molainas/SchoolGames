@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+
+  <div class="cubo1">
+
+    <div class="pasillo">
+      <button class="cambio"><</button>
+
+      <div class="cubito">
+        <div class="letrero">
+          <div class="texto" id="textoOpcion"></div>
+        </div>
+
+        <button class="puerta">
+          <img src="../imagenes/puerta1.png" class="img1" />
+          <img src="../imagenes/puerta2.png" class="img1" />
+        </button>
+      </div>
+
+      <button class="cambio">></button>
+    </div>
+
+    <div class="piso">
+      <div class="animal">
+        <canvas id="canvasAnimal" width="200" height="150"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cubo2">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba5.css");
+  </style>
+
+<script>
+const animales = [
+ { nombre: "Perro", reproduccion: "viviparo", dibujo: dibujarPerro },
+  { nombre: "Pato", reproduccion: "oviparo", dibujo: dibujarPato },
+  { nombre: "Serpiente", reproduccion: "ovoviviparo", dibujo: dibujarSerpiente }
+ 
+];
+
+const tiposReproduccion = ["viviparo", "oviparo", "ovoviviparo"];
+
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+let animalActual;
+let indiceTipo = 0;
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText =
+        `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames.html";
+}
+
+function iniciarJuego() {
+  iniciarTemporizador();
+  nuevaRonda();
+}
+
+function nuevaRonda() {
+  animalActual = animales[Math.floor(Math.random() * animales.length)];
+  indiceTipo = 0;
+  mostrarAnimal(animalActual);
+  mostrarTexto();
+}
+
+function mostrarAnimal(animal) {
+  const canvas = document.getElementById("canvasAnimal");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.save();
+  // Centrar el origen
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  // Escalar un poco para que quepa en el canvas
+  ctx.scale(0.6, 0.6);
+
+  animal.dibujo(ctx);
+
+  ctx.restore();
+}
+
+function mostrarTexto() {
+  const texto = tiposReproduccion[indiceTipo];
+  document.getElementById("textoOpcion").textContent = texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+// Botones de cambio de opción
+document.querySelectorAll(".cambio")[0].onclick = () => {
+  indiceTipo = (indiceTipo - 1 + tiposReproduccion.length) % tiposReproduccion.length;
+  mostrarTexto();
+};
+document.querySelectorAll(".cambio")[1].onclick = () => {
+  indiceTipo = (indiceTipo + 1) % tiposReproduccion.length;
+  mostrarTexto();
+};
+
+ const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+document.querySelector(".puerta").onclick = () => {
+  const tipoSeleccionado = tiposReproduccion[indiceTipo];
+  if (tipoSeleccionado === animalActual.reproduccion) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play();
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+  nuevaRonda();
+};
+
+// 🐶 Perro
+function dibujarPerro(ctx) {
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(0, 40, 60, 40, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(30, -10, 40, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(60, -35, 15, 25, -0.5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(2, -35, 15, 25, 0.5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(15, -15, 10, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(45, -15, 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(15, -15, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(45, -15, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(30, 0, 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(32, -2, 2, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(30, 5, 15, 0.25 * Math.PI, 0.75 * Math.PI);
+  ctx.stroke();
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(30, 18, 10, 0, Math.PI, false);
+  ctx.fill();
+
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.arc(-50, 20, 20, 0.5 * Math.PI, 1.5 * Math.PI);
+  ctx.stroke();
+
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(-55, 55, 15, 40);
+  ctx.fillRect(-30, 70, 15, 25);
+  ctx.fillRect(18, 70, 15, 25);
+  ctx.fillRect(43, 50, 15, 45);
+}
+
+// 🦆 Pato mejorado con posición
+function dibujarPato(ctx, x, y) {
+  ctx.save();
+  ctx.translate(x, y); // El pato se dibuja en (x, y)
+
+  // Cuerpo
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(0, 20, 60, 40, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Cabeza
+  ctx.beginPath();
+  ctx.arc(50, -10, 30, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Pico
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(90, -5, 20, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ala
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.ellipse(-10, 20, 30, 20, Math.PI / 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Cola
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(-50, 10);
+  ctx.lineTo(-90, 0);
+  ctx.lineTo(-50, 30);
+  ctx.closePath();
+  ctx.fill();
+
+  // Ojo
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(60, -15, 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(60, -15, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+
+// 🐍 Serpiente ondulada
+function dibujarSerpiente(ctx, x, y) {
+  ctx.save();
+  ctx.translate(x, y);
+
+  // Cuerpo ondulado
+  ctx.fillStyle = "yellow";
+  const segmentos = 12;  // cantidad de segmentos
+  const amplitud = 20;   // qué tan ondulado
+  const separacion = 25; // distancia entre segmentos
+
+  for (let i = 0; i < segmentos; i++) {
+    let offsetY = Math.sin(i * 0.8) * amplitud; // curva tipo S
+    ctx.beginPath();
+    ctx.arc(-i * separacion, offsetY, 18, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Cabeza
+  ctx.beginPath();
+  ctx.arc(30, 0, 25, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ojos
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(40, -8, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(40, 8, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(40, -8, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(40, 8, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Lengua roja bífida
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(55, 0);
+  ctx.lineTo(75, -5);
+  ctx.moveTo(55, 0);
+  ctx.lineTo(75, 5);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+
+window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

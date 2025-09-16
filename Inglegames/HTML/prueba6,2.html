@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+<div class="cubo">
+    <div class="cubo1">
+        <div class="cubo2">
+            <div class="semana">
+                <div class="meses">
+    <button onclick="cambiarAMPM('prev')"><</button>
+    <div class="mes" id="periodo">JANUARY</div>
+    <button onclick="cambiarAMPM('next')">></button>
+</div>
+                <div class="dias">
+                    <div class="lunes">M</div>
+                    <div class="martes">T</div> 
+                    <div class="miercoles">W</div> 
+                    <div class="jueves">T</div> 
+                    <div class="viernes">F</div> 
+                    <div class="sabado">S</div> 
+                    <div class="domingo">S</div> 
+                </div>
+                <div id="calendario"></div>
+            </div>
+            <!-- Mensaje de respuesta -->
+<div id="mensajeRespuesta" style="
+    position: absolute;
+    top: 20px;
+    left: 80%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #FE8330;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;">
+</div>
+
+            <div class="texto">
+                <div class="burbuja" id="desafio"></div>
+            </div>
+        </div>
+        <div class="cubo3">
+            <div class="puntos">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">3:30</div>
+    <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+</div>
+
+            <div class="pequeñin">
+                <img src="../imagenes/rtert2.png" class="img1">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba6,2.css");
+</style>
+
+<script>
+let tiempo = 210;
+let interval;
+let correctos = 0, incorrectos = 0;
+let desafioMes = ''; 
+
+const dias = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const meses = ["JANUARY", "FEBRUARY", "MARCH", "APRIL" , "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+let indiceMes = 0;
+let desafioDia = 0;
+let desafioSemana = '';
+
+function cambiarAMPM(direccion) {
+    if (direccion === 'prev') {
+        indiceMes = (indiceMes - 1 + meses.length) % meses.length;
+    } else {
+        indiceMes = (indiceMes + 1) % meses.length;
+    }
+    document.getElementById("periodo").innerText = meses[indiceMes];
+    generarCalendario();
+}
+
+function pronunciarTexto(texto) {
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+}
+
+function mostrarMensaje(texto, esCorrecto) {
+    const mensaje = document.getElementById("mensajeRespuesta");
+    mensaje.textContent = texto;
+    mensaje.style.backgroundColor = esCorrecto ? "" : ""; 
+    mensaje.style.borderColor = esCorrecto ? "" : "";   
+    mensaje.style.display = "block";
+
+    setTimeout(() => {
+        mensaje.style.display = "none";
+    }, 1500);
+}
+
+
+function nuevoDesafio() {
+    const anio = new Date().getFullYear();
+    desafioMes = meses[Math.floor(Math.random() * meses.length)];
+    const mesIndex = meses.indexOf(desafioMes);
+    const diasDelMes = new Date(anio, mesIndex + 1, 0).getDate();
+
+    desafioDia = Math.floor(Math.random() * diasDelMes) + 1;
+    const fecha = new Date(anio, mesIndex, desafioDia);
+    desafioSemana = dias[fecha.getDay()];
+
+    const textoDesafio = `${desafioDia}${sufijo(desafioDia)} of ${desafioMes}`;
+    document.getElementById("desafio").innerText = textoDesafio;
+
+    pronunciarTexto(textoDesafio); // ✅ Aquí se pronuncia
+
+    generarCalendario();
+}
+
+function iniciarJuego() {
+    document.getElementById("btnEmpezar").style.display = "none";
+    correctos = 0;
+    incorrectos = 0;
+    document.getElementById("correctos").innerText = correctos;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    tiempo = 210;
+    document.getElementById("tiempo").innerText = "3:30";
+
+    clearInterval(interval);
+    iniciarTemporizador();
+    nuevoDesafio();
+}
+
+
+function sufijo(n) {
+    if (n % 10 == 1 && n != 11) return "st";
+    if (n % 10 == 2 && n != 12) return "nd";
+    if (n % 10 == 3 && n != 13) return "rd";
+    return "th";
+}
+
+function esCorrecta(diaNumero) {
+    const anio = new Date().getFullYear();
+
+    const mesActualTexto = meses[indiceMes]; // mes que el jugador ve
+    if (mesActualTexto !== desafioMes) return false;
+
+    const fecha = new Date(anio, indiceMes, diaNumero);
+    const diaSemana = dias[fecha.getDay()];
+
+    return diaNumero === desafioDia && diaSemana === desafioSemana;
+}
+
+function verificarSeleccion(diaNumero, elemento) {
+    const correcto = esCorrecta(diaNumero);
+
+    const marca = document.createElement('span');
+    marca.innerText = correcto ? 'X' : '';
+    marca.style.color = correcto ? 'purple' : '';
+    marca.style.position = 'absolute';
+    marca.style.right = '4px';
+    marca.style.top = '0';
+    elemento.appendChild(marca);
+
+    if (correcto) {
+        correctos++;
+        document.getElementById('correctos').innerText = correctos;
+        mostrarMensaje("¡Correcto!", true);  // ✅ nuevo mensaje
+    } else {
+        incorrectos++;
+        document.getElementById('incorrectos').innerText = incorrectos;
+        mostrarMensaje("Incorrecto", false); // ❌ nuevo mensaje
+    }
+
+    setTimeout(() => {
+        elemento.removeChild(marca);
+        nuevoDesafio();
+    }, 1000);
+}
+
+
+function generarCalendario() {
+    const calendario = document.getElementById("calendario");
+    calendario.innerHTML = '';
+
+    const anio = new Date().getFullYear();
+    const diasMes = new Date(anio, indiceMes + 1, 0).getDate();
+
+    let fila;
+    for (let i = 1; i <= diasMes; i++) {
+        if ((i - 1) % 7 === 0) {
+            fila = document.createElement("div");
+            fila.className = "dias";
+            calendario.appendChild(fila);
+        }
+
+        const casilla = document.createElement("div");
+        casilla.className = "casilla";
+        casilla.innerText = i;
+        casilla.onclick = function () {
+            verificarSeleccion(i, casilla);
+        };
+        fila.appendChild(casilla);
+    }
+}
+
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = resultadoFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Inglegames.html";
+}
+
+window.onload = function () {
+    document.getElementById("periodo").innerText = meses[indiceMes];
+    generarCalendario(); // Solo dibuja calendario al cargar
+};
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+body{background-color: green;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 655px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.cubo1{background-color: #FFF52D;
+height: 100%;
+width: 70%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.separacion{
+width: 800px;}
+
+.separacion1{
+display: flex;
+justify-content: flex-end;
+width: 800px;
+}
+
+.microscopio{border: 5px solid green;
+background-color: white;
+border-radius: 100%;
+height: 315px;
+width: 315px;
+}
+
+.cubo2{border: 1px solid green;
+height: 100%;
+width: 30%;
+display: flex;
+flex-direction: column;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 100px;
+}
+
+.correcto{border: 1px solid green;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.verificacion{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 100%;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 100%;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.texto{border: 3px solid #FFF52D;
+border-radius: 50px;
+height: 100px;
+margin-top: 5px;
+margin-right: 5px;
+margin-left: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #FFF52D;
+font-family: cursive;
+font-size: 20px;
+}
+
+.pequeñin{width: 100%;
+height: 205px;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 83%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    height: 450px;
+    width: 400px;
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 400px;
+}

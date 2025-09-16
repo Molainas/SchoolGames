@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>MAYOR MENOR O IGUAL</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+				<li>
+					ahora que lo pienso, no esta bien pijado el cobertiso, es que todavia no coloco los clavos correctos pero algunos deben de estar en un lugar especifio o si no el clavo se soltara debido el tamaño segun su lugar
+				</li>
+
+				<li>
+					Pero hay un problema, he regado todos los clavos cuando organizamos las tabla asi que necesito saber cual los mayores clavos para el cobertiso
+				</li>
+
+				<li>
+					no es tan difilci solo tienes que agarrar dos clavos y me pasas el mayor de los dos y si son iguales me los pasas de igual manera
+				</li>
+
+				<li>
+					si necesitas informacion utilice mi libro
+				</li>
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+				
+                </ul>
+                <div class="consejos">CONSEJOS</div>
+            <ul>
+                <li>
+                	no te cuestiones demasiado, solo mirar antes de actuar 
+                </li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem6.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+          	
+           <li>Los símbolos mayor que, menor que e igual que son >, <, y =, respectivamente. Estos símbolos se utilizan para comparar números y expresiones. </li>
+
+           <li>El símbolo de mayor que es >.
+           Por ejemplo, 9 > 7 se lee como 
+           "9 es mayor que 7".</li>
+
+            <div class="rt">
+           <img src="../imagenes/mayor1.png" class="img3">
+            </div>
+
+           <li>El símbolo de menor que es <. 
+           Por ejemplo, 1 < 2 se lee como 
+           "1 es menor que 2". </li>
+            
+            <div class="rt">
+           <img src="../imagenes/menor.png" class="img3">
+            </div>
+
+           <li>El símbolo de igual que es =.
+           Por ejemplo, 123 = 123 se lee como 
+           "123 es igual que 123".</li>
+
+            <div class="rt">
+           <img src="../imagenes/igual.png" class="img3">
+            </div>
+ <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+          </ul>
+        </div>
+        <div class="mucho-texto2">
+        	<div class="tr">
+        	<img src="../imagenes/ejemplo1.png" class="img2">
+            </div>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/mayor.css")
+</style>
+
+<script>
+	
+function ir() {
+    window.location.href = "../HTML/prueba6.html";
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Espagames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ESCRIBIR</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Hay algunas pinturas que no estan terminadas correctamente debido que les falta las lineas negras dentro del controno gris 
+		  </li>
+
+		  <li>
+		      Necesito que hagas la linea negra pero sin salir de la marca gris y estar bien completo sin errores
+		  </li>
+
+		  <li>
+		      Puedes ver mi libro si necesitas ver como se hace
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Manten la calma a escribir	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem1.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li> enfócate en la claridad del mensaje, practicando con un borrador inicial y revisando tu texto para que sea fácil de entender, además de mejorar tu caligrafía a través de una buena postura, el uso de materiales adecuados, la práctica de trazos básicos y la sujeción correcta del lápiz o bolígrafo. </li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen1.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/escribir.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Espagames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

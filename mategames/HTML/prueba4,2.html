@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mategames</title>
+</head>
+<body>
+    <div class="cubo">
+        <div class="cubo1">
+            <div class="ejercicio">
+                <div class="cubiculo" id="numero1"></div>
+                <div class="cubiculo" id="operador"></div>
+                <div class="cubiculo" id="numero2"></div>
+                <div class="cubiculo" id="operador1"></div>
+                <div class="cubiculo" id="numero3"></div>
+            </div>
+            <div class="pequeñin">
+               <img src="../imagenes/46.png"> 
+            </div>
+        </div>
+
+        <div class="cubo2">
+            <div class="escribir">
+                <input type="number" id="respuesta">
+                <button class="verificacion" onclick="verificarRespuesta()">Verificar</button>
+            </div>
+            <div class="puntos">
+                <div class="correcto" id="correcto">C: 0</div>
+                <div class="incorrecto" id="incorrecto">F: 0</div>
+            </div>
+            <div class="tiempo" id="tiempo">3:20</div>
+        </div>
+    </div>
+
+    <div id="resultadoFinal" class="res">
+        <div class="contenido">
+            <h2>Juego Terminado</h2>
+            <p>Puntuación Final: <span id="notaFinal">0</span></p>
+            <p id="mensajeFinal">Aquí aparecerá el mensaje según tu puntuación.</p>
+            <div class="sepa">
+                <button class="reinicio" onclick="reiniciarJuego()">Reiniciar</button>
+                <button class="salir" onclick="salir()">Escoger otro</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    @import url("../CSS/prueba4,2.css")
+</style>
+
+    <script>
+        let puntosCorrectos = 0;
+        let puntosIncorrectos = 0;
+        let tiempoRestante = 200; 
+
+       function generarEjercicio() {
+    const numero1 = Math.floor(Math.random() * 10) + 1; 
+    const numero2 = Math.floor(Math.random() * 10) + 1;
+    const numero3 = Math.floor(Math.random() * 10) + 1;
+    const operadores = ['+', '-', '*'];
+    const operador = operadores[Math.floor(Math.random() * operadores.length)];
+
+    let resultado;
+
+    if (operador === '+') {
+        resultado = numero1 + numero2 + numero3;
+    } else if (operador === '-') {
+        resultado = Math.abs(numero1 - numero2 - numero3); 
+    } else if (operador === '*') {
+        resultado = numero1 * numero2 * numero3;
+    }
+
+    window.respuestaCorrecta = resultado;
+    
+    document.getElementById('numero1').textContent = numero1;
+    document.getElementById('operador').textContent = operador;
+    document.getElementById('numero2').textContent = numero2;
+    document.getElementById('operador1').textContent = operador;
+    document.getElementById('numero3').textContent = numero3;
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+        function verificarRespuesta() {
+            const respuestaJugador = parseInt(document.getElementById('respuesta').value);
+            if (respuestaJugador === window.respuestaCorrecta) {
+                puntosCorrectos++;
+                document.getElementById('correcto').textContent = `C: ${puntosCorrectos}`;
+                sonidoCorrecto.play(); 
+            } else {
+                puntosIncorrectos++;
+                document.getElementById('incorrecto').textContent = `F: ${puntosIncorrectos}`;
+                  sonidoIncorrecto.play();
+            }
+            document.getElementById('respuesta').value = '';
+            generarEjercicio();
+        }
+
+        function temporizador() {
+            const tiempoDisplay = document.getElementById('tiempo');
+            
+            const intervalo = setInterval(function() {
+                let minutos = Math.floor(tiempoRestante / 60);
+                let segundos = tiempoRestante % 60;
+                tiempoDisplay.textContent = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+                tiempoRestante--;
+                
+                if (tiempoRestante < 0) {
+                    clearInterval(intervalo);
+                    mostrarResultadoFinal();
+                }
+            }, 1000);
+        }
+
+        function mostrarResultadoFinal() {
+            const puntuacionFinal = puntosCorrectos - puntosIncorrectos;
+
+            document.getElementById('resultadoFinal').style.display = 'block';
+            document.getElementById('notaFinal').textContent = puntuacionFinal;
+
+            let mensaje = '';
+            if (puntuacionFinal >= 20) {
+                mensaje = "Nota: A";
+            } else if (puntuacionFinal >= 10) {
+                mensaje = "Nota: B";
+            } else if (puntuacionFinal >= 5) { 
+                mensaje = "Nota: C";
+            } else {
+                mensaje = "Nota: F";
+            }
+
+            document.getElementById("mensajeFinal").textContent = mensaje;
+        }
+
+        function iniciarJuego() {
+            generarEjercicio();
+            temporizador();
+        }
+
+        function reiniciarJuego() {
+            puntosCorrectos = 0;
+            puntosIncorrectos = 0;
+            tiempoRestante = 200;
+            document.getElementById('correcto').textContent = `C: ${puntosCorrectos}`;
+            document.getElementById('incorrecto').textContent = `F: ${puntosIncorrectos}`;
+            document.getElementById('tiempo').textContent = '3:20';
+            document.getElementById('resultadoFinal').style.display = 'none'; 
+            iniciarJuego();
+        }
+
+        function salir() {
+            window.location.href = 'mategames.html'; 
+        }
+
+        window.onload = iniciarJuego;
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MateGames</title>
+</head>
+<body>
+    <div class="cubo">
+        <div class="relleno"></div>
+        <div class="game">
+            <div class="puntos" id="puntajes">
+                <div class="correcto"><p> <span id="correctos">C: 0</span></p></div>
+                <img src="../imagenes/2.png">
+                <div class="incorrecto"><p> <span id="incorrectos">F: 0</span></p></div>
+            </div>
+            <div class="conjunto">
+                <div class="lineas">
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                </div>
+                <div class="ejercicio">
+                    <div class="cubiculo" id="numero1"></div>
+                    <div class="cubiculo" id="operador">?</div>
+                    <div class="cubiculo" id="numero2"></div>
+                    <div class="cubiculo">=</div>
+                    <div class="cubiculo" id="resultado"></div>
+                </div>
+                <div class="lineas">
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                    <div class="linea"></div>
+                </div>
+            </div>
+            <div class="cubiculo2">
+                <button class="scroll-button" onclick="scrolleft()">◀</button>
+                <div class="scroll-container" id="scrollContainer" onscroll="actualizarOperacion()">
+                    <div class="cubiculo1">
+                        <span>+</span>
+                        <span>-</span>
+                        <span>*</span>
+                        <span>/</span>
+                    </div>
+                </div>
+                <button class="scroll-button" onclick="scrollRight()">▶</button>
+            </div>
+            <div class="tiempo">
+                <button class="verificacion" onclick="verificar()">Verificar</button>
+                <p id="tiempo">5:00</p>
+            </div>
+        </div>
+        <div class="relleno"></div>
+    </div>
+    
+    <div id="resultadoFinal" class="res">
+        <div class="contenido">
+            <h2>Juego Terminado</h2>
+            <p>Puntuación Final: <span id="notaFinal">0</span></p>
+            <p id="mensajeFinal">Aquí aparecerá el mensaje según tu puntuación.</p>
+            <div class="sepa">
+        <button onclick="location.reload()" class="reinicio">Reiniciar</button>
+        <button onclick="salir()" class="salir">Escoger otro</button>
+    </div>
+        </div>
+    </div>
+
+    <style>
+    @import url("../CSS/prueba3.css")
+</style>
+    
+    <script>
+        let tiempoRestante = 300;
+        let temporizador;
+        let juegoActivo = true;
+        let numero1, numero2, operacion, resultado;
+        let respuestasCorrectas = 0;
+        let respuestasIncorrectas = 0;
+        let operadores = ['+', '-', '*', '/'];
+
+        function scrolleft() {
+            let container = document.getElementById("scrollContainer");
+            container.scrollLeft -= 50;
+        }
+
+        function scrollRight() {
+            let container = document.getElementById("scrollContainer");
+            container.scrollLeft += 50;
+        }
+
+        function actualizarOperacion() {
+            let container = document.getElementById("scrollContainer");
+            let index = Math.round(container.scrollLeft / 50) % operadores.length;
+            document.getElementById("operador").textContent = operadores[index];
+        }
+
+        function generarEjercicio() {
+            numero1 = Math.floor(Math.random() * 10) + 1;
+            numero2 = Math.floor(Math.random() * 10) + 1;
+            operacion = operadores[Math.floor(Math.random() * 4)];
+
+            if (operacion === '/') {
+                numero1 = numero1 * numero2;
+            }
+            if (operacion === '-' && numero1 < numero2) {
+                [numero1, numero2] = [numero2, numero1];
+            }
+
+            switch (operacion) {
+                case '+': resultado = numero1 + numero2; break;
+                case '-': resultado = numero1 - numero2; break;
+                case '*': resultado = numero1 * numero2; break;
+                case '/': resultado = numero1 / numero2; break;
+            }
+
+            document.getElementById("numero1").textContent = numero1;
+            document.getElementById("numero2").textContent = numero2;
+            document.getElementById("resultado").textContent = resultado;
+            document.getElementById("operador").textContent = '?';
+        }
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+        function verificar() {
+            if (!juegoActivo) return;
+            let operadorActual = document.getElementById("operador").textContent;
+            if (operadorActual === operacion) {
+                respuestasCorrectas++;
+                 sonidoCorrecto.play(); 
+            } else {
+                respuestasIncorrectas++;
+                  sonidoIncorrecto.play(); 
+            }
+            document.getElementById("correctos").textContent = "C: " + respuestasCorrectas;
+            document.getElementById("incorrectos").textContent = "F: " + respuestasIncorrectas;
+            generarEjercicio();
+        }
+
+        function iniciarTemporizador() {
+            temporizador = setInterval(function() {
+                if (tiempoRestante > 0) {
+                    tiempoRestante--;
+                    let minutos = Math.floor(tiempoRestante / 60);
+                    let segundos = tiempoRestante % 60;
+                    document.getElementById("tiempo").textContent = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+                } else {
+                    clearInterval(temporizador);
+                    juegoActivo = false;
+                    mostrarResultados();
+                }
+            }, 1000);
+        }
+
+        function mostrarResultados() {
+            let notaFinal = respuestasCorrectas - respuestasIncorrectas;
+            document.getElementById("notaFinal").textContent = notaFinal;
+            let mensaje = notaFinal >= 20 ? "Nota: A" : 
+                          notaFinal >= 10 ? "Nota: B" : 
+                          notaFinal >= 5  ? "Nota: C" : "Nota: F";
+            document.getElementById("mensajeFinal").textContent = mensaje;
+            document.getElementById("resultadoFinal").style.display = "flex";
+        }
+
+        function reiniciarJuego() {
+            tiempoRestante = 300;
+            respuestasCorrectas = 0;
+            respuestasIncorrectas = 0;
+            document.getElementById("correctos").textContent = "C: 0";
+            document.getElementById("incorrectos").textContent = "F: 0";
+            document.getElementById("tiempo").textContent = "5:00";
+            document.getElementById("resultadoFinal").style.display = "none";
+            juegoActivo = true;
+            generarEjercicio();
+        }
+
+        window.onload = function() {
+            generarEjercicio();
+            iniciarTemporizador();
+        };
+    </script>
+</body>
+</html>

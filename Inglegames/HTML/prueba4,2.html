@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="reloj">
+            <div class="configuracion1">
+                <div class="botones-arriba">
+    <button class="boton" onclick="ajustarCantidad('hora1', 1)">▲</button>
+    <button class="boton" onclick="ajustarCantidad('hora2', 1)">▲</button>
+                <div class="espacio"></div>
+<button class="boton" onclick="ajustarCantidad('minutos1', 1)">▲</button>
+<button class="boton" onclick="ajustarCantidad('minutos2', 1)">▲</button>
+                </div>
+                <div class="numeros">
+                    <div class="num" id="hora1">0</div>
+                    <div class="num" id="hora2">0</div>
+                    <div class="num">:</div>
+                    <div class="num" id="minutos1">0</div>
+                    <div class="num" id="minutos2">0</div>
+                </div>
+                <div class="botones-abajo">
+<button class="boton" onclick="ajustarCantidad('hora1', -1)">▼</button>
+<button class="boton" onclick="ajustarCantidad('hora2', -1)">▼</button>
+                <div class="espacio"></div>
+<button class="boton" onclick="ajustarCantidad('minutos1', -1)">▼</button>
+<button class="boton" onclick="ajustarCantidad('minutos2', -1)">▼</button>
+                </div>
+            </div>
+
+            <div class="configuracion2">
+                <button class="cambio" onclick="cambiarAMPM()">◄</button>
+                <div class="hora" id="periodo">AM</div>
+                <button class="cambio" onclick="cambiarAMPM()">►</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cubo2">
+        <div class="texto">
+            <div id="horaAleatoria"></div>
+            <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+        </div>
+        <img class="pequeñin" src="../imagenes/pequenin13.png"> 
+        <button class="verificacion" onclick="verificarHora()">VERIFICAR</button>
+        <div class="tiempo" id="tiempo">5:00</div>
+        <div class="puntos">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba4,2.css");
+</style>
+
+<script>
+    let correctos = 0, incorrectos = 0;
+    let horaCorrecta, minutosCorrectos, periodoCorrecto;
+    let tiempo = 300;
+    let interval;
+    let racha = 0;
+    let modoDoblePuntos = false;
+
+    function generarHoraAleatoria() {
+        let hora = Math.floor(Math.random() * 12) + 1;  
+        let minutos = Math.floor(Math.random() * 60);
+        let periodoSeleccion = Math.random() < 0.5 ? "AM" : "PM"; 
+
+        let periodoTexto;
+        if (periodoSeleccion === "AM") {
+            periodoTexto = (hora >= 1 && hora <= 5) ? "night" : "morning";
+        } else {
+            periodoTexto = (hora >= 1 && hora <= 5) ? "afternoon" : "evening";
+        }
+
+        horaCorrecta = hora;
+        minutosCorrectos = minutos;
+        periodoCorrecto = periodoSeleccion;
+
+        let minutosStr = minutos.toString().padStart(2, '0');
+        let texto = `${hora}:${minutosStr} ${periodoTexto}`;
+
+        // Mostrar u ocultar texto según el modo racha
+        const horaElem = document.getElementById("horaAleatoria");
+        if (modoDoblePuntos) {
+            horaElem.innerText = '';
+        } else {
+            horaElem.innerText = texto;
+        }
+
+        pronunciarTexto(texto);
+
+        // Reiniciar valores de selección del jugador
+        document.getElementById("hora1").innerText = "0";
+        document.getElementById("hora2").innerText = "0";
+        document.getElementById("minutos1").innerText = "0";
+        document.getElementById("minutos2").innerText = "0";
+        document.getElementById("periodo").innerText = "AM";
+    }
+
+    function pronunciarTexto(texto) {
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        speechSynthesis.cancel(); // Cancela cualquier voz anterior
+        speechSynthesis.speak(utterance);
+    }
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        racha = 0;
+        modoDoblePuntos = false;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        generarHoraAleatoria();
+    }
+
+    function ajustarCantidad(tipo, cambio) {
+        let valor = parseInt(document.getElementById(tipo).innerText);
+
+        if (tipo === "hora1") {
+            valor = (valor + cambio + 2) % 2;
+        } else if (tipo === "hora2") {
+            const h1 = document.getElementById("hora1").innerText;
+            if (h1 === "1") {
+                valor = (valor + cambio + 3) % 3;
+            } else {
+                valor = (valor + cambio + 10) % 10;
+            }
+        } else if (tipo === "minutos1") {
+            valor = (valor + cambio + 6) % 6;
+        } else if (tipo === "minutos2") {
+            valor = (valor + cambio + 10) % 10;
+        }
+
+        document.getElementById(tipo).innerText = valor;
+    }
+
+    function cambiarAMPM() {
+        let periodo = document.getElementById("periodo").innerText;
+        document.getElementById("periodo").innerText = periodo === "AM" ? "PM" : "AM";
+    }
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+    function verificarHora() {
+        let horasJugador = parseInt(document.getElementById("hora1").innerText + document.getElementById("hora2").innerText);
+        let minutosJugador = parseInt(document.getElementById("minutos1").innerText + document.getElementById("minutos2").innerText);
+        let periodoJugador = document.getElementById("periodo").innerText;
+
+        if (horasJugador === horaCorrecta && minutosJugador === minutosCorrectos && periodoJugador === periodoCorrecto) {
+            racha++;
+            if (modoDoblePuntos) {
+                correctos += 2;
+            } else {
+                correctos += 1;
+            }
+
+            if (racha >= 5 && !modoDoblePuntos) {
+                modoDoblePuntos = true;
+            
+            }
+        } else {
+            incorrectos++;
+            racha = 0;
+            if (modoDoblePuntos) {
+                modoDoblePuntos = false;
+               
+            }
+        }
+
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        generarHoraAleatoria();
+    }
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames2.html";
+    }
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+<div class="cubo">
+
+<div class="cubo1">
+    <div class="ventana">
+        <div class="ventanilla">
+            <img src="../imagenes/soliado.png" class="img5">
+        </div>
+
+        <div id="marcador" style="font-size: 24px; font-weight: bold; text-align: center; margin-top: 10px;"></div>
+    </div>
+    <div class="pequeñin">
+        <img src="../imagenes/eret2.png" class="img1">
+    </div>
+    <div class="closet">
+        <div class="manitas">
+            <img src="../imagenes/manitas2.png" class="img3">
+        </div>
+        <div class="adentro">
+            <img src="../imagenes/puerta1,2.png" class="img2">
+
+            <button class="ropa"><img src="../imagenes/ropa1,2.png" class="img4"><p>SUNNY</p></button>
+            <button class="ropa"><img src="../imagenes/ropa2,2.png" class="img4"><p>RAINY</p></button>
+            <button class="ropa"><img src="../imagenes/ropa3,2.png" class="img4"><p>CLOUDY</p></button>
+            <button class="ropa"><img src="../imagenes/ropa4.png" class="img4"><p>SPRING</p></button>
+            <button class="ropa"><img src="../imagenes/ropa5.png" class="img4"><p>SUMMER</p></button>
+            <button class="ropa"><img src="../imagenes/ropa6.png" class="img4"><p>AUTUMN</p></button>
+            <button class="ropa"><img src="../imagenes/ropa7.png" class="img4"><p>WINTER</p></button>
+
+            <img src="../imagenes/puerta2,2.png" class="img2">
+        </div>
+    </div>
+</div>  
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<div class="cubo2">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">3:00</div>
+    <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+</div>
+
+</div>
+
+<style>
+    @import url("../CSS/prueba5,2.css");
+</style>
+
+<script>
+let tiempo = 180;
+let interval;
+let correctos = 0, incorrectos = 0;
+
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function mostrarMarcador(texto, esCorrecto) {
+    const marcador = document.getElementById("marcador");
+    marcador.textContent = texto;
+    marcador.style.color = esCorrecto ? "green" : "red";
+
+    setTimeout(() => {
+        marcador.textContent = "";
+    }, 1500);
+}
+
+
+function iniciarJuego() {
+    document.getElementById("btnEmpezar").style.display = "none";
+    correctos = 0;
+    incorrectos = 0;
+    document.getElementById("correctos").innerText = correctos;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    tiempo = 180;
+    document.getElementById("tiempo").innerText = "3:00";
+
+    clearInterval(interval);
+    iniciarTemporizador();
+    cambiarClima(); // 👈 genera el clima y pronuncia el nombre
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+
+    if (resultadoFinal >= 40) {
+        nota = "A";
+    } else if (resultadoFinal >= 20) {
+        nota = "B";
+    } else if (resultadoFinal >= 10) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = resultadoFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Inglegames2.html";
+}
+
+// 🔊 Función para pronunciar el clima
+function decirTexto(texto) {
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = "en-US";
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const climaImg = document.querySelector(".ventanilla img");
+    const botonesRopa = document.querySelectorAll(".ropa");
+    const correctosSpan = document.getElementById("correctos");
+    const incorrectosSpan = document.getElementById("incorrectos");
+
+    const climas = [
+        { nombre: "SUNNY", imagen: "soliado.png" },
+        { nombre: "RAINY", imagen: "lluvioso.png" },
+        { nombre: "CLOUDY", imagen: "nublado.png" },
+        { nombre: "SPRING", imagen: "primavera.png" },
+        { nombre: "SUMMER", imagen: "verano.png" },
+        { nombre: "AUTUMN", imagen: "otono.png" },
+        { nombre: "WINTER", imagen: "invierno.png" }
+    ];
+
+    let climaActual = climas[0];
+
+    function cambiarClima() {
+        const indice = Math.floor(Math.random() * climas.length);
+        climaActual = climas[indice];
+        climaImg.src = `../imagenes/${climaActual.imagen}`;
+        decirTexto(climaActual.nombre); // 🔊 pronunciar el clima
+    }
+
+
+    botonesRopa.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const respuestaJugador = boton.querySelector("p").textContent.trim().toUpperCase();
+
+           if (respuestaJugador === climaActual.nombre) {
+    correctos++;
+    correctosSpan.textContent = correctos;
+    mostrarMarcador("✔", true);
+} else {
+    incorrectos++;
+    incorrectosSpan.textContent = incorrectos;
+    mostrarMarcador("✘", false);
+}
+
+
+    
+        });
+    });
+
+  
+});
+
+
+</script>
+
+</body>
+</html>

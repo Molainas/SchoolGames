@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+
+<div class="cubo">
+    
+<div class="cubo1">
+    <div class="caja1">
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">MIRROR</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOWEL</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">SOAP</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOOTHBRUSH</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BATHTUB</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOILET</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">SINK</button>
+            </div>
+        </div>
+        <div class="caja">
+             <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">CUPBOARD</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">FRIDGE</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BLENDER</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">STOVE</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TELEVISION</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">CARPET</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">COFFE TABLE</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">COUCH</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BED</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">LAMP</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">WARDROBE</button>
+            </div>
+             <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">MATTRESS</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">PILLOW</button>
+            </div>
+
+
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BOOKCASE</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">COMPUTER</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">DESK</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">RUG</button>
+            </div>
+        </div>
+    </div>
+    <div class="casa">
+
+    <div class="caja2">
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TABLE</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">CHAIR</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOYS</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">HOLIDAY DECORATIONS</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">WASHING MACHINE</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">LAUNDRY BASKET</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="casa1">
+        <div class="piso1">
+            <div class="atico" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">ATTIC</div>
+        </div>
+        <div class="piso">
+            <div class="recamara" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">BEDROOM</div>
+            <div class="baño" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">BATHROOM</div>
+        </div>
+        <div class="piso">
+            <div class="estudio" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">STUDY</div>
+            <div class="sala" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">LIVING ROOM</div>
+        </div>
+        <div class="piso">
+            <div class="cocina" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">KITCHEN</div>
+            <div class="comedor" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">DINING ROOM</div>
+        </div>
+        <div class="piso">
+            <div class="sotano" ondrop="soltarLetra(event)" ondragover="permitirDrop(event)">BASEMENT</div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="cubo2">
+    <div class="texto">
+         <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+    </div>
+
+    <img src="../imagenes/rethgf2.png" class="img1">    
+ <div class="puntos">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+ </div>
+
+<div class="tiempo" id="tiempo">4:30</div>
+<div class="mensaje">
+<div id="mensaje" style="
+
+    border-radius: 10px;
+    font-size: 24px;
+    ">
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba7,2.css");
+</style>
+
+<script>
+    let tiempo = 270;
+let interval;
+const desafios = [
+    { objeto: "MIRROR", habitacion: "BATHROOM" },
+    { objeto: "TOWEL", habitacion: "BATHROOM" },
+    { objeto: "SOAP", habitacion: "BATHROOM" },
+    { objeto: "TOOTHBRUSH", habitacion: "BATHROOM" },
+    { objeto: "BATHTUB", habitacion: "BATHROOM" },
+    { objeto: "TOILET", habitacion: "BATHROOM" },
+    { objeto: "SINK", habitacion: "BATHROOM" },
+    { objeto: "CUPBOARD", habitacion: "KITCHEN" },
+    { objeto: "FRIDGE", habitacion: "KITCHEN" },
+    { objeto: "BLENDER", habitacion: "KITCHEN" },
+    { objeto: "STOVE", habitacion: "KITCHEN" },
+    { objeto: "TELEVISION", habitacion: "LIVING ROOM" },
+    { objeto: "CARPET", habitacion: "LIVING ROOM" },
+    { objeto: "COFFE TABLE", habitacion: "LIVING ROOM" },
+    { objeto: "COUCH", habitacion: "LIVING ROOM" },
+    { objeto: "BED", habitacion: "BEDROOM" },
+    { objeto: "LAMP", habitacion: "BEDROOM" },
+    { objeto: "MATTRESS", habitacion: "BEDROOM" },
+    { objeto: "PILLOW", habitacion: "BEDROOM" },
+    { objeto: "WARDROBE", habitacion: "BEDROOM" },
+    { objeto: "BOOKCASE", habitacion: "STUDY" },
+    { objeto: "DESK", habitacion: "STUDY" },
+    { objeto: "RUG", habitacion: "STUDY" },
+    { objeto: "COMPUTER", habitacion: "STUDY" },
+    { objeto: "TABLE", habitacion: "DINING ROOM" },
+    { objeto: "CHAIR", habitacion: "DINING ROOM" },
+    { objeto: "WASHING MACHINE", habitacion: "BASEMENT" },
+    { objeto: "LAUNDRY BASKET", habitacion: "BASEMENT" },
+    { objeto: "TOYS", habitacion: "ATTIC" },
+    { objeto: "HOLIDAY DECORATIONS", habitacion: "ATTIC" }
+
+];
+
+let desafioActual;
+let correctos = 0;
+let incorrectos = 0;
+
+
+function nuevoDesafio() {
+    desafioActual = desafios[Math.floor(Math.random() * desafios.length)];
+    document.querySelector(".texto").innerText = `${desafioActual.objeto}`;
+    pronunciar(desafioActual.objeto); 
+}
+
+function mostrarMensaje(texto, esCorrecto) {
+    const mensajeDiv = document.getElementById("mensaje");
+    mensajeDiv.innerText = texto;
+    mensajeDiv.style.Color = esCorrecto ? "#FE8330" : "#FE8330";
+    mensajeDiv.style.display = "block";
+    
+    setTimeout(() => {
+        mensajeDiv.style.display = "none";
+    }, 1200);
+}
+
+
+ function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 270;
+        document.getElementById("tiempo").innerText = "4:30";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        nuevoDesafio();
+    }
+
+
+function arrastrar(event) {
+    event.dataTransfer.setData("text", event.target.innerText.trim());
+}
+
+
+function permitirDrop(event) {
+    event.preventDefault();
+}
+
+function pronunciar(texto) {
+    const mensaje = new SpeechSynthesisUtterance(texto);
+    const voces = speechSynthesis.getVoices();
+    mensaje.voice = voces.find(voz => voz.lang === 'en-US' && voz.name.includes('Male')) || voces[0];
+    mensaje.lang = 'en-US';
+    mensaje.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(mensaje);
+}
+
+
+function soltarLetra(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const habitacion = event.target.innerText.trim();
+
+    if (data === desafioActual.objeto && habitacion === desafioActual.habitacion) {
+        correctos++;
+        document.getElementById("correctos").innerText = correctos;
+        mostrarMensaje("Correct!", true); // ✅
+    } else {
+        incorrectos++;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        mostrarMensaje("Incorrect!", false); // ❌
+    }
+
+    nuevoDesafio();
+}
+
+function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames2.html";
+    }
+
+
+</script>
+
+</body>
+</html>

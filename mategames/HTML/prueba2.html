@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mategames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="imagen"><img src="../imagenes/9.png"></div>
+        <div class="game">
+        <div class="cubo2">
+        <div class="arriba" id="numeroObjetivo"></div>
+        </div>
+        <div class="cubo3">
+        <div class="fila" id="cuadrados">
+            <div class='mini-cubos' id='millares'></div>
+            <div class='mini-cubos' id='centenas'></div>
+            <div class='mini-cubos' id='decenas'></div>
+            <div class='mini-cubos' id='unidades'></div>
+        </div>
+        <div class="fila">
+            <div class="cubito">M</div>
+            <div class="cubito">C</div>
+            <div class="cubito">D</div>
+            <div class="cubito">U</div>
+        </div>
+        </div>
+        </div>
+        <div class="imagen"><img src="../imagenes/11.png"></div>
+    </div>
+    <div class="cubo4">
+        <div class="correcto">C: <span id="correctas">0</span></div>
+        <div class="tiempo">
+            <div class="unidad">
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('millares', 1000)">+</button>
+                    <p id="inputM">0</p>
+                    <button class="num" onclick="ajustarCantidad('millares', -1000)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('centenas', 100)">+</button>
+                    <p id="inputC">0</p>
+                    <button class="num" onclick="ajustarCantidad('centenas', -100)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('decenas', 10)">+</button>
+                    <p id="inputD">0</p>
+                    <button class="num" onclick="ajustarCantidad('decenas', -10)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('unidades', 1)">+</button>
+                    <p id="inputU">0</p>
+                    <button class="num" onclick="ajustarCantidad('unidades', -1)">-</button>
+                </div>
+            </div>
+            <button onclick="verificar()">Verificar</button>
+            <span id="tiempo">5:00</span>
+        </div>
+        <div class="incorrecto">F: <span id="incorrectas">0</span></div>
+    </div>
+</div>
+
+<div id="resultado" class="res">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button onclick="location.reload()">Reiniciar</button>
+        <button onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba2.css")
+</style>
+
+<script>
+function salir() {
+    window.location.href = "mategames.html";
+}
+
+let correctas = 0;
+let incorrectas = 0;
+let tiempoRestante = 300;
+let numeroActual = {};
+let cantidades = { millares: 0, centenas: 0, decenas: 0, unidades: 0 };
+
+
+function iniciarTemporizador() {
+    interval = setInterval(() => {
+        tiempoRestante--;
+        let minutos = Math.floor(tiempoRestante / 60);
+        let segundos = tiempoRestante % 60;
+        document.getElementById('tiempo').innerText = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+
+        if (tiempoRestante <= 0) {
+            clearInterval(interval); 
+            mostrarResultado();   
+        }
+    }, 1000);
+}
+ 
+
+function generarNumero() {
+    let millares = (Math.floor(Math.random() * 9) + 1) * 1000;
+    let centenas = (Math.floor(Math.random() * 9) + 1) * 100;
+    let decenas = (Math.floor(Math.random() * 9) + 1) * 10;
+    let unidades = (Math.floor(Math.random() * 9) + 1);
+
+    numeroActual = { millares, centenas, decenas, unidades };
+
+  
+    let valores = [millares, centenas, decenas, unidades];
+
+    
+    valores.sort(() => Math.random() - 0.5);
+
+   
+    document.getElementById('numeroObjetivo').innerText = valores.join(" - ");
+}
+
+generarNumero();
+
+iniciarTemporizador();
+
+function ajustarCantidad(tipo, cambio) {
+    let maximos = { millares: 9000, centenas: 900, decenas: 90, unidades: 9 };
+    cantidades[tipo] = Math.max(0, Math.min(maximos[tipo], cantidades[tipo] + cambio));
+    document.getElementById(`input${tipo.charAt(0).toUpperCase()}`).innerText = cantidades[tipo];
+    actualizarCuadrados(tipo);
+}
+
+function actualizarCuadrados(tipo) {
+    let cantidad = cantidades[tipo] / (tipo === 'millares' ? 1000 : tipo === 'centenas' ? 100 : tipo === 'decenas' ? 10 : 1);
+    let contenedor = document.getElementById(tipo);
+    contenedor.innerHTML = '';
+    for (let i = 0; i < cantidad; i++) {
+        let div = document.createElement('div');
+        div.classList.add('mini-cubo');
+        contenedor.appendChild(div);
+    }
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificar() {
+    let respuesta = cantidades.millares + cantidades.centenas + cantidades.decenas + cantidades.unidades;
+    let totalNumeroActual = numeroActual.millares + numeroActual.centenas + numeroActual.decenas + numeroActual.unidades;
+    if (respuesta === totalNumeroActual) {
+        correctas++;
+        document.getElementById('correctas').innerText = correctas;
+         sonidoCorrecto.play(); 
+    } else {
+        incorrectas++;
+        document.getElementById('incorrectas').innerText = incorrectas;
+          sonidoIncorrecto.play(); 
+    }
+    generarNumero();
+    cantidades = { millares: 0, centenas: 0, decenas: 0, unidades: 0 };
+    document.querySelectorAll(".respuesta p").forEach(p => p.innerText = "0");
+    document.querySelectorAll(".mini-cubos").forEach(c => c.innerHTML = "");
+}
+
+function mostrarResultado() {
+    let puntajeFinal = correctas - incorrectas;
+    let nota = puntajeFinal >= 20 ? "A" : puntajeFinal >= 10 ? "B" : puntajeFinal >= 5 ? "C" : "F";
+    document.getElementById('puntajeFinal').innerText = puntajeFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+</script>
+</body>
+</html>

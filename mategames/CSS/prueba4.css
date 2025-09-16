@@ -1,0 +1,146 @@
+body{background-color: blue;}
+
+input{border: 1px solid blue;
+height: 96px;
+width: 230px;
+color: blue;
+font-size: 50px;
+text-align: center;}
+
+img{height: 100%;
+width: 100%;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 641px;
+display: flex;
+justify-content: space-around;}
+
+.cubo1{border: 3px solid blue;
+background-image: url("../imagenes/fondo1,3.png");
+background-repeat: no-repeat;
+background-position: center;
+background-size: 100% 100%;
+height: 635px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-end;}
+
+.ejercicio{border: 5px solid blue;
+border-radius: 60px;
+height: 200px;
+width: 700px;
+margin-left: 5px;
+margin-right: 5px;
+margin-top: 5px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.cubiculo{
+	height: 190px ;
+color: red;
+font-family: cursive;
+font-size: 180px;
+text-align: center;
+display: flex;
+align-items: center;}
+
+.pequeñin{
+height: 330px;
+width: 100%;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+.cubo2{border: 3px solid blue;
+height: 635px;
+width: 400px;}
+
+.escribir{border: 1px solid blue;
+	height: 100px;
+display: flex;}
+
+.verificacion{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 100px;
+width: 163px;
+font-family: cursive;
+font-size: 30px;}
+
+.puntos{border: 1px solid blue;
+height: 430px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.correcto{border: 1px solid blue;
+width: 100px;
+height: 100px;
+background-color: blue;
+color: white;
+font-size: 40px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid blue;
+width: 100px;
+height: 100px;
+background-color: blue;
+color: white;
+font-size: 40px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid blue;
+background-color: blue; 
+height: 100px;
+font-size: 50px;
+color: white; 
+font-family: cursive;
+text-align: center;}
+
+.res {
+    display: none;
+    position: fixed;
+     top: 25%; 
+     left: 77%;
+     transform: translate(-50%, -50%); 
+     background: blue; 
+     padding: 40px; 
+     border: 2px solid red; 
+     text-align: center; 
+     color: white; 
+     font-family: cursive;
+
+}
+
+.sepa {
+display: flex;
+justify-content: space-around;
+width: 450px;
+}
+
+
+.reinicio{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 120px;
+font-family: cursive;
+font-size: 20px;}
+
+.salir{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 120px;
+font-family: cursive;
+font-size: 20px;}

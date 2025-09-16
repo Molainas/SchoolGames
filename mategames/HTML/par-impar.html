@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>PARES/IMPARES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+				
+				<li>
+					ahora que estamos en mi casa, ¿que tal si me ayudas con algo?, tengo algunas tablas en el cobertiso y necesito tener mas espacio porque son muchas 
+				</li>
+
+				<li>
+					no te preocupes por la medida ya tengo registrada en cada tabla, solo necesito que me digas cual es par o impar, los impares van al cobertiso y los pares los utilisares para costruir otro cobertiso 
+				</li>
+
+				<li>
+					si necesitas ayuda puedes ler mi libro
+				</li>
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+				
+            </ul>
+				<div class="consejos">CONSEJOS</div>
+            <ul>
+				<li>
+					solo utiliza el ultimo numero osea la unidad (si has visto la descomposicion de numeros)
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem5.gif" class="img4"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+          	<li>Los números pares son aquellos que podemos dividir entre dos. Son aquellos que acaban en 0, 2, 4, 6, 8.</li>
+          	<div class="rt">
+                <img src="../imagenes/par.png" class="img2">
+                </div>
+          	<li>
+          	Los números impares son los que no son divisibles por dos, aquellos que terminan en 1, 3, 5, 7, 9.	
+          	</li>
+          	<div class="rt">
+          	<img src="../imagenes/impar.png" class="img2">
+                </div>
+                <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+          </ul>
+        </div>
+        <div class="mucho-texto2">
+                <div class="tr"> 
+        	<img src="../imagenes/dividos.png" class="img3">
+                </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+	@import url("../CSS/par-impar.css")
+</style>
+
+<script>
+	
+function ir() {
+
+window.location.href = "../HTML/prueba5.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block';
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

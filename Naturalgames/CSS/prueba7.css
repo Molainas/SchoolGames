@@ -1,0 +1,128 @@
+body{background-color: #FFF52D;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 620px;
+display: flex;
+flex-direction: column;
+}
+
+.cubo1{
+height: 30%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.correcto{border: 1px solid #FFF52D;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid #FFF52D; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FFF52D;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubo2{
+height: 80%;
+display: flex;
+flex-direction: column;}
+
+.imagen{
+height: 70%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.pequeñin1{
+width: 16.4%;
+height: 100%;
+display: flex;}
+
+.pequeñin2{
+width: 16.4%;
+height: 100%;
+display: flex;
+justify-content: flex-end;}
+
+.pequeñin{border: 1px solid #FFF52D;}
+
+.img{border: 1px solid #FFF52D;}
+
+.situacion{width: 70%;
+height: 100%;}
+
+.objetos{border: 1px solid #FFF52D;
+height: 30%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.colector{border: 5px solid #FFF52D;
+  cursor: pointer;
+height: 120px;
+width: 120px;
+display: flex;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: #FFF52D; 
+    height: 450px;
+    width: 800px;
+    border: 2px solid green; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 770px;
+}

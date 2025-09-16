@@ -1,0 +1,203 @@
+body{background-color: #FE8330;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 625px;
+display: flex;
+flex-direction: column;
+align-items: center;}
+
+.cubo1{
+height: 60%;
+width: 100%;
+background-image: url(../imagenes/fondo.png);
+background-repeat: no-repeat;
+background-size: 100% 100%}
+
+.familia1{
+height: 33%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.empezar{border: 1px solid #FE8330;
+background-color: #FE8330;
+color: white;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 800px;
+border-radius: 150%;}
+
+.familia2{
+height: 33%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.familia3{
+height: 33%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.abuelos{
+height: 100%;
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.tios{
+height: 100%;
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.padres{
+height: 100%;
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.primos{
+height: 100%;
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.pequeñin{
+height: 100%;
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.circulo{border: 3px solid purple;
+border-radius: 100%;
+background-color: white;
+width: 110px;
+height: 110px;
+font-family: cursive;
+font-size: 13px;
+color: purple;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.circulo.seleccionado {
+    border: 3px solid #FE8330;
+    background-color: #FE8330;
+}
+
+.circulo1{border: 3px solid purple;
+border-radius: 100%;
+background-image: url(../imagenes/fondo1.png);
+background-size: 100% 100%;
+background-repeat: no-repeat;
+width: 110px;
+height: 110px;
+}
+
+.cubo2{border: 3px solid purple;
+border-radius: 30%;
+height: 20%;
+width: 70%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: purple;
+font-family: cursive;
+font-size: 40px;
+}
+ 
+.cubo3{width: 100%;
+height: 20%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.verificacion{border: 1px solid #FE8330;
+background-color: white;
+color: purple;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 200px;}
+
+.correcto{border: 1px solid #FE8330;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FE8330;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid #FE8330; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.peque{height: 124px;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 40%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: #FE8330;; 
+    height: 500px;
+    width: 900px;
+    border: 2px solid purple; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 40px;}
+
+.boton1{border: 1px solid #FE8330;;
+background-color: white;
+color: purple;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FE8330;;
+background-color: white;
+color: purple;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 900px;}

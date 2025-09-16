@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>DIAS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      A parte de la hora necesito tener marcado los dias importantes para que no se me olvide por el tiempo y estar preparado
+		  </li>
+
+		  <li>
+		      Necesito que marcas con una x el dia que tengo algo importante, la hora no es necesaria ya que la escribire yo despues de terminar, y como yo tengo el papel que escribo los dias importantes yo sere que dija el dia y revisare si esta bien o esta mal
+		  </li>
+
+		  <li>
+		      Para esto necesito que sepas los dias de la semana por lo que te doy mi libro para que lo aprendas
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      El dia es que importa no la hora	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem6.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <p>No importa si estás aprendiendo inglés con fines laborales o personales, conocer los días de la semana en inglés es esencial para alcanzar un buen dominio de este útil idioma. Podrás compartir con otros angloparlantes información sobre planes, rutinas y actividades.</p>
+
+           <p>Pensemos por un momento en algunas tareas para las que necesitamos mencionar los días de la semana:</p>
+
+           <li>Agendar una cita con el doctor o una junta en el trabajo.</li>
+
+           <li>Hacer una reservación en un restaurante.</li>
+
+           <li>Dar a conocer nuestros planes a futuro. Por ejemplo, nuestras vacaciones.</li>
+
+           <li>Relatar el pasado.</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen564.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/dias.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba6.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

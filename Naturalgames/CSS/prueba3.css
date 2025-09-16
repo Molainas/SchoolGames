@@ -1,0 +1,188 @@
+body{background-color: #FFF52D;}
+
+img{height: 50px;
+width: 50px;}
+
+canvas{
+height: 75%;
+width: 100%;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 625px;
+display: flex;
+flex-direction: column;
+justify-content: space-around;}
+
+.cubo1{
+height: 80%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.puerta{
+height: 70%;
+width: 100%;
+display: flex;
+justify-content: space-around;
+background-image: url("../imagenes/fondo1,4.png");
+background-size: 50% 100%;
+}
+
+.jaula{
+height: 350px;
+width: 500px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;}
+
+.letrero1{border: 1px solid green;
+background-color: green;
+height: 80px;
+width: 160px;
+margin-bottom: 5px;
+margin-top: 5px;}
+
+.letreros{
+display: flex;
+flex-direction: column;
+justify-content: space-around;}
+
+.letrero2{border: 1px solid green;
+background-color: green;
+height: 100px;
+width: 160px;
+margin-bottom: 5px;
+margin-top: 5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;}
+
+.texto2{border: 1px solid white;
+width: 100%;
+background-color: white;
+color: green;
+font-family: cursive;
+font-size: 15px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.hueco{border: 5px solid green;
+background-color: white;
+height: 100%;
+width: 80%;
+display: flex;
+justify-content: space-around;}
+
+.linea{border: 3px solid green;
+background-color: green;
+height: 100%;
+width: 15px;}
+
+.comida{border: 1px solid yellow;
+background-color: yellow;
+height: 30%;
+width: 60%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.cubito{
+ cursor: pointer;
+border: 1px solid green;
+background-color: green;
+height: 120px;
+width: 140px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+flex-direction: column;}
+
+.texto1{border: 1px solid green;
+width: 100%;
+background-color: yellow;
+color: green;
+font-family: cursive;
+font-size: 15px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubo2{
+height: 20%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.correcto{border: 1px solid #FFF52D;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid #FFF52D; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FFF52D;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 75%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: yellow; 
+    padding: 50px; 
+    border: 2px solid green; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid yellow;
+background-color: white;
+color: green;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid yellow;
+background-color: white;
+color: green;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>HORA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Tambien el reloj que compre pose un sistema de alarma una vez que se alla configurado 
+		  </li>
+
+		  <li>
+		      Yo tengo una lista de las citas que tengo junto con las horas establecidas, y tu vas a configurar el reloj mientras yo digo las horas pero ten cuidado el reloj debe saber que hora es de la mañana o de la tarde
+		  </li>
+
+		  <li>
+		      En mi libro esta la informacion
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Solo son dos cosas, no es que sea tan dificil	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem4,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>Hay que recordar que en la hora tambien se dice la hora en la mañana y en la tarde, debido que no es los mismo 9:00 am que 9:00 pm por lo que ingles tiene maneras de identificar la hora de la mañana y de la tarde</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen1234.png" class="img4">
+         
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/hora2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba4,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>COMIDA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Tengo estas loncheras que sirven para guardar la comidad de cada animal por varios dias hasta que llega la hora de la comida  
+		  </li>
+
+		  <li>
+		      Debo colocar la comida correcta en su lugar correcto dependiendo de la alimentacion del animal
+		  </li>
+
+		  <li>
+		      Si necesitas saber toda la alimentacion de los animales puedes leer mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Puedes mirar el nombre
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.png" class="img3">
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+            <li>
+            	Un animal carnívoro se identifica principalmente por su dieta, que se basa en la carne de otros animales. También se pueden observar características físicas que los ayudan en la caza y el consumo de carne, como dientes afilados y garras. 
+            </li>
+
+           <li>
+           	Dientes: Tienen dientes afilados y fuertes, especialmente los caninos, diseñados para desgarrar y perforar la carne. 
+           </li>
+
+            <li>
+            Garras: Las garras afiladas les permiten agarrar, sujetar y manipular a sus presas. 
+           </li>
+
+           <li>
+           Sistema digestivo: Su sistema digestivo suele ser más corto y adaptado para procesar la carne rápidamente. 
+           </li>
+
+          <div class="imagenes">
+          	<img src="../imagenes/dientes1.jpg" class="img2">
+          	<img src="../imagenes/garras1.jpg" class="img2">
+          	<img src="../imagenes/sistema2.png" class="img2">
+          </div>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <li>
+            	Un animal herbívoro se identifica principalmente por su dieta, que se basa en consumir exclusivamente plantas y vegetales. Esto incluye hojas, tallos, frutos, semillas, flores y otras partes de las plantas. Además, pueden tener características anatómicas y fisiológicas específicas para facilitar la digestión de material vegetal, como dientes planos y sistemas digestivos especializados. 
+            </li>
+
+
+            <li>
+            Dientes:
+            Dientes planos y aplanados, diseñados para moler y triturar plantas, a diferencia de los dientes puntiagudos de los carnívoros. 
+            </li>
+
+            <li>
+            Sistema digestivo:
+            Pueden tener estómagos múltiples o una cámara de fermentación en el intestino para ayudar a digerir la celulosa de las plantas. 
+            </li>
+
+            <div class="imagenes">
+          	<img src="../imagenes/dientes2.jpg" class="img2">
+          	<img src="../imagenes/garras2.png" class="img2">
+          	<img src="../imagenes/garras3.png" class="img2">
+          	<img src="../imagenes/sistema1.png" class="img2">
+            </div>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/comida.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba3.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

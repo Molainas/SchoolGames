@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>DESCOMPOSICION</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+				<li>
+					esta es mi casa donde tengo mis dos juguetes favoritos, un tablero y unos bloques con letras y otros con color, y sabes se me ocurrio un juego combinando mis dos juguetes
+				</li>
+
+				<li>
+				   yo escribo seis numeros diferentes y debes colocar la cantidad correcta encima de los bloques con letras (C,D,U,d,c,m) usando los bloques con color pero en el orden correcto segun la descomposicion de decimales 
+				</li>
+
+				<li>
+					si necesitas saber el nuevo tema actualizado, puedes consultarlo en mi libro
+				</li>
+
+				<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+
+            </ul>
+				<div class="consejos">CONSEJOS</div>
+             <ul>
+             	<li>
+             		si miras y creas en tu mente el numero que aparece, podras hacerlo mas rapido que en uno en uno
+             	</li>
+             </ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem2,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+
+          <li>La descomposición de un número decimal se hace considerando la parte entera y la parte decimal. La parte entera se descompone igual que los números enteros, mientras que la parte decimal se considera el valor posicional. </li>
+
+          <li>Se coloca la cifra seguida de la unidad que ocupa en el número.</li>
+
+          <li>Por ejemplo, 28,246 = 2D + 8 U + 2d + 4 c + 6 m.</li>
+
+          <li>Se coloca el número de unidades que tiene cada cifra dentro del número.</li>
+
+          <li>Por ejemplo, 28,246 = 20 + 8 + 0,2 + 0,04 + 0,006.</li>
+
+          <li>La parte entera y la parte decimal están separadas por la coma decimal. 
+1 décima equivale a 0,1 unidades. 
+1 centésima a 0,01 unidades. 
+1 milésima equivale a 0,001 unidades. 
+Los números decimales se leen diciendo la parte entera en unidades y la parte decimal en el orden más pequeño. 
+Los números decimales son números no enteros, compuestos por una parte entera y una parte decimal. </li>
+
+<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+          </ul>	
+        </div>
+        <div class="mucho-texto2">
+        	<img src="../imagenes/decimas.png" class="img2">
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Descomposicion2.css")
+</style>
+
+<script>
+
+function irse() {
+
+window.location.href = "../HTML/mategames2.html"
+
+}
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2,2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block';
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none';
+
+}
+
+</script>
+</body>
+</html>

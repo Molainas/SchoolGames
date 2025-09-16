@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CASA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Ahora que nos mudamos a otra casa necesito poner todas las cosas en su lugar, por suerte cada caja pose todos los objetos de cada habitacion, tambien tengo algunas cosas en casa que la casa no tiene como un inodoro
+		  </li>
+
+		  <li>
+		      Yo dijo una cosa en especifico y tu lo llevas a su habitacion
+		  </li>
+
+		  <li>
+		      En el libro esta el nombre de las habitaciones de la casa junto con las cosas que debe tener una casa
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Puedes figarte en las imagen que en el nombre	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem7,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+
+        	<img src="../imagenes/atico2.png" class="img3">
+        	<img src="../imagenes/comedor2.png" class="img3">
+        	<img src="../imagenes/recamara2,2.png" class="img3">
+          
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+               <img src="../imagenes/bano2.png" class="img3">
+        	<img src="../imagenes/sotano2.png" class="img3">
+        	<img src="../imagenes/study.png" class="img3">
+        	
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/casa2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba7,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

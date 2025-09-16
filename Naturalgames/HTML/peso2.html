@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>PESO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      El peso es una manera de medir la cantidad de masa, en caso de que no se puede hacer de la manera tradicional
+		  </li>
+
+		  <li>
+		      Lo digo porque hay que medir el peso de estas bolsas de comidad y contenedores de agua para los animales, del lado izquierdo esta el ejemplo y de la derecho esta para replicar el ejemplo 
+		  </li>
+
+		  <li>
+		      En mi libro esta el metodo de como ver como lo digo
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Solo corre el punto de izquierda a derecha segun lo que quiere el juego
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+
+     <li>
+     Litros (L) a mililitros (ml)
+Multiplica los litros por 1,000. 
+Ejemplo: 2 litros de agua son 2 x 1000 = 2000 ml.
+     </li>
+
+     <li>
+Mililitros (ml) a litros (L):
+Divide los mililitros entre 1,000. 
+Ejemplo: 5,500 ml de agua son 5,500 / 1000 = 5.5 litros. 
+     </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+           <img src="../imagenes/imagen5,2.png" class="img2">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/peso2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba8,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

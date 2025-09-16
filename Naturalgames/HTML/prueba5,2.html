@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="pasillo">
+      <!-- Animal -->
+      <div class="cubito">
+        <div class="cubito1">
+          <div class="letrero">
+            <div class="texto" id="textoAnimal"></div>
+          </div>
+        </div>
+        <div class="cubito2">
+          <button class="cambioAnimal"><</button>
+          <button class="puerta" id="puertaAnimal">
+            <img src="../imagenes/puerta1,2.png" class="img1" />
+            <img src="../imagenes/puerta2,2.png" class="img1" />
+          </button>
+          <button class="cambioAnimal">></button> 
+        </div>
+      </div>
+
+      <!-- Planta -->
+      <div class="cubito">
+        <div class="cubito1_1">
+          <div class="letrero">
+            <div class="texto" id="textoPlanta"></div>
+          </div>
+        </div>
+        <div class="cubito2_2">
+          <button class="cambioPlanta"><</button>
+          <button class="puerta" id="puertaPlanta">
+            <img src="../imagenes/puerta1,2.png" class="img1" />
+            <img src="../imagenes/puerta2,2.png" class="img1" />
+          </button>
+          <button class="cambioPlanta">></button> 
+        </div>
+      </div>
+    </div>
+
+    <div class="piso">
+      <div class="animal">
+        <canvas id="canvasPrincipal" width="400" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="cubo2">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+  @import url("../CSS/prueba5,2.css");
+</style>
+
+<script>
+const reproduccionAnimales = ["vivíparo", "ovíparo", "ovovivíparo"];
+const reproduccionPlantas = ["asexual", "sexual"];
+let indiceAnimal = 0;
+let indicePlanta = 0;
+let tipoAnimalImagen = "";
+let tipoPlantaImagen = "";
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText = `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames2.html";
+}
+
+function iniciarJuego() {
+  iniciarTemporizador();
+  nuevaRonda();
+}
+
+function mostrarTextos() {
+  const textoAnimal = reproduccionAnimales[indiceAnimal];
+  const textoPlanta = reproduccionPlantas[indicePlanta];
+  document.getElementById("textoAnimal").textContent = textoAnimal.charAt(0).toUpperCase() + textoAnimal.slice(1);
+  document.getElementById("textoPlanta").textContent = textoPlanta.charAt(0).toUpperCase() + textoPlanta.slice(1);
+  mostrarDibujoAnimalYPlanta(tipoAnimalImagen, tipoPlantaImagen);
+}
+
+const botonesCambioAnimal = document.querySelectorAll(".cambioAnimal");
+botonesCambioAnimal[0].onclick = () => {
+  indiceAnimal = (indiceAnimal - 1 + reproduccionAnimales.length) % reproduccionAnimales.length;
+  mostrarTextos();
+};
+botonesCambioAnimal[1].onclick = () => {
+  indiceAnimal = (indiceAnimal + 1) % reproduccionAnimales.length;
+  mostrarTextos();
+};
+
+const botonesCambioPlanta = document.querySelectorAll(".cambioPlanta");
+botonesCambioPlanta[0].onclick = () => {
+  indicePlanta = (indicePlanta - 1 + reproduccionPlantas.length) % reproduccionPlantas.length;
+  mostrarTextos();
+};
+botonesCambioPlanta[1].onclick = () => {
+  indicePlanta = (indicePlanta + 1) % reproduccionPlantas.length;
+  mostrarTextos();
+};
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+document.getElementById("puertaAnimal").onclick = () => {
+  const tipo = reproduccionAnimales[indiceAnimal];
+  if (tipo === tipoAnimalImagen) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play();
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+  nuevaRonda();
+};
+
+document.getElementById("puertaPlanta").onclick = () => {
+  const tipo = reproduccionPlantas[indicePlanta];
+  if (tipo === tipoPlantaImagen) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+  }
+  nuevaRonda();
+};
+
+function nuevaRonda() {
+  tipoAnimalImagen = reproduccionAnimales[Math.floor(Math.random() * reproduccionAnimales.length)];
+  tipoPlantaImagen = reproduccionPlantas[Math.floor(Math.random() * reproduccionPlantas.length)];
+  indiceAnimal = Math.floor(Math.random() * reproduccionAnimales.length);
+  indicePlanta = Math.floor(Math.random() * reproduccionPlantas.length);
+  mostrarTextos();
+}
+
+function dibujarFondoCompartido(ctx) {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+/* === FUNCIONES DE DIBUJO CON x, y === */
+function dibujarAnimalViviparo(ctx, x, y) {
+
+  // Cabeza
+   ctx.fillStyle = "green"; 
+  ctx.beginPath();
+  ctx.arc(x, y, 40, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Orejas
+  ctx.fillStyle = "green"; 
+  ctx.beginPath();
+  ctx.arc(x - 30, y - 25, 15, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + 30, y - 25, 15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ojos
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(x - 15, y - 10, 8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + 15, y - 10, 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(x - 15, y - 10, 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + 15, y - 10, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Hocico
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 10, 15, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Nariz
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(x, y + 5, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+}
+
+
+
+function dibujarAnimalOviparo(ctx, x, y) {
+  // Cuerpo (amarillo)
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 20, 25, 35, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Cabeza (amarillo también, más grande)
+  ctx.beginPath();
+  ctx.arc(x, y - 20, 25, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Alas
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.ellipse(x - 30, y + 10, 12, 18, Math.PI / 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + 30, y + 10, 12, 18, -Math.PI / 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ojos
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(x - 10, y - 25, 6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + 10, y - 25, 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(x - 10, y - 25, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x + 10, y - 25, 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Pico (triángulo naranja)
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(x, y - 15);
+  ctx.lineTo(x - 8, y - 5);
+  ctx.lineTo(x + 8, y - 5);
+  ctx.closePath();
+  ctx.fill();
+
+  // Patitas
+  ctx.strokeStyle = "green";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 10, y + 50);
+  ctx.lineTo(x - 10, y + 65);
+  ctx.moveTo(x + 10, y + 50);
+  ctx.lineTo(x + 10, y + 65);
+  ctx.stroke();
+}
+
+
+function dibujarAnimalOvoviviparo(ctx, x, y) {
+  ctx.fillStyle = "green";
+  ctx.beginPath(); ctx.ellipse(x, y, 40, 20, 0, 0, Math.PI * 2); ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(x - 40, y);
+  ctx.lineTo(x - 60, y - 10);
+  ctx.lineTo(x - 60, y + 10);
+  ctx.fill();
+}
+
+function dibujarPlantaSexual(ctx, x, y) {
+  // Tallo
+  ctx.fillStyle = 'green';
+  ctx.fillRect(x - 5, y, 10, 80);
+
+  // Pétalos (rosa)
+  ctx.fillStyle = 'green';
+  let petalos = 6;
+  let radio = 25;
+  for (let i = 0; i < petalos; i++) {
+    let angle = i * (2 * Math.PI / petalos);
+    ctx.beginPath();
+    ctx.ellipse(
+      x + radio * Math.cos(angle),
+      y - 20 + radio * Math.sin(angle),
+      20, 20,
+      angle,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+  }
+
+  // Centro de la flor (amarillo)
+  ctx.fillStyle = 'yellow';
+  ctx.beginPath();
+  ctx.arc(x, y - 20, 12, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+
+function dibujarPlantaAsexual(ctx, x, y) {
+  ctx.fillStyle = 'green';
+  ctx.fillRect(x - 5, y, 10, 60);
+
+  ctx.fillStyle = 'green';
+  ctx.beginPath();
+  ctx.arc(x, y - 20, 25, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+/* === MOSTRAR ANIMAL A LA IZQUIERDA Y PLANTA A LA DERECHA === */
+function mostrarDibujoAnimalYPlanta(tipoAnimal, tipoPlanta) {
+  const ctx = document.getElementById("canvasPrincipal").getContext("2d");
+  dibujarFondoCompartido(ctx);
+
+  const centerX = ctx.canvas.width / 2;
+  const centerY = ctx.canvas.height / 2;
+
+  // Animal izquierda
+  if (tipoAnimal === "vivíparo") dibujarAnimalViviparo(ctx, centerX - 120, centerY);
+  else if (tipoAnimal === "ovíparo") dibujarAnimalOviparo(ctx, centerX - 120, centerY);
+  else if (tipoAnimal === "ovovivíparo") dibujarAnimalOvoviviparo(ctx, centerX - 120, centerY);
+
+  // Planta derecha
+  if (tipoPlanta === "sexual") dibujarPlantaSexual(ctx, centerX + 120, centerY);
+  else if (tipoPlanta === "asexual") dibujarPlantaAsexual(ctx, centerX + 120, centerY);
+}
+
+window.onload = () => {
+  const ctx = document.getElementById("canvasPrincipal").getContext("2d");
+  dibujarFondoCompartido(ctx);
+  iniciarJuego();
+};
+</script>
+</body>
+</html>

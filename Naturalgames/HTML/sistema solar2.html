@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>SISTEMA SOLAR</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Necesito tu ayuda para retirar los planetas dañados y colocar los nuevos de cada ejemplo del museo que existe en el planeta
+		  </li>
+
+		  <li>
+		      Pero tambien hay que colocar la cantidad de lunas cuando un planeta no tiene la cantidad de lunas correctas
+		  </li>
+
+		  <li>
+		      si necesitas saber sobre el sistema solar puedes consultarlo en mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		      Memoriza la cantidad de lunas que tiene cada planeta
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>
+          	  El sistema solar tiene cientos de lunas que orbitan planetas y planetas enanos. Las más conocidas son la Tierra, con una sola luna; Marte, con Fobos y Deimos; Júpiter, que tiene 95; Saturno, con 146; Urano, con 28; y Neptuno, con 16. 
+          </li>
+
+          <img src="../imagenes/luna.jpg" class="img3">
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+        <li> Mercurio y Venus: No tienen lunas.</li>
+
+        <li>La Tierra: Tiene una luna.</li>
+
+    <li>Marte: Tiene dos lunas: Fobos y Deimos.</li> 
+<li>Júpiter: Tiene 95 lunas. Algunas de sus lunas más grandes son Ganímedes, Calisto, Ío y Europa.</li>
+
+<li>Saturno: Tiene 146 lunas. Titán es su luna más grande y conocida.</li>
+
+<li>Urano: Tiene 28 lunas.</li>
+
+
+<li>Neptuno: Tiene 16 lunas.</li>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/sistema solar2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba9,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

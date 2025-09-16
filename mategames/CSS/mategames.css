@@ -1,0 +1,87 @@
+body{background-color: blue; }
+
+h1{color: red;
+font-size: 50px;
+font-family: cursive;}
+
+h3{color: red;
+font-family: cursive;}
+
+img{height: 170px;
+width: 270px;
+border-bottom-right-radius:5px ;
+border-bottom-left-radius: 5px;
+}
+
+.cubo{
+height: 100%;
+background-color: white;}
+
+.cubo1{
+	border: 1px  solid #87CEEB;
+	height: 100px;
+	background-color: #87CEEB;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cubo2{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content:space-evenly ;
+}
+
+.dificultad{border: 1px solid blue;
+height: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: blue;
+}
+
+.fila{
+height: 235px;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+background-image: url("../imagenes/fondo0.png");
+background-size: 50% 100%;
+}
+
+.cubiculo{border: 5px solid blue;
+height: 200px;
+width: 270px;
+border-radius: 10px;
+background-color: white;}
+
+
+.sub{border: 1px solid blue;
+background-color: blue;
+color: white;
+font-size: 20px;
+font-family: cursive;
+display: flex;
+justify-content: center;}
+
+.cambio{
+	height: 100%;
+	width: 300px;
+background-color: white;
+display: flex; 
+align-items: center;}
+
+.sigma{height: 100%;}
+
+.boton1{border: 1px solid blue;
+background-color: blue;
+color: white;
+font-family: cursive;
+font-size: 10px;
+width: 100px;
+height: 100%;
+}
+

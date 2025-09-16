@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+<div class="cubo"> 
+    <div class="cubo1">
+        <div class="ejemplo">
+            <button class="letra" style="top: 50px; left: 50px;" draggable="true">Aa</button>
+            <button class="letra" style="top: 100px; left: 200px;" draggable="true">Ee</button>
+            <button class="letra" style="top: 200px; left: 100px;" draggable="true">Ii</button>
+            <button class="letra" style="top: 300px; left: 250px;" draggable="true">Oo</button>
+            <button class="letra" style="top: 400px; left: 150px;" draggable="true">Uu</button>
+        </div>
+        <div class="mesa">
+            <div class="lugar" id="lugar" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">
+                <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+            </div>
+            <div class="pequeñin"><img src="../imagenes/escritorio.png" class="peque"></div>
+        </div>
+    </div>
+
+    <div class="cubo2">
+        <button class="verificacion" onclick="verificarRespuesta()">VERIFICAR</button>
+        <div class="puntos">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+        <div class="tiempo" id="tiempo">5:00</div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba1.css")
+</style>
+
+<script>
+    let tiempo = 300;
+    let interval;
+    let correctos = 0;
+    let incorrectos = 0;
+    let vocalActual = "";
+
+    let vocesDisponibles = [];
+    let vozSeleccionada = null;
+
+    // Cargar voces disponibles
+    window.speechSynthesis.onvoiceschanged = function () {
+        vocesDisponibles = speechSynthesis.getVoices();
+
+        // Intenta seleccionar una voz en inglés de EE.UU. femenina (puedes cambiar esto)
+        vozSeleccionada = vocesDisponibles.find(v => v.lang === "en-US" && v.name.toLowerCase().includes("male")) 
+            || vocesDisponibles.find(v => v.lang === "en-US");
+
+        // También puedes ver las voces en consola para elegir otra
+        console.log("Voces disponibles:", vocesDisponibles);
+    };
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+        clearInterval(interval);
+        iniciarTemporizador();
+        pronunciarVocal();
+    }
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = 
+                    `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+   function pronunciarVocal() {
+    const vocales = ["Aa", "Ee", "Ii", "Oo", "Uu"];
+    vocalActual = vocales[Math.floor(Math.random() * vocales.length)];
+
+    const utterance = new SpeechSynthesisUtterance(vocalActual.charAt(0)); // Solo pronuncia la letra
+    utterance.lang = "en-US";
+    utterance.volume = 100.0; // volumen máximo
+    utterance.pitch = 0.1;  // tono más grave (más masculino)
+    if (vozSeleccionada) utterance.voice = vozSeleccionada;
+
+    speechSynthesis.speak(utterance);
+    document.getElementById("lugar").textContent = "?";
+}
+
+    document.querySelectorAll(".letra").forEach(button => {
+        button.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text", e.target.textContent.trim());
+        });
+    });
+
+    function permitirDrop(event) {
+        event.preventDefault();
+    }
+
+    function soltarLetra(event) {
+        event.preventDefault();
+        const letraArrastrada = event.dataTransfer.getData("text").trim();
+        document.getElementById("lugar").textContent = letraArrastrada;
+    }
+
+   function verificarRespuesta() {
+    const lugar = document.getElementById("lugar");
+    const respuesta = lugar.textContent.trim();
+
+    if (respuesta === vocalActual) {
+        correctos++;
+        document.getElementById("correctos").innerText = correctos;
+
+        lugar.style.backgroundColor = "white"; // verde claro
+        lugar.textContent = "¡Correcto!";
+     
+    } else {
+        incorrectos++;
+        document.getElementById("incorrectos").innerText = incorrectos;
+
+        lugar.style.backgroundColor = "white"; // rojo claro
+        lugar.textContent = "Incorrecto";
+   
+    }
+
+    // Esperar un segundo y mostrar la siguiente vocal
+    setTimeout(() => {
+        lugar.style.backgroundColor = ""; // Quitar color
+        pronunciarVocal();
+    }, 1000);
+}
+
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames.html";
+    }
+</script>
+
+</body>
+</html>

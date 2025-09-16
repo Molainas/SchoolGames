@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="microscopio">
+      <h3>Célula Animal</h3>
+      <canvas id="canvasAnimal" width="400" height="400"></canvas>
+    </div>
+    <div class="microscopio">
+      <h3>Célula Vegetal</h3>
+      <canvas id="canvasVegetal" width="400" height="400"></canvas>
+    </div>
+  </div>
+
+  <div class="cubo2">
+    <div class="texto" id="partes"></div>
+    <img class="pequeñin" src="../imagenes/peque123.png">
+    <button class="verificacion" onclick="verificarSeleccion()">VERIFICAR</button>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="puntos">
+      <div class="correcto">C: <span id="correctos">0</span></div>
+      <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba4,2.css")
+</style>
+
+<script>
+const canvasAnimal = document.getElementById("canvasAnimal");
+const canvasVegetal = document.getElementById("canvasVegetal");
+const ctxAnimal = canvasAnimal.getContext("2d");
+const ctxVegetal = canvasVegetal.getContext("2d");
+
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+const partes = [
+  { nombre: "nucleo", x: 200, y: 200, r: 30, celula: "ambas" },
+  { nombre: "pared celular", x: 200, y: 200, r: 140, celula: "vegetal" },
+  { nombre: "centriolo", x: 100, y: 100, r: 10, celula: "animal" },
+  { nombre: "cloroplasto", x: 250, y: 150, r: 20, celula: "vegetal" },
+  { nombre: "membrana", x: 200, y: 200, r: 110, celula: "ambas" }
+];
+
+let parteActual = null;
+let clicsRealizados = { animal: false, vegetal: false };
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText =
+        `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 5) nota = "A";
+  else if (resultadoFinal >= 3) nota = "B";
+  else if (resultadoFinal >= 1) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames.html";
+}
+
+function dibujarCelulas() {
+  // Animal
+  ctxAnimal.clearRect(0, 0, 400, 400);
+  ctxAnimal.fillStyle = "#e3f2fd";
+  ctxAnimal.beginPath();
+  ctxAnimal.arc(200, 200, 140, 0, Math.PI * 2);
+  ctxAnimal.fill();
+  ctxAnimal.stroke();
+
+  // Vegetal
+  ctxVegetal.clearRect(0, 0, 400, 400);
+  ctxVegetal.fillStyle = "#c8e6c9";
+  ctxVegetal.beginPath();
+  ctxVegetal.rect(50, 50, 300, 300);
+  ctxVegetal.fill();
+  ctxVegetal.stroke();
+}
+
+function nuevaParte() {
+  clicsRealizados = { animal: false, vegetal: false };
+  if (partes.length === 0) {
+    finalizarJuego();
+    return;
+  }
+  const index = Math.floor(Math.random() * partes.length);
+  parteActual = partes.splice(index, 1)[0];
+  document.getElementById("partes").innerText = "Haz clic en: " + parteActual.nombre.toUpperCase();
+}
+
+function detectarClic(canvas, tipo) {
+  canvas.addEventListener("click", function (e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const dx = x - parteActual.x;
+    const dy = y - parteActual.y;
+    const distancia = Math.sqrt(dx * dx + dy * dy);
+
+    if (distancia <= parteActual.r) {
+      if (parteActual.celula === "ambas" || parteActual.celula === tipo) {
+        clicsRealizados[tipo] = true;
+        canvas.style.border = "4px solid green";
+      } else {
+        clicsRealizados[tipo] = "incorrecto";
+        canvas.style.border = "4px solid red";
+      }
+    } else {
+      clicsRealizados[tipo] = "incorrecto";
+      canvas.style.border = "4px solid red";
+    }
+  });
+}
+
+ const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+
+function verificarSeleccion() {
+  const requerido = parteActual.celula;
+
+  const esCorrecto =
+    (requerido === "ambas" && clicsRealizados.animal === true && clicsRealizados.vegetal === true) ||
+    (requerido === "animal" && clicsRealizados.animal === true && !clicsRealizados.vegetal) ||
+    (requerido === "vegetal" && clicsRealizados.vegetal === true && !clicsRealizados.animal);
+
+  if (esCorrecto) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play(); 
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+
+  canvasAnimal.style.border = "1px solid black";
+  canvasVegetal.style.border = "1px solid black";
+  nuevaParte();
+}
+
+window.onload = () => {
+  dibujarCelulas();
+  nuevaParte();
+  iniciarTemporizador();
+  detectarClic(canvasAnimal, "animal");
+  detectarClic(canvasVegetal, "vegetal");
+};
+</script>
+
+</body>
+</html>

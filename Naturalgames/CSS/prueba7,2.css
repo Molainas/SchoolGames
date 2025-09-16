@@ -1,0 +1,144 @@
+body{background-color: green;}
+
+.canvas{border: 3px solid green;
+background-color: green;
+}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 620px;
+display: flex;
+flex-direction: column;}
+
+.cubo1{
+height: 30%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.correcto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubo2{
+height: 80%;
+display: flex;
+flex-direction: column;}
+
+.imagen{
+height: 70%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.pequeñin1{
+width: 16.4%;
+height: 100%;
+display: flex;}
+
+.pequeñin2{
+width: 16.4%;
+height: 100%;
+display: flex;
+justify-content: flex-end;}
+
+.pequeñin{border: 1px solid green;}
+
+.img{border: 1px solid green;}
+
+.situacion{
+width: 70%;
+height: 100%;
+ position: relative;
+      text-align: center;}
+
+.texto{display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid green;
+background-color: green;
+color: yellow;
+font-family: cursive;
+width: 99.9%;
+height: 12%;
+}
+
+.temperatura{border: 1px solid green;
+height: 30%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.cambio{border: 5px solid green;
+  cursor: pointer;
+height: 120px;
+width: 120px;
+display: flex;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 83%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    height: 450px;
+    width: 400px;
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 400px;

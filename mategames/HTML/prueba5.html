@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mategames</title>
+</head>
+<body>
+<div class="cubo">
+  <div class="cubo1">
+    <div class="pequeñin"><img src="../imagenes/23.png"></div>
+<div class="cubo2">
+    <div class="mesa"><img src="../imagenes/mesa1.png"></div>
+    <div class="numero" id="numero"></div>
+  <div class="cabaña"><img src="../imagenes/cabaña.png"></div>
+</div>
+  </div>
+
+  <div class="cubo3">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo">
+        <div class="botones1">
+          <button class="boton1" onclick="verificarRespuesta(true)"><-PAR</button>
+          <button class="boton2" onclick="verificarRespuesta(false)">IMPAR-></button>
+        </div>
+        <span id="tiempo1">5:00</span>
+    </div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+</div>
+
+<div id="resultado" class="res">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton3" onclick="location.reload()">Reiniciar</button>
+        <button class="boton4" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba5.css")
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+function iniciarTemporizador() {
+    interval = setInterval(function() {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo1').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego(); 
+        }
+    }, 1000);
+}
+
+function generarNumero() {
+    const numeroAleatorio = Math.floor(Math.random() * 90) + 10;
+    document.getElementById('numero').innerText = numeroAleatorio;
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarRespuesta(esPar) {
+    const numero = parseInt(document.getElementById('numero').innerText);
+    
+    
+    const esNumeroPar = numero % 2 === 0;
+
+    if (esPar && esNumeroPar || !esPar && !esNumeroPar) {
+        correctos++;
+        document.getElementById('correctos').innerText = correctos;
+         sonidoCorrecto.play();
+    } else {
+        incorrectos++;
+        document.getElementById('incorrectos').innerText = incorrectos;
+         sonidoIncorrecto.play(); 
+    }
+
+    generarNumero();
+}
+
+function finalizarJuego() {
+    clearInterval(interval); 
+    const resultadoFinal = correctos - incorrectos; 
+
+    let nota;
+    
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = `${resultadoFinal}`;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block'; 
+}
+
+function salir() {
+    window.location.href = "mategames.html";
+}
+
+function iniciarJuego() {
+    generarNumero();  
+    iniciarTemporizador();  
+}
+
+window.onload = iniciarJuego;
+</script>
+</body>
+</html>

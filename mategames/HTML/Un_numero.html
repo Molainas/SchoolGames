@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>UN NUMERO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Ahora que ya juntamos los pasteles sobrantes en su respetivo tipo ahora hay que cortarlos en rodajas y repartir estos pedasos en cantidades iguales 
+		  </li>
+
+		  <li>
+                      lo mas facil es que yo mida el pastel y tu dices cuantos pedasos se puede sacar
+		  </li>
+
+		  <li>
+		      Para eso necesitos que tu tengas en cuenta el tema de fraccion de un numero,
+		      mi libro tiene sobre este tema	
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Puedes escojer que metodo puedes utilizar, ambos dan lo mismo	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem9.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+         <ul>
+         	
+            <li>
+            	La fracción de un número es la división de un entero en partes iguales, donde el numerador indica cuántas partes se toman y el denominador indica la cantidad de partes iguales en las que se divide el entero. 
+            </li>
+
+            <li>
+            	Para calcular la fracción de un número, se divide el número entre el denominador y luego se multiplica por el numerador. 
+            </li>
+
+            <img src="../imagenes/ejemplo3.png" class="img1">
+
+         </ul>
+        </div>
+        <div class="mucho-texto2">
+
+        	<ul>
+        		<li>
+        		    Tambien se puede hacerlo al revez
+        		</li>
+
+                  <img src="../imagenes/ejemplo4.png" class="img1">
+
+        	</ul>
+        	
+        	<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Un_numero.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba9.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

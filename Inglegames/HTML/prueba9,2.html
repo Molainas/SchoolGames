@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+
+<div class="cubo">
+    
+<div class="cubo1">
+   <div class="texto">
+         <div id="oracion"></div>
+         <div id="mensaje" style="
+    position: fixed;
+    top: 220px;
+    left: 30%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.85);
+    color: #FE8330;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    display: none;
+    z-index: 1000;">
+</div>
+
+         <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+    </div>
+    <img src="../imagenes/pequenin18.png" class="img1">
+</div>
+
+<div class="cubo2">
+    <div class="puntos">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">3:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+    <div class="Pronombres">
+      <div class="p">
+      <button class="pronombre">I</button>
+      <button class="pronombre">YOU</button>
+       </div>
+      <div class="p">
+      <button class="pronombre">HE</button> 
+      <button class="pronombre">SHE</button>
+      </div> 
+      <div class="p">
+      <button class="pronombre">IT</button> 
+      <button class="pronombre">WE</button>
+      </div> 
+      <div class="p">
+      <button class="pronombre">YOU</button> 
+      <button class="pronombre">THEY</button>
+      </div> 
+    </div>
+</div>
+
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba9,2.css")
+</style>
+
+<script>
+    
+let tiempo = 180;
+let interval;
+let correctos = 0;
+let incorrectos = 0;
+
+const oraciones = [
+    { texto: "___ am learning English.", respuesta: "I" },
+    { texto: "___ is a doctor.", respuesta: "HE" },
+    { texto: "___ are my parents.", respuesta: "THEY" },
+    { texto: "___ is my cat.", respuesta: "IT" },
+    { texto: "___ are good students.", respuesta: "WE" },
+    { texto: "___ is my sister.", respuesta: "SHE" },
+    { texto: "___ are playing football.", respuesta: "YOU" },
+    { texto: "___ is very small.", respuesta: "IT" },
+    { texto: "___ are my cousins.", respuesta: "THEY" },
+    { texto: "___ am your teacher.", respuesta: "I" },
+];
+
+let oracionActual;
+
+function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 180;
+        document.getElementById("tiempo").innerText = "3:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        mostrarNuevaPregunta();
+    }
+
+function mostrarMensaje(texto, esCorrecto) {
+    const mensajeDiv = document.getElementById("mensaje");
+    mensajeDiv.innerText = texto;
+    mensajeDiv.style.backgroundColor = esCorrecto ? "" : "";
+    mensajeDiv.style.display = "block";
+
+    setTimeout(() => {
+        mensajeDiv.style.display = "none";
+    }, 1200);
+}
+
+
+function pronunciarTexto(texto) {
+    window.speechSynthesis.cancel(); 
+
+    const textoLimpiado = texto.replace("___", "...");
+
+    const mensaje = new SpeechSynthesisUtterance(textoLimpiado);
+    mensaje.lang = 'en-US';
+    window.speechSynthesis.speak(mensaje);
+}
+
+function mostrarNuevaPregunta() {
+    const indice = Math.floor(Math.random() * oraciones.length);
+    oracionActual = oraciones[indice];
+    document.getElementById('oracion').innerText = oracionActual.texto;
+    pronunciarTexto(oracionActual.texto); // ✅ pronunciar la oración
+}
+
+
+document.querySelectorAll('.pronombre').forEach(boton => {
+    boton.addEventListener('click', () => {
+        if (boton.innerText === oracionActual.respuesta) {
+            correctos++;
+            document.getElementById('correctos').innerText = correctos;
+            mostrarMensaje("Correct!", true);
+        } else {
+            incorrectos++;
+            document.getElementById('incorrectos').innerText = incorrectos;
+            mostrarMensaje("Incorrect!", false);
+        }
+        mostrarNuevaPregunta();
+    });
+});
+
+
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText =
+                `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Inglegames2.html";
+}
+
+</script>
+
+</body>
+</html>

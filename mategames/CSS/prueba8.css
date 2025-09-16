@@ -1,0 +1,168 @@
+body{background-color: blue;}
+
+input{
+width: 100px;
+height: 100px;
+background-color: white;
+border: 1px solid red;
+color: red;
+font-family: cursive;
+font-size: 50px;
+text-align: center;
+}
+
+canvas{
+	height: 100px;
+	width: 100px;
+}
+
+.cubo{border: 1px solid white;
+background-image: url("../imagenes/fondo1.png");
+background-size: 50% 50%;
+height: 620px;}
+
+.cubo1{
+height: 420px;
+margin-top: 50px;
+margin-left: 20px;
+margin-right: 20px;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+font-size: 50px;
+font-family: cursive;
+color: red;}
+
+.pequeñin{
+    height: 150px;
+    margin-left: 20px;
+margin-right: 20px;
+}
+
+.peque{height: 100%;
+width: 750px;}
+
+.cubo2{border: 3px solid blue;
+background-color: white;
+width: 300px;
+height: 100%;}
+
+.fraccion{height: 260px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around; }
+
+.dibujo{;
+height: 160px;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: gray;}
+
+.cubo3{border: 3px solid blue;
+background-color: white;
+width: 300px;
+height: 100%;}
+
+.linea1{border: 1px solid blue;
+width: 50px;}
+
+.linea2{border: 1px solid blue;
+width: 100px;
+margin-top: 30px;
+margin-bottom: 30px;}
+
+.cubo4{border: 3px solid blue;
+background-color: white;
+width: 300px;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;}
+
+.cubiculo{
+height: 200px;
+width: 100px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;}
+
+.tiempo{border: 3px solid blue;
+width: 100%;
+background-color: blue;
+color: white;
+}
+
+.puntuacion{border: 1px solid blue;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.correcto{border: 1px solid blue;
+height: 90px;
+width: 90px;
+color: white;
+background-color: blue;
+font-size: 30px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.incorrecto{border: 1px solid blue;
+height: 90px;
+width: 90px;
+color: white;
+background-color: blue;
+font-size: 30px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.verificacion{border: 1px solid blue;
+background-color: white;
+width: 100%;
+height: 100px;
+font-family: cursive;
+font-size: 40px;
+color: red;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 27%; 
+    left: 75%; 
+    transform: translate(-50%, -50%); 
+    background: blue; 
+    padding: 50px; 
+    border: 2px solid red; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

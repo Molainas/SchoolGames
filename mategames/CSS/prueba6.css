@@ -1,0 +1,160 @@
+body{background-color: blue;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 640px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;}
+
+.puntos{
+height: 100px;
+width: 400px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: row;}
+
+.correcto{border: 1px solid blue;
+height: 100px;
+width: 100px;
+background-color:blue;
+color: white;
+font-size:40px;
+font-family: cursive; 
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid blue;
+height: 100px;
+width: 100px;
+background-color:blue;
+color: white;
+font-size:40px;
+font-family: cursive; 
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.numero{height: 200px;
+width: 800px;
+display:flex; 
+justify-content: space-around;
+align-items: center;}
+
+.arriba{
+height: 30px;
+width: 100px;}
+
+.clavo1{height: 100%;}
+
+.abajo{
+height: 30px;
+width: 100px;}
+
+.clavo2{height: 100%;}
+
+.cubito{border: 3px solid blue;
+height: 100px;
+width: 100px;
+color: red;
+font-size: 70px;
+font-family: cursive;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.seleccion{
+ height: 100px;
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.simbolo{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 70px;
+width: 80px;
+font-family: cursive;
+font-size: 50px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.cubo1{
+width: 100%;
+display: flex;
+justify-content: space-between;
+background-image: url("../imagenes/fondo1,5.png");
+background-size: 100% 100%;
+background-repeat: no-repeat;}
+
+.martillo{
+height: 340px;}
+
+.frasco{
+height: 340px;}
+
+.peque{height: 100%;}
+
+.tiempo{border: 1px solid blue;
+height: 250px;
+width: 300px;
+background-color: blue;
+display: flex;
+justify-content: center; 
+align-items: center;
+flex-direction: column;
+justify-content: space-around;
+color: white;
+font-family: cursive;
+font-size: 50px;}
+
+.verificacion{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 70px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.res {
+    display: none;
+    position: fixed;
+     top: 57%; 
+     left: 50%;
+     transform: translate(-50%, -50%); 
+     background: blue; 
+     padding: 20px; 
+     border: 2px solid red; 
+     text-align: center; 
+     color: white; 
+     font-family: cursive;
+
+}
+
+.sepa {
+display: flex;
+justify-content: space-around;
+width: 450px;
+}
+
+.reinicio{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.salir{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}

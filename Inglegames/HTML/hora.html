@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>HORA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Yo compre un nuevo reloj para la sala, pero hay un problema que es un reloj resiclado lo que significa que puede tener fallas, y el vendedor me dijo que el reloj necesita que mover las flechas en horas correctas o sino el reloj no funcionara
+		  </li>
+
+		  <li>
+		      Por lo que tu me vas a ayudar con el reloj, yo digo cualquier hora y tu mueves las flechas en la hora correcta
+		  </li>
+
+		  <li>
+		      En mi libro esta la informacion
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      solo imagina como si fuera una hora normal	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem4.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>La hora en ingles se puede decir de una manera muy facil, primero se dice el numero y luego o'clock que es la manera de como se representa la hora</li>
+
+           <img src="../imagenes/imagen345.png" class="img3">
+
+            <li>Pero tambien se dice los minutos, tambien se dice de una facil manera (9:40 - nine forty), pero existe partes donde se dice de manera diferente</li>
+
+           <img src="../imagenes/imagen678.png" class="img3">
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+             <li>Aqui esta los minutos que se dicen de manera diferente</li>
+
+           <img src="../imagenes/imagen890.png" class="img4">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/hora.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba4.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

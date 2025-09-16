@@ -1,0 +1,182 @@
+body{background-color: black;}
+
+.cubo{background-color: white;
+border: 1px solid white;
+height: 625px;
+display: flex;
+align-items: center;
+flex-direction: row;
+justify-content: space-around;
+}
+
+.cubo1{border-bottom: 1px solid white;
+border-top: 1px solid white;
+width: 100%;
+height: 100%;}
+
+.cubo2{border-bottom: 1px solid white;
+border-top: 1px solid white;
+border: 1px solid white;	
+ width: 360px; 
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: black;}
+
+.Titulo{border: 1px solid black;
+font-family: cursive;
+color: white;
+font-size: 40px;
+height: 70px;}
+
+.mundo_arriba{
+display: flex;
+background-color: black;}
+
+.mundo{
+height: 265px;
+width: 300px;
+display: flex;
+justify-content: center;
+border: 1px solid white;}
+
+ .seleccion {
+            display: flex;
+             overflow-x: hidden;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            width: 100%; 
+            height: 265px;
+        }
+
+        .seleccion::-webkit-scrollbar {
+            display: none;
+        }
+
+        .planeta1 {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            width: 256px; 
+            height: 265px;
+            scroll-snap-align: center;
+            background: white;
+        }
+
+        .mundo1{
+        	width: 100%;
+        	height: 200px;
+        }
+
+        .viajar1{width: 100%;
+        	height: 150px;
+        	color: red;
+        	background-color: blue;
+        	border: none;
+        	font-family: cursive;
+            font-size: 20px;
+        }
+
+        .planeta2 {
+            flex: 0 0 auto;
+             display: flex;
+            flex-direction: column;
+             width: 256px;   
+            height: 265px;
+            scroll-snap-align: center;
+            background: white;
+
+        }
+
+         .viajar2{width: 100%;
+            height: 150px;
+            color: purple;
+            background-color: orange;
+            border: none;
+            font-family: cursive;
+            font-size: 20px;
+        }
+
+        .mundo2{
+            width: 100%;
+            height: 200px;
+        }
+
+        .planeta3 {
+            flex: 0 0 auto;
+            width: 256px;  
+            height: 265px;
+            scroll-snap-align: center;
+            background: yellow;
+            border: 1px solid orange;
+        }
+
+.viajar3{width: 100%;
+            height: 60px;
+            background-color: yellow;
+            border: none;
+            font-family: cursive;
+            font-size: 20px;
+            color: green;
+        }
+
+        .mundo3{
+            width: 100%;
+            height: 199px;
+        }
+
+        .planeta4 {
+            flex: 0 0 auto;
+            width: 256px;  
+            height: 265px;
+            scroll-snap-align: center;
+            background: #804000;
+            border: 1px solid #804000;
+        }
+
+.viajar4{width: 100%;
+            height: 60px;
+            background-color: #804000;
+            border: none;
+            font-family: cursive;
+            font-size: 20px;
+            color: black;
+        }
+
+        .mundo4{
+            width: 100%;
+            height: 199px;
+        }
+           
+        .mundo {
+            display: flex;
+            align-items: center;
+        }
+
+        .izquierda, .derecha {
+        	border: 1px solid white;
+            cursor: pointer;
+            background: black;
+            height: 100%;
+            font-family: cursive;
+            font-size: 20px;
+            color: white;
+        }
+
+.mundo_abajo{
+background-color: black;}
+
+.cubo3{border-bottom: 1px solid white;
+border-top: 1px solid white;
+width: 100%;
+height: 100%;}
+
+.mun{width: 100%;
+height: 100%;}
+
+.galaxia{height: 624px;
+width: 100%;
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mategames</title>
+</head>
+<body>
+<div class="cubo">
+    <div class="puntos">
+        <div class="correcto" id="correctos">C: 0</div> 
+        <div class="incorrecto" id="incorrectos">F: 0</div>
+    </div>  
+
+    <div class="numero">
+        <div class="cubiculo">
+        <div class="arriba"><img src="../imagenes/clavo1.png" class="clavo1"></div>
+        <div class="cubito" id="numero1">?</div>
+        <div class="abajo"><img src="../imagenes/clavo2.png" class="clavo2"></div>
+        </div>
+        <div class="cubito" id="operacion">?</div>
+        <div class="cubiculo">
+        <div class="arriba"><img src="../imagenes/clavo1.png" class="clavo1"></div>
+        <div class="cubito" id="numero2">?</div>
+        <div class="abajo"><img src="../imagenes/clavo2.png" class="clavo2"></div>
+        </div>
+    </div>
+
+    <div class="cubo1">
+<div class="martillo"><img src="../imagenes/34.png" class="peque"></div>
+    <div class="tiempo">
+         <div class="seleccion">
+        <button class="simbolo" onclick="seleccionarOperacion('>')">></button>
+        <button class="simbolo" onclick="seleccionarOperacion('<')"><</button>
+        <button class="simbolo" onclick="seleccionarOperacion('=')">=</button>
+    </div>
+        <button class="verificacion" onclick="verificar()">Verificar</button>
+        <span id="tiempo">5:00</span>
+    </div>
+    <div class="frasco"><img src="../imagenes/frasco.png" class="peque"></div>
+</div>
+</div>
+
+<div id="resultadoFinal" class="res">
+    <div class="contenido">
+        <h2>Juego Terminado</h2>
+        <p>Puntuación Final: <span id="notaFinal">0</span></p>
+        <p id="mensajeFinal">Aquí aparecerá el mensaje según tu puntuación.</p>
+        <div class="sepa">
+            <button class="reinicio" onclick="reiniciarJuego()">Reiniciar</button>
+            <button class="salir" onclick="salir()">Escoger otro</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba6.css")
+</style>
+
+<script>
+    let tiempoRestante = 300;  
+    let temporizador;  
+    let juegoActivo = true; 
+    let numero1, numero2;  
+    let operacionSeleccionada = null;  
+    let respuestasCorrectas = 0; 
+    let respuestasIncorrectas = 0;  
+
+   
+    function iniciarTemporizador() {
+        temporizador = setInterval(function() {
+            if (tiempoRestante > 0) {
+                tiempoRestante--;
+                let minutos = Math.floor(tiempoRestante / 60);
+                let segundos = tiempoRestante % 60;
+                document.getElementById("tiempo").textContent = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+            } else {
+                
+                clearInterval(temporizador);
+                juegoActivo = false;
+                mostrarResultados();
+            }
+        }, 1000);
+    }
+
+    
+    function mostrarResultados() {
+        let notaFinal = respuestasCorrectas - respuestasIncorrectas;
+        document.getElementById("notaFinal").textContent = notaFinal;
+
+        
+        let mensaje = '';
+        if (notaFinal >= 20) {
+            mensaje = "Nota: A";
+        } else if (notaFinal >= 10) {
+            mensaje = "Nota: B";
+        } else if (notaFinal >= 5) {
+            mensaje = "Nota: C";
+        } else {
+            mensaje = "Nota: F";
+        }
+
+        document.getElementById("mensajeFinal").textContent = mensaje;
+
+       
+        document.getElementById("resultadoFinal").style.display = "flex";
+    }
+
+    function salir() {
+    window.location.href = "mategames.html";
+}
+
+    function generarEjercicio() {
+        numero1 = Math.floor(Math.random() * 100) + 1;   
+        numero2 = Math.floor(Math.random() * 100) + 1;  
+
+        
+        document.getElementById("numero1").textContent = numero1;
+        document.getElementById("numero2").textContent = numero2;
+
+        
+        operacionSeleccionada = null;
+        document.getElementById("operacion").textContent = "?";
+    }
+
+  
+    function seleccionarOperacion(simbolo) {
+        if (!juegoActivo) return;
+
+        operacionSeleccionada = simbolo;
+        document.getElementById("operacion").textContent = simbolo;
+    }
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+    
+    function verificar() {
+        if (!juegoActivo) return;
+
+        let correcta = false;
+
+        
+        if (operacionSeleccionada === ">" && numero1 > numero2) {
+            correcta = true;
+        } else if (operacionSeleccionada === "<" && numero1 < numero2) {
+            correcta = true;
+        } else if (operacionSeleccionada === "=" && numero1 === numero2) {
+            correcta = true;
+        }
+
+       
+        if (correcta) {
+            respuestasCorrectas++;
+            sonidoCorrecto.play(); 
+
+        } else {
+            respuestasIncorrectas++;
+             sonidoIncorrecto.play(); 
+        }
+
+        document.getElementById("correctos").textContent = "C: " + respuestasCorrectas;
+        document.getElementById("incorrectos").textContent = "F: " + respuestasIncorrectas;
+
+       
+        generarEjercicio();
+    }
+
+    function reiniciarJuego() {
+     
+        tiempoRestante = 300;
+        respuestasCorrectas = 0;
+        respuestasIncorrectas = 0;
+        document.getElementById("correctos").textContent = "C: " + respuestasCorrectas;
+        document.getElementById("incorrectos").textContent = "F: " + respuestasIncorrectas;
+        document.getElementById("tiempo").textContent = "5:00";
+
+        
+        document.getElementById("resultadoFinal").style.display = "none";
+
+        
+        generarEjercicio();
+
+        
+        if (!juegoActivo) {
+            juegoActivo = true;
+            iniciarTemporizador();
+        }
+    }
+
+    
+    window.onload = function() {
+        generarEjercicio();
+        iniciarTemporizador();
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+body{background-color: #FFF52D;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 655px;
+display: flex;
+justify-content: space-around;}
+
+.cubo1{background-color: green;
+height: 100%;
+width: 70%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.microscopio{border: 5px solid #FFF52D;
+background-color: white;
+border-radius: 100%;
+height: 630px;
+width: 630px;
+}
+
+.cubo2{border: 1px solid #FFF52D;
+height: 100%;
+width: 30%;
+display: flex;
+flex-direction: column;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 100px;
+}
+
+.correcto{border: 1px solid #FFF52D;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FFF52D;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.verificacion{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 100%;}
+
+.tiempo{border: 1px solid #FFF52D; 
+height: 100px;
+width: 100%;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FFF52D;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.texto{border: 3px solid green;
+border-radius: 50px;
+height: 100px;
+margin-top: 5px;
+margin-right: 5px;
+margin-left: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: green;
+font-family: cursive;
+font-size: 20px;
+}
+
+.pequeñin{width: 100%;
+height: 205px;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 49%; 
+    left: 35%; 
+    transform: translate(-50%, -50%); 
+    background: #FFF52D; 
+    height: 550px;
+    width: 520px;
+    border: 2px solid green; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 35px;
+    }
+
+.boton1{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 520px;
+}

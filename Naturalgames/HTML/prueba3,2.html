@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naturalgames</title>
+</head>
+<body>
+<div class="cubo">
+  <div class="cubo1">
+    <div class="puerta">
+      <div class="letreros">
+        <div class="letrero2">
+          <div class="texto2">DIENTES</div>
+          <canvas id="canvas-dientes" width="150" height="150"></canvas>
+        </div>
+        <div class="letrero2">
+          <div class="texto2">GARRAS</div>
+          <canvas id="canvas-garras" width="150" height="150"></canvas>
+        </div>
+      </div>
+      <div class="jaula">
+        <div class="letrero1">
+          <div id="nombre" class="texto2"></div>
+        </div>
+        <div class="hueco">
+          <div class="linea"></div><div class="linea"></div><div class="linea"></div>
+          <div class="linea"></div><div class="linea"></div><div class="linea"></div><div class="linea"></div>
+        </div>
+      </div>
+      <div class="letreros">
+        <div class="letrero2">
+          <div class="texto2">SISTEMA</div>
+          <canvas id="canvas-sistema" width="150" height="150"></canvas>
+        </div>
+        <div class="letrero2">
+          <div class="texto2">ROSTRO</div>
+          <canvas id="canvas-rostro" width="150" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="comida">
+      <button class="cubito" onclick="verificarComida('CARNE Y PESCADO FRESCO')">
+        <div class="texto1">CARNE Y PESCADO FRESCO</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('PLANTAS')">
+        <div class="texto1">PLANTAS</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('HOJAS FRESCAS')">
+        <div class="texto1">HOJAS FRESCAS</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('FRUTAS')">
+        <div class="texto1">FRUTAS</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('SEMILLAS')">
+        <div class="texto1">SEMILLAS</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('MADERA')">
+        <div class="texto1">MADERA</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('RAISES')">
+        <div class="texto1">RAISES</div>
+      </button>
+      <button class="cubito" onclick="verificarComida('FLORES intactas')">
+        <div class="texto1">FLORES INTACTAS</div>
+      </button>
+       <button class="cubito" onclick="verificarComida('CARNE Y PESCADO PODRIDO')">
+        <div class="texto1">CARNE Y PESCADO PODRIDO</div>
+      </button>
+    </div>
+  </div>
+  <div class="cubo2">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+  @import url("../CSS/prueba3,2.css")
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let animalActual;
+
+const comidasPorSubtipo = {
+  "carnivoro depredador": ["CARNE Y PESCADO FRESCO"],
+  "carnivoro carroñero": ["CARNE Y PESCADO PODRIDO"],
+  "herbivoro folivoro": ["HOJAS FRESCAS"],
+  "herbivoro frugivoro": ["FRUTAS"],
+  "herbivoro granivoro": ["SEMILLAS"],
+  "herbivoro nectarivoro": ["FLORES intactas"],
+  "herbivoro pastador": ["PLANTAS", "RAISES", "MADERA"]
+};
+
+const animales = [
+  {
+    nombre: "León",
+    subtipoAlimentacion: "carnivoro depredador",
+   dibujos: {
+      rostro: (ctx) => {
+        // Melena
+        ctx.fillStyle = "green";
+        for (let i = 0; i < 360; i += 15) {
+          const angle = (i * Math.PI) / 180;
+          const x = 75 + Math.cos(angle) * 45;
+          const y = 75 + Math.sin(angle) * 45;
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        // Cabeza
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(75, 75, 40, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Ojos
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(63, 65, 6, 0, 2 * Math.PI);
+        ctx.arc(87, 65, 6, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(63, 65, 3, 0, 2 * Math.PI);
+        ctx.arc(87, 65, 3, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Hocico
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(75, 85, 18, 12, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Nariz
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.moveTo(75, 78);
+        ctx.lineTo(70, 88);
+        ctx.lineTo(80, 88);
+        ctx.closePath();
+        ctx.fill();
+      },
+
+     dientes: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+  ctx.fillStyle = "green";
+
+  // === FILA SUPERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 45);
+    ctx.lineTo(x + 6, 55);
+    ctx.lineTo(x + 12, 45);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos superiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 45);
+  ctx.lineTo(68, 85);
+  ctx.lineTo(72, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 45);
+  ctx.lineTo(82, 85);
+  ctx.lineTo(78, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  // === FILA INFERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 115);
+    ctx.lineTo(x + 6, 105);
+    ctx.lineTo(x + 12, 115);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos inferiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 115);
+  ctx.lineTo(68, 90);
+  ctx.lineTo(72, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 115);
+  ctx.lineTo(82, 90);
+  ctx.lineTo(78, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+},
+
+   
+      garras: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(75, 100, 20, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        const dedos = [
+          [60, 80],
+          [70, 75],
+          [80, 75],
+          [90, 80]
+        ];
+        dedos.forEach(([x, y]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, 2 * Math.PI);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(x - 4, y - 5);
+          ctx.quadraticCurveTo(x, y - 30, x + 4, y - 2);
+          ctx.lineTo(x, y - 6);
+          ctx.closePath();
+          ctx.fill();
+        });
+      },
+
+      sistema: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(75, 90, 20, 25, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(75, 60);
+        ctx.lineTo(75, 75);
+        ctx.stroke();
+      }
+    }
+  },
+  {
+    nombre: "Vaca",
+    subtipoAlimentacion: "herbivoro pastador",
+       dibujos: {
+      rostro: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        // Orejas
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(45, 55, 10, 15, -0.5, 0, 2 * Math.PI);
+        ctx.ellipse(105, 55, 10, 15, 0.5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Cabeza
+        ctx.beginPath();
+        ctx.ellipse(75, 75, 32, 42, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Manchas
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(55, 75, 9, 0, 2 * Math.PI);
+        ctx.arc(88, 50, 7, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Hocico
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(75, 95, 20, 12, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Fosas
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(70, 95, 2, 0, 2 * Math.PI);
+        ctx.arc(80, 95, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Ojos
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(65, 65, 4, 0, 2 * Math.PI);
+        ctx.arc(85, 65, 4, 0, 2 * Math.PI);
+        ctx.fill();
+      },
+
+      dientes: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(80, 100, 35, 0, Math.PI, true);
+        ctx.fill();
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          ctx.ellipse(50 + i * 12, 98, 6, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      },
+
+      garras: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(70, 90, 10, 30, Math.PI / 60, 0, Math.PI * 4);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(90, 90, 10, 30, -Math.PI / 60, 0, Math.PI * 4);
+        ctx.fill();
+      },
+
+      sistema: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "green";
+        // Estómagos
+        ctx.beginPath();
+        ctx.ellipse(55, 95, 15, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(55, 55, 12, 15, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(95, 55, 12, 15, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(95, 95, 15, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        // Esófago
+        ctx.beginPath();
+        ctx.arc(75, 75, 6, 0, Math.PI * 2);
+        ctx.fill();
+        // Conexiones
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(75, 75); ctx.lineTo(60, 55); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(67, 55); ctx.lineTo(83, 55); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(95, 70); ctx.lineTo(95, 80); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(90, 100); ctx.lineTo(60, 100); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(60, 90); ctx.lineTo(75, 75); ctx.stroke();
+        // Salida
+        ctx.beginPath();
+        ctx.moveTo(95, 110);
+        ctx.bezierCurveTo(105, 120, 85, 135, 75, 145);
+        ctx.stroke();
+      }
+    }
+  },
+  {
+   nombre: "Buitre",
+subtipoAlimentacion: "carnivoro carroñero",
+dibujos: {
+
+  dientes: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+  
+  // Pico curvo
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.moveTo(75, 75);          // inicio en la cabeza
+  ctx.lineTo(100, 80);         // línea hacia afuera
+  ctx.quadraticCurveTo(115, 90, 90, 100); // curva hacia abajo
+  ctx.lineTo(75, 90);          // regreso a la cabeza
+  ctx.closePath();
+  ctx.fill();
+
+  // Detalle de abertura (línea en el pico)
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(75, 85);
+  ctx.quadraticCurveTo(95, 90, 88, 95);
+  ctx.stroke();
+},
+
+
+garras: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2; // huella fina
+
+  // Dedos delanteros (tres en forma de Y)
+  const dedos = [
+    { x: 75, y: 100, dx: 0, dy: 40 },   // central
+    { x: 75, y: 100, dx: -20, dy: 30 }, // izquierdo
+    { x: 75, y: 100, dx: 20, dy: 30 },  // derecho
+  ];
+
+  dedos.forEach(d => {
+    ctx.beginPath();
+    ctx.moveTo(d.x, d.y);
+    ctx.lineTo(d.x + d.dx, d.y + d.dy);
+    ctx.stroke();
+  });
+
+  // Dedo trasero (hallux) centrado
+  ctx.beginPath();
+  ctx.moveTo(75, 100);
+  ctx.lineTo(75, 75);
+  ctx.stroke();
+
+  // Uñas más curvas tipo garfio
+  const garras = [
+    { x1: 75, y1: 140, cx: 90, cy: 160, x2: 75, y2: 138 }, // central (curva hacia derecha)
+    { x1: 55, y1: 130, cx: 40, cy: 145, x2: 55, y2: 128 }, // izquierdo (curva hacia afuera)
+    { x1: 95, y1: 130, cx: 110, cy: 145, x2: 95, y2: 128 }, // derecho (curva hacia afuera)
+    { x1: 75, y1: 75,  cx: 60, cy: 60,  x2: 75, y2: 73 },  // trasero (curva hacia izquierda)
+  ];
+
+  garras.forEach(g => {
+    ctx.beginPath();
+    ctx.moveTo(g.x1, g.y1);
+    ctx.quadraticCurveTo(g.cx, g.cy, g.x2, g.y2);
+    ctx.stroke();
+  });
+},
+
+
+
+
+
+
+ rostro: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Cabeza (ovalada, calva)
+  ctx.fillStyle = "lightgray";
+  ctx.beginPath();
+  ctx.ellipse(75, 65, 28, 22, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Cuello (piel rugosa, sin plumas)
+  ctx.fillStyle = "#d9a066"; // tono piel
+  ctx.beginPath();
+  ctx.ellipse(75, 95, 20, 15, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Pico ganchudo
+  ctx.fillStyle = "goldenrod";
+  ctx.beginPath();
+  ctx.moveTo(75, 75);
+  ctx.lineTo(100, 80);
+  ctx.quadraticCurveTo(115, 90, 95, 105); // gancho hacia abajo
+  ctx.lineTo(75, 90);
+  ctx.closePath();
+  ctx.fill();
+
+  // Detalle línea pico (separación superior-inferior)
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(85, 85);
+  ctx.quadraticCurveTo(100, 92, 88, 100);
+  ctx.stroke();
+
+  // Ojo con contorno
+  ctx.fillStyle = "black";
+  ctx.beginPath();
+  ctx.arc(65, 60, 4, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.strokeStyle = "white"; // brillo alrededor
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(65, 60, 5, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  // Pupila brillante
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  ctx.arc(67, 59, 1.5, 0, 2 * Math.PI);
+  ctx.fill();
+},
+
+
+  sistema: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Esófago (cuello delgado)
+  ctx.strokeStyle = "gray";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(75, 60);
+  ctx.lineTo(75, 80);
+  ctx.stroke();
+
+  // Buche (crop) - ensanchamiento en el cuello
+  ctx.fillStyle = "lightgray";
+  ctx.beginPath();
+  ctx.ellipse(75, 85, 15, 10, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Estómago (ventrículo)
+  ctx.fillStyle = "darkred";
+  ctx.beginPath();
+  ctx.ellipse(75, 110, 20, 15, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Intestino simple (curva hacia abajo)
+  ctx.strokeStyle = "brown";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(75, 120);
+  ctx.quadraticCurveTo(90, 135, 75, 145);
+  ctx.stroke();
+
+  // Cloaca
+  ctx.fillStyle = "black";
+  ctx.beginPath();
+  ctx.arc(75, 145, 4, 0, 2 * Math.PI);
+  ctx.fill();
+},
+
+
+}
+
+  }
+];
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText = `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames.html";
+}
+
+function mostrarDibujosDelAnimal() {
+  const indice = Math.floor(Math.random() * animales.length);
+  animalActual = animales[indice];
+
+  const ctxDientes = document.getElementById("canvas-dientes").getContext("2d");
+  const ctxGarras = document.getElementById("canvas-garras").getContext("2d");
+  const ctxRostro = document.getElementById("canvas-rostro").getContext("2d");
+  const ctxSistema = document.getElementById("canvas-sistema").getContext("2d");
+
+  [ctxDientes, ctxGarras, ctxRostro, ctxSistema].forEach(ctx => ctx.clearRect(0, 0, 150, 150));
+
+  animalActual.dibujos.dientes(ctxDientes);
+  animalActual.dibujos.garras(ctxGarras);
+  animalActual.dibujos.rostro(ctxRostro);
+  animalActual.dibujos.sistema(ctxSistema);
+
+  document.getElementById("nombre").innerText = `${animalActual.nombre} (${animalActual.subtipoAlimentacion})`;
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarComida(comidaSeleccionada) {
+  if (!animalActual || !animalActual.subtipoAlimentacion) return;
+  const comidasValidas = comidasPorSubtipo[animalActual.subtipoAlimentacion] || [];
+
+  if (comidasValidas.includes(comidaSeleccionada)) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+     sonidoCorrecto.play(); 
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+
+  mostrarDibujosDelAnimal();
+}
+
+function iniciarJuego() {
+  iniciarTemporizador();
+  mostrarDibujosDelAnimal();
+}
+
+window.onload = iniciarJuego;
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+body{background-color: red;}
+
+input{color: blue;
+font-family: cursive;
+font-size: 50px;
+width: 50%;
+text-align: center;}
+
+.cubo{border: 1px solid white;
+background-image: url("../imagenes/fondo2.png");
+background-size: 50% 50%; 
+height: 625px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.cubo1{
+height: 300px; 
+width: 1000px;
+display: flex;
+}
+
+.pequeñin{
+	width: 100px;}
+
+.peque{width: 100px;
+	height: 290px;
+}
+
+.cubo2{border: 3px solid red;
+background-color: white;
+width: 100%;
+display: flex;}
+
+.dibujo{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fraccion{
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;}
+
+.numerador{
+height: 200px;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: cursive;
+font-size: 50px;
+color: blue;}
+
+.linea{border: 1px solid red;
+width: 100px;}
+
+.denominador{
+height: 200px;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: cursive;
+font-size: 50px;
+color: blue;}
+
+.numero{
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: cursive;
+font-size: 50px;
+color: blue;}
+
+.igual{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100px;
+color: blue;
+font-family: cursive;
+font-size: 30px;}
+
+.cubo3{border: 3px solid red;
+width: 100%;}
+
+.cubiculo1{border: 1px solid red;
+height: 50%;
+display: flex;
+}
+
+.verificacion{
+	border: 2px solid red;
+width: 50%;
+background-color: white;
+color: blue;
+font-family: cursive;
+font-size: 30px;
+}
+
+.cubiculo2{border: 1px solid red;
+height: 50%;
+font-family: cursive;
+display: flex;
+justify-content: space-between;
+align-items: center;}
+
+.correcto{border: 1px solid red;
+height: 100%;
+width: 100%;
+color: white;
+background-color: red;
+font-size: 50px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.tiempo{border: 1px solid red;
+	height: 100%;
+width: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: red;
+color: white;
+font-size: 30px;}
+
+
+.incorrecto{border: 1px solid red;
+height: 100%;
+width: 100%;
+color: white;
+background-color: red;
+font-size: 50px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 50%; 
+    left: 70%; 
+    transform: translate(-50%, -50%); 
+    background: red; 
+    padding: 50px; 
+    border: 2px solid blue; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CLIMA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Tengo mucha ropa como para toda la vida, de todos los tipos de ropa que existen, pero solo utilizo la ropa adecuada de acuerdo al clima porque no toda la ropa esta hecha para todo
+		  </li>
+
+		  <li>
+		      Vas a mirar en la ventana y luego escoje la ropa correcta dentro del closet
+		  </li>
+
+		  <li>
+		      En el libro esta solo el nombre del clima pero de la ropa tendras que saber
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Practica varias veces hasta que lo logres	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem5.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>Existen muchas razones por las cuales es importante que los pequeños aprendan palabras relacionadas con el clima en inglés y español desde una temprana edad. Al hacerlo, éstos empiezan a identificar los diferentes cambios y patrones ambientales que ocurren a su alrededor, asimismo, aprender este tema es una manera muy efectiva para que comiencen a familiarizarse con conceptos básicos de ciencia que les serán muy útiles durante su educación.</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <li><h2>Sunny - soleado</h2></li>
+
+           <img src="../imagenes/soliado.png" class="img3">
+
+           <li><h2>Rainy - lluvioso</h2></li>
+
+           <img src="../imagenes/lluvioso.png"
+           class="img3">
+         
+           <li><h2>Cloudy - nublado</h2></li>
+
+           <img src="../imagenes/nublado.png"
+           class="img3">
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/clima.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba5.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

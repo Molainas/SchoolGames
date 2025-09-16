@@ -1,0 +1,151 @@
+body{background-color: green;}
+
+.cubo{border: 1px solid white;
+background-image: url("../imagenes/fondo1,2.png");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+background-position: center;
+height: 625px;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 120px;
+}
+
+.correcto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 400px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubo1{
+height: 505px;}
+
+.pequeñin{
+height: 150px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.peque{height: 100%;}
+
+.cubo2{
+height: 352px;
+display: flex;
+justify-content: space-around;}
+
+.caja1{
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.carta{
+width: 40%;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+ canvas {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: right;
+      align-items: center;
+
+    }
+
+.ser{position: absolute;
+cursor: grab;
+border: 3px solid yellow;
+background-color: #FFF52D;
+height: 300px;
+width: 190px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: column;}
+
+.texto{border: 3px solid yellow;
+height: 40px;
+width: 100%;
+background-color: yellow;
+color: green;
+font-family: cursive;
+font-size: 30px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.caja2{
+width: 30%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.caja{height: 90%;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 70%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    padding: 50px; 
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid green;
+background-color: white;
+color: yellow;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid green;
+background-color: white;
+color: yellow;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

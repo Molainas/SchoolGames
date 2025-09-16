@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>FAMILIA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Este es el albor de mi familia, donde esta toda mi familia en un orden especifico
+		  </li>
+
+		  <li>
+		      Aunque por la mudanza las fotos sean despegado del cuadro, pero sera facil colocar las fotos en su lugar si me guias el lugar de la foto y yo pego con pegamento
+
+		  <li>
+		      En mi libro esta la informacion para que no estes perdido
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Si sabes sobre el arbol familiar, talvez sea mas facil identificar el lugar	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem8.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>Saber los términos en inglés para la familia te será útil en muchas situaciones. Por ejemplo:</li>
+
+<li>Al conocer a alguien por primera vez, y que te hagan preguntas acerca de tu familia para conocerte mejor.</li>
+
+<li>Al presentarle a tu pareja a los miembros de tu familia.
+Durante las cenas y reuniones familiares.</li>
+
+<li>Cuando necesites ponerte en contacto con familiares de un país de habla inglesa.</li>
+
+<li>Cuando decidas abrirte acerca de asuntos familiares con un amigo cercano o un terapeuta.</li>
+
+ 
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+
+           <img src="../imagenes/imagen6345.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Familia.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba8.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

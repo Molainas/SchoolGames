@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CUERPO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+          El cuerpo humano esta compuesto por varias partes que lo comforman gracias a las celulas que ayudan a los tejidos del cuerpo, las partes del cuerpo humano del esterior es desde la cabeza hasta los pies
+      </li>
+		     
+		  <li>
+		      Utilizando un esquema simple pero identificable, vor a cortar algunas partes y tu colocas las partes faltantes, debido que algunas esta mal hechas 
+		  </li>
+
+		  <li>
+		      Primero necesitas saber cuales son las partes del cuerpo, por eso te doy mi libro para que aprendas
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		     utiliza el color para identificar las partes
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+           <li>
+               El cuerpo humano externo incluye la piel y los órganos que podemos ver y tocar, como la cabeza, el torso, los brazos y las piernas. La cabeza contiene la cara, los ojos, la nariz, el cabello, la boca y las orejas. El torso incluye el tórax y el abdomen. Las extremidades superiores son los brazos y las manos, y las inferiores son las piernas y los pies.             
+           </li>
+
+           <li>
+               El cuerpo humano externo se puede dividir en las siguientes partes principales:
+           </li>
+
+           <li>
+           Cabeza: Formada por el cráneo y la cara.
+           </li>
+
+           <li>
+           Cuello: Une la cabeza con el tronco.
+           </li>
+
+           <li>
+           Tronco: Incluye el tórax, el abdomen y la ingle.
+           </li>
+
+           <li>
+           Extremidades superiores (brazos): Brazo, antebrazo y mano.
+           </li>
+
+           <li>
+           Extremidades inferiores (piernas): Muslo, pierna y pie. 
+           </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen6.png" class="img2">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/cuerpo.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba6.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

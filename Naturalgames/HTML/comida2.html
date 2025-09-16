@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>COMIDA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Tengo estas loncheras que sirven para guardar la comidad de cada animal por varios dias hasta que llega la hora de la comida  
+		  </li>
+
+		  <li>
+		      Debo colocar la comida correcta en su lugar correcto dependiendo si el animal es carnivoro o herbivoro
+		  </li>
+
+		  <li>
+		      Si necesitas saber como identificar un herbivoro y un carnivoro puedes leer mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Puedes mirar el nombre
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul class="texto">
+          	
+            <li>
+            	Un animal carnívoro se identifica principalmente por su dieta, que se basa en la carne de otros animales.  
+            </li>
+
+            <li>
+            Según el modo de obtención del alimento, podemos encontrar dos tipos de carnívoros:</li>
+
+            <li>
+            Depredadores: son aquellos que obtienen su alimento de presas vivas. Para ello, deben buscarlas, perseguirlas y atraparlas, lo que supone un gran gasto de energía. Algunos ejemplos de animales depredadores son los felinos (Felidae) o las mariquitas (Coccinellidae).
+            </li>
+
+            <li>
+            Carroñeros: se alimentan de otros animales muertos. Los animales carroñeros no necesitan gastar energía en la depredación, aunque sí poseen un organismo preparado para evitar contraer infecciones. Por ejemplo, suelen tener un ácido gástrico con un pH muy bajo. Los buitres (Accipitridae) y las larvas de algunas moscas (Sharcophagidae) son ejemplos de animales carroñeros.
+            </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul class="texto">
+          	
+            <li>
+            	Un animal herbívoro se identifica principalmente por su dieta, que se basa en consumir exclusivamente plantas y vegetales.
+            </li>
+
+            <li>
+            Los animales herbívoros se clasifican según el tipo de materia vegetal de la que se alimentan. Muchos consumen un alimento principal, aunque pueden tomar otro tipo de comida de manera más esporádica. Estos son algunos tipos de herbívoros:
+            </li>
+
+            <li>Herbívoros generalistas: se alimentan de todo tipo de plantas e, incluso, muchos tipos de tejidos vegetales. Un ejemplo serían los grandes rumiantes, como la vaca (Bos taurus), que come tanto plantas herbáceas como ramas de plantas leñosas (son ramoneadoras).</li>
+
+      <li>Folívoros: se alimentan fundamentalmente de hojas. Por ejemplo, el gorila de montaña (Gorilla beringei beringei) y las orugas de muchas mariposas (Lepidoptera).</li>
+
+<li>Frugívoros: su alimento principal es la fruta. Algunos murciélagos, como Eidolon helvum, y las larvas de la mosca de la fruta (Ceratitis capitata) son ejemplos de frugívoros.</li>
+
+<li>Granívoros: las semillas son su manjar favorito. Las aves de pico corto y ancho se alimentan fundamentalmente de semillas, como el verderón común (Chloris chloris). Otro ejemplo son las hormigas Messor barbarus.</li>
+
+<li>Xilófagos: son animales que se alimentan de madera. El ejemplo más conocido son las termitas (Isoptera), aunque hay muchos otros insectos que comen madera, como el gorgojo descortezador (Dendroctonus spp.).</li>
+
+<li>Rizófagos: su alimento principal son las raíces. Algunos animales rizófagos son las larvas de muchos insectos, como los escarabajos de la familia Scarabaeidae y la mosca de la zanahoria (Psila rosae).
+Nectarívoros: consumen el néctar que ofrecen las flores a cambio de su polinización. Entre los animales nectarívoros encontramos a las abejas (Anthophila) y a los sírfidos (Syrphidae).</li>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/comida2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba3,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

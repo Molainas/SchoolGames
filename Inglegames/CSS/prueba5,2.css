@@ -1,0 +1,154 @@
+body{background-color: purple;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 625px;}
+
+.cubo1{border: 1px solid purple;
+background-image: url("../imagenes/fondo2,5.png");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+height: 470px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.empezar{border: 1px solid purple;
+background-color: purple;
+color: white;
+font-family: cursive;
+font-size: 50px;
+height: 120px;
+width: 300px;}
+
+.ventana{
+height: 52%;
+width: 100%;
+display: flex;
+align-items: center;
+}
+
+.ventanilla{border: 3px solid purple;
+height: 160px;
+width: 300px;
+margin-left: 10px;}
+
+.pequeñin{
+height: 25%;
+display: flex;
+justify-content: center;}
+
+.img1{height: 120px;}
+
+.img2{height: 100%;}
+
+.img3{height: 50px;}
+
+.img4{height: 50px;}
+
+.img5{height: 160px;
+width: 100%;}
+
+.closet{border: 1px solid purple;
+height: 32%;
+width: 80%;}
+
+.ropa{border: 1px solid purple;
+background-color: purple;
+height: 90px;
+width: 90px;
+color: white;
+font-family: cursive;}
+
+.manitas{border: 1px solid purple;
+background-color: #FE8330;
+height: 50px;
+display: flex;
+justify-content: center;}
+
+.adentro{border: 1px solid purple;
+background-color: #FE8330;
+height: 95px;
+display: flex;
+justify-content: space-between;
+align-items: center;}
+
+.cubo2{border: 1px solid purple;
+height: 150px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.correcto{border: 1px solid purple;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid purple; 
+height: 120px;
+width: 250px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid purple;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: purple;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: purple; 
+    height: 450px;
+    width: 1000px;
+    border: 2px solid #FE8330; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid purple;
+background-color: white;
+color: #FE8330;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid purple;
+background-color: white;
+color: #FE8330;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 1000px;
+}

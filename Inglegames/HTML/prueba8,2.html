@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+
+<div class="cubo">
+
+    <div class="cubo1">
+
+        <div class="familia1">
+            <div class="bisabuelos">
+                <div class="circulo" data-respuesta="GREATGRANDFATHER1">GREAT GRANDFATHER1</div>
+                <div class="circulo" data-respuesta="GREATGRANDMOTHER1">GREAT GRANDMOTHER1</div>
+            </div>
+
+            <div class="bisabuelos">
+                <div class="circulo" data-respuesta="GREATGRANDFATHER2">GREAT GRANDFATHER2</div>
+                <div class="circulo" data-respuesta="GREATGRANDMOTHER2">GREAT GRANDMOTHER2</div>
+            </div>
+        </div>
+
+        <div class="familia1">
+            <div class="abuelos">
+                <div class="circulo" data-respuesta="GRANDFATHER">GRANDFATHER</div>
+                <div class="circulo" data-respuesta="GRANDMOTHER">GRANDMOTHER</div>
+            </div>
+        </div>
+
+        <div class="familia2">
+            <div class="tios">
+                <div class="circulo" data-respuesta="UNCLE">UNCLE</div>
+                <div class="circulo" data-respuesta="AUNT">AUNT</div>
+            </div>
+
+            <div class="padres">
+                <div class="circulo" data-respuesta="FATHER">FATHER</div>
+                <div class="circulo" data-respuesta="MOTHER">MOTHER</div>
+            </div>
+        </div>
+
+        <div id="mensaje" style="
+    position: fixed;
+    top: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.85);
+    color: #FE8330;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    display: none;
+    z-index: 1000;">
+</div>
+
+
+        <div class="familia3">
+            <div class="primos">
+                <div class="circulo" data-respuesta="COUSIN">COUSIN</div>
+                <div class="circulo" data-respuesta="COUSIN">COUSIN</div>
+            </div>
+
+            <div class="pequeñin">
+                <div class="circulo1"></div>
+                <div class="circulo" data-respuesta="BROTHER">BROTHER</div>
+                <div class="circulo" data-respuesta="SISTER">SISTER</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cubo2">
+        <div class="pregunta" id="preguntaTexto">
+            <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+        </div>
+    </div>
+
+    <div class="cubo3">
+
+        <div class="correcto">C: <span id="correctos">0</span></div>
+
+        <div class="tiempo" id="tiempo">3:30</div>
+
+        <img src="../imagenes/hhbcv2.png" class="peque">
+
+        <button class="verificacion" onclick="verificarHora()">VERIFICAR</button>
+
+        <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+
+    </div>
+
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+        @import url("../CSS/prueba8,2.css");
+    </style>
+
+<script>
+let tiempo = 210;
+let interval;
+let correctos = 0;
+let incorrectos = 0;
+let seleccion = null;
+let respuestaCorrecta = "";
+
+const palabras = [ "GREATGRANDMOTHER2", "GREATGRANDFATHER2", "GREATGRANDMOTHER1", "GREATGRANDFATHER1","GRANDFATHER", "GRANDMOTHER", "UNCLE", "AUNT", "FATHER", "MOTHER", "COUSIN", "BROTHER", "SISTER"];
+
+function iniciarTemporizador() {
+    interval = setInterval(function () {
+        if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText =
+                `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function mostrarMensaje(texto, esCorrecto) {
+    const mensajeDiv = document.getElementById("mensaje");
+    mensajeDiv.innerText = texto;
+    mensajeDiv.style.backgroundColor = esCorrecto ? "" : "";
+    mensajeDiv.style.display = "block";
+
+    setTimeout(() => {
+        mensajeDiv.style.display = "none";
+    }, 1200);
+}
+
+
+ function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 210;
+        document.getElementById("tiempo").innerText = "3:30";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        mostrarNuevaPregunta();
+    }
+
+function pronunciar(texto) {
+    const voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = 'en-US'; // voz en inglés
+    voz.rate = 0.9; // velocidad moderada
+    window.speechSynthesis.speak(voz);
+}
+
+function mostrarNuevaPregunta() {
+    seleccion = null;
+    document.querySelectorAll(".circulo").forEach(c => c.classList.remove("seleccionado"));
+
+    const palabra = palabras[Math.floor(Math.random() * palabras.length)];
+    respuestaCorrecta = palabra;
+    document.getElementById("preguntaTexto").innerText = `${palabra}`;
+    pronunciar(palabra); // 🔊 pronunciar la palabra
+}
+
+
+function verificarHora() {
+    if (!seleccion) return alert("Selecciona una opción antes de verificar.");
+
+    if (seleccion === respuestaCorrecta) {
+        correctos++;
+        document.getElementById("correctos").innerText = correctos;
+        mostrarMensaje("Correct!", true);
+    } else {
+        incorrectos++;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        mostrarMensaje("Incorrect!", false);
+    }
+
+    mostrarNuevaPregunta();
+}
+
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+
+    if (resultadoFinal >= 20) {
+        nota = "A";
+    } else if (resultadoFinal >= 10) {
+        nota = "B";
+    } else if (resultadoFinal >= 5) {
+        nota = "C";
+    } else {
+        nota = "F";
+    }
+
+    document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Inglegames2.html";
+}
+
+
+
+    // Event listener para selección de círculos
+    document.querySelectorAll(".circulo").forEach(circulo => {
+        circulo.addEventListener("click", () => {
+            document.querySelectorAll(".circulo").forEach(c => c.classList.remove("seleccionado"));
+            circulo.classList.add("seleccionado");
+            seleccion = circulo.getAttribute("data-respuesta");
+        });
+    });
+
+</script>
+
+</body>
+</html>

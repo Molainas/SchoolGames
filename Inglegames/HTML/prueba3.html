@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head>
+<body>
+<div class="cubo">
+    <div class="cubo1">
+        <div class="cubo2">
+            <div class="colores1">
+                <button class="color" onclick="verificarColor('red')" style="background-color: red;"></button>
+                <button class="color" onclick="verificarColor('blue')" style="background-color: blue;"></button>
+                <button class="color" onclick="verificarColor('green')" style="background-color: green;"></button>
+            </div>
+            <div class="pequeñin">
+                <img src="../imagenes/imagen123.png" class="peque">
+            </div>
+            <div class="colores1">
+                <button class="color" onclick="verificarColor('yellow')" style="background-color: yellow;"></button>
+                <button class="color" onclick="verificarColor('purple')" style="background-color: purple;"></button>
+                <button class="color" onclick="verificarColor('orange')" style="background-color: orange;"></button>
+            </div>
+        </div>
+        <div class="cubo3">
+            <div class="colores2">
+                <button class="color" onclick="verificarColor('white')" style="background-color: white;"></button>
+                <button class="color" onclick="verificarColor('gray')" style="background-color: gray;"></button>
+                <button class="color" onclick="verificarColor('black')" style="background-color: black;"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cubo4">
+        <div class="correcto">C: <span id="correctos">0</span></div>
+        <div class="tiempo" id="tiempo">5:00</div>
+        <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+        <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba3.css");
+</style>
+
+<script>
+    let tiempo = 300;
+    let interval;
+    let correctos = 0;
+    let incorrectos = 0;
+    let colorCorrecto;
+
+    // Lista de colores
+    const colores = ["red", "blue", "green", "yellow", "purple", "orange", "white", "gray", "black"];
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        reproducirAudio();
+    }
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+   function reproducirAudio() {
+    colorCorrecto = colores[Math.floor(Math.random() * colores.length)];
+
+    const utterance = new SpeechSynthesisUtterance(colorCorrecto);
+    utterance.lang = "en-US"; // Inglés estadounidense
+    utterance.rate = 0.9;     // Velocidad (1 es normal)
+    utterance.pitch = 0.1;      // Tono (1 es normal)
+    utterance.volume = 100;     // Volumen (1 es máximo)
+
+    // Intentar seleccionar una voz masculina en inglés
+    const vocesDisponibles = speechSynthesis.getVoices();
+    const vozMasculina = vocesDisponibles.find(v => v.lang === "en-US" && v.name.toLowerCase().includes("male"));
+
+    if (vozMasculina) {
+        utterance.voice = vozMasculina;
+    }
+
+    speechSynthesis.speak(utterance);
+}
+
+window.speechSynthesis.onvoiceschanged = () => {
+    speechSynthesis.getVoices();
+};
+
+    function verificarColor(colorSeleccionado) {
+        if (colorSeleccionado === colorCorrecto) {
+            correctos++;
+            document.getElementById("correctos").innerText = correctos;
+        } else {
+            incorrectos++;
+            document.getElementById("incorrectos").innerText = incorrectos;
+        }
+        reproducirAudio();
+    }
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames.html";
+    }
+</script>
+
+</body>
+</html>

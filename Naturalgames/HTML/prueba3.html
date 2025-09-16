@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naturalgames</title>
+</head>
+<body>
+<div class="cubo">
+  <div class="cubo1">
+    <div class="puerta">
+      <div class="letreros">
+        <div class="letrero2">
+          <div class="texto2">DIENTES</div>
+          <canvas id="canvas-dientes" width="150" height="150"></canvas>
+        </div>
+
+        <div class="letrero2">
+          <div class="texto2">GARRAS</div>
+          <canvas id="canvas-garras" width="150" height="150"></canvas>
+        </div>
+      </div>
+
+      <div class="jaula">
+        <div class="letrero1">
+          <div id="nombre" class="texto2"></div>
+        </div>
+
+        <div class="hueco">
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+        </div>
+      </div>
+
+      <div class="letreros">
+        <div class="letrero2">
+          <div class="texto2">SISTEMA</div>
+          <canvas id="canvas-sistema" width="150" height="150"></canvas>
+        </div>
+
+        <div class="letrero2">
+          <div class="texto2">ROSTRO</div>
+          <canvas id="canvas-rostro" width="150" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="comida">
+      <button onclick="verificarRespuesta('carnivoro')" class="cubito">
+        <div class="texto1">carnes y pescados</div>
+        <img src="../imagenes/cyp.png" width="100" />
+      </button>
+      <button onclick="verificarRespuesta('herbivoro')" class="cubito">
+        <div class="texto1">plantas y vegetales</div>
+        <img src="../imagenes/pyv.png" width="100" />
+      </button>
+    </div>
+  </div>
+
+  <div class="cubo2">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba3.css")
+</style>
+
+
+<script>
+  let correctos = 0;
+  let incorrectos = 0;
+  let tiempo = 300;
+  let interval;
+  let animalActual;
+
+const animales = [
+  // 🦁 LEÓN
+  {
+    nombre: "León",
+    tipo: "carnivoro",
+    dibujos: {
+      rostro: (ctx) => {
+        // Melena
+        ctx.fillStyle = "yellow";
+        for (let i = 0; i < 360; i += 15) {
+          const angle = (i * Math.PI) / 180;
+          const x = 75 + Math.cos(angle) * 45;
+          const y = 75 + Math.sin(angle) * 45;
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        // Cabeza
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(75, 75, 40, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Ojos
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(63, 65, 6, 0, 2 * Math.PI);
+        ctx.arc(87, 65, 6, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(63, 65, 3, 0, 2 * Math.PI);
+        ctx.arc(87, 65, 3, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Hocico
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(75, 85, 18, 12, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Nariz
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(75, 78);
+        ctx.lineTo(70, 88);
+        ctx.lineTo(80, 88);
+        ctx.closePath();
+        ctx.fill();
+      },
+
+     dientes: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+  ctx.fillStyle = "yellow";
+
+  // === FILA SUPERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 45);
+    ctx.lineTo(x + 6, 55);
+    ctx.lineTo(x + 12, 45);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos superiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 45);
+  ctx.lineTo(68, 85);
+  ctx.lineTo(72, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 45);
+  ctx.lineTo(82, 85);
+  ctx.lineTo(78, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  // === FILA INFERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 115);
+    ctx.lineTo(x + 6, 105);
+    ctx.lineTo(x + 12, 115);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos inferiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 115);
+  ctx.lineTo(68, 90);
+  ctx.lineTo(72, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 115);
+  ctx.lineTo(82, 90);
+  ctx.lineTo(78, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+},
+
+   
+      garras: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(75, 100, 20, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        const dedos = [
+          [60, 80],
+          [70, 75],
+          [80, 75],
+          [90, 80]
+        ];
+        dedos.forEach(([x, y]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, 2 * Math.PI);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(x - 4, y - 5);
+          ctx.quadraticCurveTo(x, y - 30, x + 4, y - 2);
+          ctx.lineTo(x, y - 6);
+          ctx.closePath();
+          ctx.fill();
+        });
+      },
+
+      sistema: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(75, 90, 20, 25, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = "yellow";
+        ctx.beginPath();
+        ctx.moveTo(75, 60);
+        ctx.lineTo(75, 75);
+        ctx.stroke();
+      }
+    }
+  },
+
+  // 🐄 VACA
+  {
+    nombre: "Vaca",
+    tipo: "herbivoro",
+    dibujos: {
+      rostro: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        // Orejas
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(45, 55, 10, 15, -0.5, 0, 2 * Math.PI);
+        ctx.ellipse(105, 55, 10, 15, 0.5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Cabeza
+        ctx.beginPath();
+        ctx.ellipse(75, 75, 32, 42, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Manchas
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(55, 75, 9, 0, 2 * Math.PI);
+        ctx.arc(88, 50, 7, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Hocico
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.ellipse(75, 95, 20, 12, 0, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Fosas
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(70, 95, 2, 0, 2 * Math.PI);
+        ctx.arc(80, 95, 2, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Ojos
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.arc(65, 65, 4, 0, 2 * Math.PI);
+        ctx.arc(85, 65, 4, 0, 2 * Math.PI);
+        ctx.fill();
+      },
+
+      dientes: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.arc(80, 100, 35, 0, Math.PI, true);
+        ctx.fill();
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          ctx.ellipse(50 + i * 12, 98, 6, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      },
+
+      garras: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(70, 90, 10, 30, Math.PI / 60, 0, Math.PI * 4);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(90, 90, 10, 30, -Math.PI / 60, 0, Math.PI * 4);
+        ctx.fill();
+      },
+
+      sistema: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        // Estómagos
+        ctx.beginPath();
+        ctx.ellipse(55, 95, 15, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(55, 55, 12, 15, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(95, 55, 12, 15, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(95, 95, 15, 20, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        // Esófago
+        ctx.beginPath();
+        ctx.arc(75, 75, 6, 0, Math.PI * 2);
+        ctx.fill();
+        // Conexiones
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(75, 75); ctx.lineTo(60, 55); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(67, 55); ctx.lineTo(83, 55); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(95, 70); ctx.lineTo(95, 80); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(90, 100); ctx.lineTo(60, 100); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(60, 90); ctx.lineTo(75, 75); ctx.stroke();
+        // Salida
+        ctx.beginPath();
+        ctx.moveTo(95, 110);
+        ctx.bezierCurveTo(105, 120, 85, 135, 75, 145);
+        ctx.stroke();
+      }
+    }
+  },
+
+  // 🐅 TIGRE (Carnívoro)
+  {
+    nombre: "Tigre",
+    tipo: "carnivoro",
+    dibujos: {
+
+  rostro: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Cabeza
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(75, 75, 40, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Orejas redondeadas
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(50, 35, 12, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(100, 35, 12, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+
+  // Interior orejas
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(50, 35, 7, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(100, 35, 7, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Rayas en la frente
+  ctx.strokeStyle = "green";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(75, 35);
+  ctx.lineTo(75, 55);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(65, 38);
+  ctx.lineTo(70, 55);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 38);
+  ctx.lineTo(80, 55);
+  ctx.stroke();
+
+  // Rayas en los lados
+  ctx.beginPath();
+  ctx.moveTo(50, 60);
+  ctx.lineTo(40, 75);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(100, 60);
+  ctx.lineTo(110, 75);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(55, 80);
+  ctx.lineTo(43, 90);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(95, 80);
+  ctx.lineTo(107, 90);
+  ctx.stroke();
+
+  // Ojos
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(63, 65, 8, 0, 2 * Math.PI);
+  ctx.arc(87, 65, 8, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(63, 65, 4, 0, 2 * Math.PI);
+  ctx.arc(87, 65, 4, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Hocico blanco
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.ellipse(75, 88, 22, 15, 0, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+
+  // Nariz triangular
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(75, 78);
+  ctx.lineTo(70, 88);
+  ctx.lineTo(80, 88);
+  ctx.closePath();
+  ctx.fill();
+
+},
+
+  dientes: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+  ctx.fillStyle = "yellow";
+
+  // === FILA SUPERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 45);
+    ctx.lineTo(x + 6, 55);
+    ctx.lineTo(x + 12, 45);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos superiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 45);
+  ctx.lineTo(68, 85);
+  ctx.lineTo(72, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 45);
+  ctx.lineTo(82, 85);
+  ctx.lineTo(78, 85);
+  ctx.lineTo(75, 45);
+  ctx.closePath();
+  ctx.fill();
+
+  // === FILA INFERIOR ===
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    const x = 50 + i * 9;
+    ctx.moveTo(x, 115);
+    ctx.lineTo(x + 6, 105);
+    ctx.lineTo(x + 12, 115);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Colmillos largos inferiores (integrados al centro de la fila)
+  ctx.beginPath();
+  ctx.moveTo(65, 115);
+  ctx.lineTo(68, 90);
+  ctx.lineTo(72, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(85, 115);
+  ctx.lineTo(82, 90);
+  ctx.lineTo(78, 90);
+  ctx.lineTo(75, 115);
+  ctx.closePath();
+  ctx.fill();
+},
+
+     garras: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // === Pata principal ===
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(75, 105, 30, 25, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Rayas negras en la pata
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 3;
+  for (let i = -2; i <= 2; i++) {
+    ctx.beginPath();
+    ctx.moveTo(75 + i * 10, 90);
+    ctx.lineTo(70 + i * 10, 120);
+    ctx.stroke();
+  }
+
+  // === Dedos + garras ===
+  const dedos = [
+    [55, 90],
+    [70, 85],
+    [80, 85],
+    [95, 90]
+  ];
+
+  dedos.forEach(([x, y]) => {
+    // Dedo (ovalado, más realista)
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.ellipse(x, y, 10, 12, 0, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Garra curva y afilada
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.moveTo(x - 3, y - 8);
+    ctx.quadraticCurveTo(x, y - 25, x + 3, y - 8);
+    ctx.closePath();
+    ctx.fill();
+
+  });
+},
+
+
+      sistema: (ctx) => {
+        ctx.clearRect(0, 0, 150, 150);
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.ellipse(75, 90, 20, 25, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = "yellow";
+        ctx.beginPath();
+        ctx.moveTo(75, 60);
+        ctx.lineTo(75, 75);
+        ctx.stroke();
+      }
+    }
+  },
+
+  // 🐘 ELEFANTE (Herbívoro)
+  {
+    nombre: "Elefante",
+    tipo: "herbivoro",
+    dibujos: {
+      
+   rostro: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Cabeza
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.ellipse(75, 75, 45, 40, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Orejas grandes
+  ctx.beginPath();
+  ctx.ellipse(35, 75, 25, 35, 0, 0, 2 * Math.PI);
+  ctx.ellipse(115, 75, 25, 35, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Trompa (más realista, cilíndrica con extremo redondo)
+  ctx.beginPath();
+  ctx.moveTo(68, 95);
+  ctx.bezierCurveTo(65, 120, 65, 140, 75, 150);
+  ctx.bezierCurveTo(85, 140, 85, 120, 82, 95);
+  ctx.closePath();
+  ctx.fill();
+
+  // Extremo de la trompa (como una ventosa)
+  ctx.beginPath();
+  ctx.ellipse(75, 150, 12, 6, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Detalles de la trompa (pliegues horizontales)
+  ctx.strokeStyle = "green";
+  ctx.lineWidth = 2;
+  for (let y = 105; y <= 145; y += 10) {
+    ctx.beginPath();
+    ctx.moveTo(70, y);
+    ctx.lineTo(80, y);
+    ctx.stroke();
+  }
+
+  // Colmillos blancos
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(60, 160);
+  ctx.lineTo(55, 100);
+  ctx.lineTo(60, 100);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(90, 160);
+  ctx.lineTo(95, 100);
+  ctx.lineTo(90, 100);
+  ctx.closePath();
+  ctx.fill();
+
+  // Ojos
+  ctx.fillStyle = "green";
+  ctx.beginPath();
+  ctx.arc(65, 65, 6, 0, 2 * Math.PI);
+  ctx.arc(85, 65, 6, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(65, 65, 3, 0, 2 * Math.PI);
+  ctx.arc(85, 65, 3, 0, 2 * Math.PI);
+  ctx.fill();
+},
+
+      dientes: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Color de los colmillos
+  ctx.fillStyle = "yellow";
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 1;
+
+  // Colmillo izquierdo
+  ctx.beginPath();
+  ctx.moveTo(65, 95);
+  ctx.quadraticCurveTo(55, 125, 60, 140); // curva hacia abajo
+  ctx.lineTo(66, 140);
+  ctx.quadraticCurveTo(60, 125, 70, 95);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Colmillo derecho
+  ctx.beginPath();
+  ctx.moveTo(85, 95);
+  ctx.quadraticCurveTo(95, 125, 90, 140); // curva hacia abajo
+  ctx.lineTo(84, 140);
+  ctx.quadraticCurveTo(90, 125, 80, 95);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+},
+
+garras: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  // Base de la huella (pata redonda)
+  ctx.fillStyle = "yellow"; // gris oscuro como tierra comprimida
+  ctx.beginPath();
+  ctx.arc(75, 90, 35, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Marcas de uñas (semicírculos en la parte superior)
+  ctx.fillStyle = "yellow"; // gris más claro para contraste
+  const posiciones = [55, 65, 75, 85, 95]; // 5 uñas
+  posiciones.forEach((x) => {
+    ctx.beginPath();
+    ctx.arc(x, 60, 8, 2, Math.PI, true); // semicircunferencia hacia abajo
+    ctx.fill();
+  });
+
+},
+
+
+     sistema: (ctx) => {
+  ctx.clearRect(0, 0, 150, 150);
+
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+
+  // Esófago
+  ctx.beginPath();
+  ctx.moveTo(75, 40);
+  ctx.lineTo(75, 60);
+  ctx.stroke();
+
+  // Estómago pequeño
+  ctx.fillStyle = "yellow"; // beige
+  ctx.beginPath();
+  ctx.ellipse(75, 70, 15, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  // Intestino delgado (enredado en el centro)
+  ctx.strokeStyle = "yellow"; // marrón claro
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(75, 80);
+  ctx.bezierCurveTo(55, 90, 95, 100, 70, 110);
+  ctx.bezierCurveTo(95, 120, 55, 130, 85, 135);
+  ctx.stroke();
+
+  // Intestino grueso (grande y en forma de marco)
+  ctx.strokeStyle = "yellow"; // marrón oscuro
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.rect(50, 85, 50, 50); // marco grande simulando intestino grueso
+  ctx.stroke();
+
+  // Ciego (gran saco a la derecha)
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(105, 110, 12, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+}
+
+    }
+  }
+];
+
+  function iniciarTemporizador() {
+    interval = setInterval(() => {
+      if (tiempo > 0) {
+        tiempo--;
+        const minutos = Math.floor(tiempo / 60);
+        const segundos = tiempo % 60;
+        document.getElementById("tiempo").innerText = `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+      } else {
+        clearInterval(interval);
+        finalizarJuego();
+      }
+    }, 1000);
+  }
+
+  function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota;
+    if (resultadoFinal >= 20) nota = "A";
+    else if (resultadoFinal >= 10) nota = "B";
+    else if (resultadoFinal >= 5) nota = "C";
+    else nota = "F";
+
+    document.getElementById("puntajeFinal").innerText = resultadoFinal;
+    document.getElementById("nota").innerText = nota;
+    document.getElementById("resultado").style.display = "block";
+  }
+
+  function salir() {
+    window.location.href = "Naturalgames.html";
+  }
+
+  function mostrarDibujosDelAnimal() {
+    const indice = Math.floor(Math.random() * animales.length);
+    animalActual = animales[indice];
+
+    const ctxDientes = document.getElementById("canvas-dientes").getContext("2d");
+    const ctxGarras = document.getElementById("canvas-garras").getContext("2d");
+    const ctxRostro = document.getElementById("canvas-rostro").getContext("2d");
+    const ctxSistema = document.getElementById("canvas-sistema").getContext("2d");
+
+    [ctxDientes, ctxGarras, ctxRostro, ctxSistema].forEach(ctx => ctx.clearRect(0, 0, 150, 150));
+
+    animalActual.dibujos.dientes(ctxDientes);
+    animalActual.dibujos.garras(ctxGarras);
+    animalActual.dibujos.rostro(ctxRostro);
+    animalActual.dibujos.sistema(ctxSistema);
+  }
+
+  const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+
+  function verificarRespuesta(respuesta) {
+    if (!animalActual) return;
+
+    if (respuesta === animalActual.tipo) {
+      correctos++;
+      document.getElementById("correctos").innerText = correctos;
+      sonidoCorrecto.play(); 
+    } else {
+      incorrectos++;
+      document.getElementById("incorrectos").innerText = incorrectos;
+       sonidoIncorrecto.play();
+    }
+
+    mostrarDibujosDelAnimal();
+  }
+
+  function iniciarJuego() {
+    iniciarTemporizador();
+    mostrarDibujosDelAnimal();
+  }
+
+  window.onload = iniciarJuego;
+</script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Espagames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="arriba">
+            <img src="../imagenes/tablero2,1.png" class="tablero">
+        </div>
+
+        <canvas id="juegoCanvas" width="470" height="284"></canvas>
+
+        <div class="abajo">
+            <img src="../imagenes/tablero2,2.png" class="tablero">
+        </div>
+    </div>
+
+    <button id="btnEmpezar" class="empezar" onclick="iniciarJuego1()">
+                Empezar
+            </button>
+
+    <div class="cubo2">
+        <div class="puntos">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="tiempo" id="tiempo">05:00</div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+
+        <div class="pequeñin">
+            <img src="../imagenes/pequenin482.png" class="peque">
+        </div>
+
+        <button class="verificacion" onclick="verificarTilde()">VERIFICAR</button>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba4,2.css");
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let juegoIniciado = false; 
+
+let ctx = null;
+let dibujando = false;
+let palabra = "";
+let tildeEsperada = { x: 0, y: 0, w: 40, h: 40 };
+let dibujoUsuario = [];
+
+const palabras = [
+    { texto: "Matematicas", tildeIndex: 6 },     // Matemáticas
+    { texto: "Electronico", tildeIndex: 7 },     // Electrónico
+    { texto: "Biologia", tildeIndex: 4 },        // Biología
+    { texto: "Quimicamente", tildeIndex: 3 },    // Químicamente
+    { texto: "Fisicamente", tildeIndex: 1 },     // Físicamente
+    { texto: "Estadistica", tildeIndex: 6 },     // Estadística
+    { texto: "Librerias", tildeIndex: 5 },       // Librerías
+    { texto: "Fotografia", tildeIndex: 7 },      // Fotografía
+    { texto: "Comunicacion", tildeIndex: 9 },    // Comunicación
+    { texto: "Educacion", tildeIndex: 7 },       // Educación
+    { texto: "Television", tildeIndex: 7 },      // Televisión
+    { texto: "Programacion", tildeIndex: 10 },   // Programación
+    { texto: "Investigacion", tildeIndex: 10 },  // Investigación
+    { texto: "Economicas", tildeIndex: 5 },      // Económicas
+    { texto: "Logicamente", tildeIndex: 2 },     // Lógicamente
+    { texto: "Politicamente", tildeIndex: 3 },   // Políticamente
+    { texto: "Computacion", tildeIndex: 9 },     // Computación
+    { texto: "Operacion", tildeIndex: 7 },       // Operación
+    { texto: "Constitucion", tildeIndex: 10 },   // Constitución
+    { texto: "Administracion", tildeIndex: 11 }, // Administración
+    { texto: "Organizacion", tildeIndex: 10 },   // Organización
+    { texto: "Nacion", tildeIndex: 4 },          // Nación
+    { texto: "Revolucion", tildeIndex: 8 },      // Revolución
+    { texto: "Produccion", tildeIndex: 8 },      // Producción
+    { texto: "Medicion", tildeIndex: 6 },        // Medición
+    { texto: "Operacion", tildeIndex: 7 },       // Operación
+    { texto: "Relacion", tildeIndex: 6 },        // Relación
+    { texto: "Compasito", tildeIndex: 5 },       // Compásito
+    { texto: "Corazoncito", tildeIndex: 5 },     // Corazóncito
+    { texto: "Camioneta", tildeIndex: 4 }        // Camioneta
+];
+
+
+function iniciarTemporizador() {
+    interval = setInterval(() => {
+        if (tiempo > 0) {
+            tiempo--;
+            const minutos = Math.floor(tiempo / 60);
+            const segundos = tiempo % 60;
+            document.getElementById('tiempo').innerText = 
+                `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        } else {
+            clearInterval(interval);
+            finalizarJuego();
+        }
+    }, 1000);
+}
+
+function iniciarJuego1() {
+    if (!juegoIniciado) {
+        juegoIniciado = true;
+        document.getElementById("btnEmpezar").style.display = "none"; // ocultar botón
+        iniciarTemporizador();
+        mostrarPalabra();
+    }
+}
+
+function pronunciarPalabra(texto) {
+    const msg = new SpeechSynthesisUtterance(texto);
+    msg.lang = "es-ES"; 
+    msg.rate = 0.9; 
+    msg.pitch = 1;  
+    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.speak(msg);
+}
+
+function finalizarJuego() {
+    clearInterval(interval);
+    const resultadoFinal = correctos - incorrectos;
+    let nota = "F";
+    if (resultadoFinal >= 4) nota = "A";
+    else if (resultadoFinal >= 3) nota = "B";
+    else if (resultadoFinal >= 2) nota = "C";
+
+    document.getElementById('puntajeFinal').innerText = resultadoFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+    window.location.href = "Espagames.html";
+}
+
+function iniciarJuego() {
+    const canvas = document.getElementById('juegoCanvas');
+    ctx = canvas.getContext('2d');
+
+    mostrarPalabra();
+
+    canvas.addEventListener('mousedown', iniciarDibujo);
+    canvas.addEventListener('mouseup', terminarDibujo);
+    canvas.addEventListener('mousemove', dibujar);
+}
+
+function mostrarPalabra() {
+    // Elegir palabra al azar
+    const randomIndex = Math.floor(Math.random() * palabras.length);
+    const seleccion = palabras[randomIndex];
+    palabra = seleccion.texto;
+
+    // Limpiar el canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    ctx.font = "48px cursive";
+    ctx.textAlign = "center";
+
+    // ✅ Colorear el texto (elige uno fijo o aleatorio)
+    // Fijo
+    // ctx.fillStyle = "blue";  
+
+    // Aleatorio
+    const colores = ["#804000"];
+    ctx.fillStyle = colores[Math.floor(Math.random() * colores.length)];
+
+    ctx.fillText(palabra, ctx.canvas.width / 2, 100);
+
+    // ✅ Pronunciar palabra
+    pronunciarPalabra(palabra);
+
+    // Calcular posición de la letra con tilde
+    const letraConTilde = seleccion.tildeIndex;
+    if (letraConTilde >= 0) {
+        const anchoTexto = ctx.measureText(palabra).width;
+        const inicio = (ctx.canvas.width / 2) - (anchoTexto / 2);
+        const letras = palabra.split("");
+
+        let x = inicio;
+        for (let i = 0; i <= letraConTilde; i++) {
+            x += ctx.measureText(letras[i]).width;
+        }
+
+        tildeEsperada = {
+            x: x - 20,
+            y: 60,
+            w: 40,
+            h: 40
+        };
+    } else {
+        const anchoTexto = ctx.measureText(palabra).width;
+        const inicio = (ctx.canvas.width / 2) - (anchoTexto / 2);
+        const x = inicio + ctx.measureText(palabra).width - 20;
+        tildeEsperada = {
+            x: x,
+            y: 60,
+            w: 40,
+            h: 40
+        };
+    }
+
+    // Debug opcional
+    // ctx.strokeStyle = "red";
+    // ctx.strokeRect(tildeEsperada.x, tildeEsperada.y, tildeEsperada.w, tildeEsperada.h);
+}
+
+
+function iniciarDibujo(e) {
+    dibujando = true;
+    dibujoUsuario = [];
+    ctx.beginPath();
+    const { x, y } = getPosicionCanvas(e);
+    ctx.moveTo(x, y);
+    dibujoUsuario.push({ x, y });
+}
+
+function terminarDibujo() {
+    dibujando = false;
+    ctx.closePath();
+}
+
+function dibujar(e) {
+    if (!dibujando) return;
+    const { x, y } = getPosicionCanvas(e);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    dibujoUsuario.push({ x, y });
+}
+
+function getPosicionCanvas(e) {
+    const rect = ctx.canvas.getBoundingClientRect();
+    return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+    };
+}
+
+function verificarTilde() {
+    const acierto = dibujoUsuario.some(p => 
+        p.x >= tildeEsperada.x &&
+        p.x <= tildeEsperada.x + tildeEsperada.w &&
+        p.y >= tildeEsperada.y &&
+        p.y <= tildeEsperada.y + tildeEsperada.h
+    );
+
+    if (acierto) {
+        correctos++;
+       
+    } else {
+        incorrectos++;
+    
+    }
+
+    document.getElementById('correctos').innerText = correctos;
+    document.getElementById('incorrectos').innerText = incorrectos;
+    mostrarPalabra();
+}
+
+window.onload = () => {
+    const canvas = document.getElementById('juegoCanvas');
+    ctx = canvas.getContext('2d');
+
+    // Eventos de dibujo listos desde el inicio
+    canvas.addEventListener('mousedown', iniciarDibujo);
+    canvas.addEventListener('mouseup', terminarDibujo);
+    canvas.addEventListener('mousemove', dibujar);
+};
+
+</script>
+</body>
+</html>
+

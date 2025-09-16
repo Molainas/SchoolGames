@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MateGames</title>
+  <style>
+    @import url("../CSS/prueba7,2.css");
+  </style>
+</head>
+<body>
+<div class="cubo">
+  <div class="cubo1">
+    <div class="dialogo"><span id="fraccion1"></span> y <span id="fraccion2"></span></div>
+    <div class="peque"><img src="../imagenes/66.png" class="pequeñin"></div>
+    <div class="abajo">AFUERA</div>
+  </div>
+  <div class="cubo2">
+    <div class="correcto"> C: 0</div>
+    <div class="incorrecto"> F: 0</div>
+  </div>
+  <div class="cubo3">
+    <div class="tiempo"><span id="tiempo">2:00</span></div>
+    <div class="cocina">
+      <div class="pastel">
+        <canvas id="figura1" width="200" height="200"></canvas>
+        <canvas id="figura2" width="200" height="200"></canvas>
+      </div>
+      <button class="verificar" onclick="verificar()">VERIFICAR</button>
+    </div>
+    <div class="abajo">COCINA</div>
+  </div>
+</div>
+
+<div id="resultadoFinal" class="res" style="display: none;">
+  <div class="contenido">
+    <h2>Juego Terminado</h2>
+    <p>Puntuación Final: <span id="notaFinal">0</span></p>
+    <p id="mensajeFinal"></p>
+    <div class="sepa">
+      <button class="reinicio" onclick="reiniciarJuego()">Reiniciar</button>
+      <button class="salir" onclick="salir()">Escoger otro</button>
+    </div>
+  </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba7,2.css");
+  </style>
+
+<script>
+let tiempoRestante = 120;
+let temporizador;
+let juegoActivo = true;
+let fraccion1, fraccion2, totalPartes1, totalPartes2;
+let respuestasCorrectas = 0;
+let respuestasIncorrectas = 0;
+
+let coloreadas1 = [], coloreadas2 = [];
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function iniciarTemporizador() {
+  temporizador = setInterval(() => {
+    if (tiempoRestante > 0) {
+      tiempoRestante--;
+      const min = Math.floor(tiempoRestante / 60);
+      const sec = tiempoRestante % 60;
+      document.getElementById("tiempo").textContent = `${min}:${sec < 10 ? '0' + sec : sec}`;
+    } else {
+      clearInterval(temporizador);
+      juegoActivo = false;
+      mostrarResultados();
+    }
+  }, 1000);
+}
+
+function mostrarResultados() {
+  let notaFinal = respuestasCorrectas - respuestasIncorrectas;
+  document.getElementById("notaFinal").textContent = notaFinal;
+
+  let mensaje = "";
+  if (notaFinal >= 15) mensaje = "Nota: A";
+  else if (notaFinal >= 5) mensaje = "Nota: B";
+  else if (notaFinal >= 2) mensaje = "Nota: C";
+  else mensaje = "Nota: F";
+
+  document.getElementById("mensajeFinal").textContent = mensaje;
+  document.getElementById("resultadoFinal").style.display = "flex";
+}
+
+function salir() {
+  window.location.href = "mategames2.html";
+}
+
+function generarFracciones() {
+  totalPartes1 = Math.floor(Math.random() * 8) + 2;
+  totalPartes2 = Math.floor(Math.random() * 8) + 2;
+  fraccion1 = Math.floor(Math.random() * totalPartes1) + 1;
+  fraccion2 = Math.floor(Math.random() * totalPartes2) + 1;
+  document.getElementById("fraccion1").textContent = `${fraccion1}/${totalPartes1}`;
+  document.getElementById("fraccion2").textContent = `${fraccion2}/${totalPartes2}`;
+}
+
+function crearFiguras() {
+  coloreadas1 = Array(totalPartes1).fill(false);
+  coloreadas2 = Array(totalPartes2).fill(false);
+  dibujarPizza("figura1", totalPartes1, coloreadas1);
+  dibujarCuadro("figura2", totalPartes2, coloreadas2);
+}
+
+function dibujarPizza(id, partes, coloreadas) {
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext("2d");
+  const cx = canvas.width / 2, cy = canvas.height / 2, r = 90;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < partes; i++) {
+    const start = (2 * Math.PI / partes) * i;
+    const end = (2 * Math.PI / partes) * (i + 1);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = coloreadas[i] ? "blue" : "red";
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  let arrastrando = false;
+  let marcar = null;
+
+  canvas.onmousedown = function (e) {
+    arrastrando = true;
+    const index = obtenerSectorPizza(e, canvas, partes);
+    if (index !== null) {
+      marcar = !coloreadas[index];
+      coloreadas[index] = marcar;
+      dibujarPizza(id, partes, coloreadas);
+    }
+  };
+
+  canvas.onmousemove = function (e) {
+    if (!arrastrando) return;
+    const index = obtenerSectorPizza(e, canvas, partes);
+    if (index !== null && coloreadas[index] !== marcar) {
+      coloreadas[index] = marcar;
+      dibujarPizza(id, partes, coloreadas);
+    }
+  };
+
+  canvas.onmouseup = () => arrastrando = false;
+  canvas.onmouseleave = () => arrastrando = false;
+}
+
+function obtenerSectorPizza(e, canvas, partes) {
+  const rect = canvas.getBoundingClientRect();
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  const x = e.clientX - rect.left - cx;
+  const y = e.clientY - rect.top - cy;
+  const angle = Math.atan2(y, x);
+  const anguloPositivo = angle >= 0 ? angle : (2 * Math.PI + angle);
+  const index = Math.floor((anguloPositivo / (2 * Math.PI)) * partes);
+  return index >= 0 && index < partes ? index : null;
+}
+
+function dibujarCuadro(id, partes, coloreadas) {
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext("2d");
+  const cols = Math.ceil(Math.sqrt(partes));
+  const rows = Math.ceil(partes / cols);
+  const w = canvas.width / cols;
+  const h = canvas.height / rows;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < partes; i++) {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    ctx.beginPath();
+    ctx.rect(col * w, row * h, w, h);
+    ctx.fillStyle = coloreadas[i] ? "blue" : "red";
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  let arrastrando = false;
+  let marcar = null;
+
+  canvas.onmousedown = function (e) {
+    arrastrando = true;
+    const index = obtenerSectorCuadro(e, canvas, cols, w, h, partes);
+    if (index !== null) {
+      marcar = !coloreadas[index];
+      coloreadas[index] = marcar;
+      dibujarCuadro(id, partes, coloreadas);
+    }
+  };
+
+  canvas.onmousemove = function (e) {
+    if (!arrastrando) return;
+    const index = obtenerSectorCuadro(e, canvas, cols, w, h, partes);
+    if (index !== null && coloreadas[index] !== marcar) {
+      coloreadas[index] = marcar;
+      dibujarCuadro(id, partes, coloreadas);
+    }
+  };
+
+  canvas.onmouseup = () => arrastrando = false;
+  canvas.onmouseleave = () => arrastrando = false;
+}
+
+function obtenerSectorCuadro(e, canvas, cols, w, h, partes) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const col = Math.floor(x / w);
+  const row = Math.floor(y / h);
+  const index = row * cols + col;
+  return index >= 0 && index < partes ? index : null;
+}
+
+function verificar() {
+  const c1 = coloreadas1.filter(x => x).length;
+  const c2 = coloreadas2.filter(x => x).length;
+  if (c1 === fraccion1 && c2 === fraccion2) {
+    respuestasCorrectas++;
+    sonidoCorrecto.play();
+  } else {
+    respuestasIncorrectas++;
+    sonidoIncorrecto.play();
+  }
+  document.querySelector(".correcto").textContent = "C: " + respuestasCorrectas;
+  document.querySelector(".incorrecto").textContent = "F: " + respuestasIncorrectas;
+  generarFracciones();
+  crearFiguras();
+}
+
+function reiniciarJuego() {
+  tiempoRestante = 300;
+  respuestasCorrectas = 0;
+  respuestasIncorrectas = 0;
+  document.querySelector(".correcto").textContent = "C: 0";
+  document.querySelector(".incorrecto").textContent = "F: 0";
+  document.getElementById("tiempo").textContent = "5:00";
+  document.getElementById("resultadoFinal").style.display = "none";
+  generarFracciones();
+  crearFiguras();
+  if (!juegoActivo) {
+    juegoActivo = true;
+    iniciarTemporizador();
+  }
+}
+
+window.onload = function () {
+  generarFracciones();
+  crearFiguras();
+  iniciarTemporizador();
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Espagames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="tiempo" id="tiempo">05:00</div>
+    <div class="puntos">
+      <div class="correcto">C: <span id="correctos">0</span></div>
+      <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div> 
+    <button class="verificacion" onclick="verificarTilde()">VERIFICAR</button>
+  </div>
+
+  <div class="cubo2">
+    <div class="texto" id="texto"></div>
+    <div class="pequeñin">
+      <img src="../imagenes/pequenin502.png" class="peque">
+    </div>
+    <div class="abajo">
+      <button class="punto" onclick="seleccionarSigno('.')">.</button>
+      <button class="coma" onclick="seleccionarSigno(',')">,</button>
+      <button class="puntoycoma" onclick="seleccionarSigno(';')">;</button>
+    </div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+  @import url("../CSS/prueba6,2.css");
+  /* opcional: estilos para span seleccionado / incorrecto */
+  #texto span.seleccionado { background: rgba(0,0,0,0.05); }
+  #texto span.err { outline: 2px solid rgba(255,0,0,0.3); }
+  #texto span.ok { outline: 2px solid rgba(0,255,0,0.25); }
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let indiceSeleccionado = null;
+let parrafosUsados = [];
+let parrafoActual;
+
+const parrafosCompletos = [
+
+  { incompleto: ["Hoy", null, "fuimos", "al", "parque", null, "y", "jugamos"], 
+
+  resuelto: ["Hoy,", "fuimos", "al", "parque,", "y", "jugamos."] },
+
+  { incompleto: ["María", null, "la", "profesora", "llegó", "tarde", null, "por", "el", "tráfico"], 
+
+  resuelto: ["María,", "la", "profesora", "llegó", "tarde,", "por", "el", "tráfico."] },
+
+  { incompleto: ["Era", "un", "día", "soleado", null, "decidimos", "ir", "a", "la", "playa", null],
+
+   resuelto: ["Era", "un", "día", "soleado,", "decidimos", "ir", "a", "la", "playa."] },
+
+  { incompleto: ["El", "perro", "corrió", "rápido", null, "pero", "no", "alcanzó", "la", "pelota", null], 
+
+  resuelto: ["El", "perro", "corrió", "rápido;", "pero", "no", "alcanzó", "la", "pelota."] },
+  
+  { incompleto: ["Carmen", null, "mi", "mejor", "amiga", null, "ganó", "el", "concurso"], 
+
+  resuelto: ["Carmen,", "mi", "mejor", "amiga,", "ganó", "el", "concurso."] },
+
+  { incompleto: ["Sin", "embargo", null, "la", "tarea", "no", "estaba", "terminada", null], 
+
+  resuelto: ["Sin", "embargo;", "la", "tarea", "no", "estaba", "terminada."] },
+
+  { incompleto: ["Pablo", "estudió", "toda", "la", "noche", null, "quería", "aprobar", "el", "examen"], 
+
+  resuelto: ["Pablo", "estudió", "toda", "la", "noche,", "quería", "aprobar", "el", "examen."] },
+  
+  { incompleto: ["La", "ciudad", "estaba", "tranquila", null, "hasta", "que", "sonó", "la", "alarma", null], 
+
+  resuelto: ["La", "ciudad", "estaba", "tranquila;", "hasta", "que", "sonó", "la", "alarma."] },
+  
+  { incompleto: ["Era", "tarde", null, "sin", "embargo", "decidimos", "seguir", "con", "el", "viaje"], 
+
+  resuelto: ["Era", "tarde;", "sin", "embargo", "decidimos", "seguir", "con", "el", "viaje."] },
+
+  { incompleto: ["Estaba", "cansado", null, "aunque", "terminó", "todo", "su", "trabajo"], 
+
+  resuelto: ["Estaba", "cansado;", "aunque", "terminó", "todo", "su", "trabajo."] },
+
+  { incompleto: ["Llovía", "fuerte", null, "no", "obstante", "salimos", "a", "caminar"], 
+
+  resuelto: ["Llovía", "fuerte;", "no", "obstante", "salimos", "a", "caminar."] }
+];
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById('tiempo').innerText =
+        `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function obtenerParrafoAleatorio() {
+  if (parrafosUsados.length === parrafosCompletos.length) {
+    finalizarJuego();
+    return null;
+  }
+  let indice;
+  do {
+    indice = Math.floor(Math.random() * parrafosCompletos.length);
+  } while (parrafosUsados.includes(indice));
+  parrafosUsados.push(indice);
+
+  return JSON.parse(JSON.stringify(parrafosCompletos[indice])); // copia defensiva
+}
+
+function mostrarParrafo() {
+  parrafoActual = obtenerParrafoAleatorio();
+  if (!parrafoActual) return;
+
+  const contenedor = document.getElementById("texto");
+  contenedor.innerHTML = "";
+  indiceSeleccionado = null;
+  let huecoIndex = 0;
+  parrafoActual.incompleto.forEach((palabra, i) => {
+    if (palabra === null) {
+      const span = document.createElement("span");
+      span.dataset.indice = huecoIndex++;
+      span.innerHTML = "\u00A0"; // &nbsp;
+      span.style.display = "inline-block";
+      span.style.width = "20px";
+      span.style.borderBottom = "1px solid black";
+      span.style.cursor = "pointer";
+      span.style.textAlign = "center";
+      span.onclick = () => seleccionarEspacio(span.dataset.indice);
+      contenedor.appendChild(span);
+    } else {
+      contenedor.append(" " + palabra + " ");
+    }
+  });
+}
+
+// selecciona el espacio (visual)
+function seleccionarEspacio(i) {
+  document.querySelectorAll("#texto span").forEach(s => s.classList.remove("seleccionado"));
+  const span = document.querySelector(`#texto span[data-indice="${i}"]`);
+  if (!span) return;
+  span.classList.add("seleccionado");
+  indiceSeleccionado = Number(i);
+}
+
+function seleccionarSigno(signo) {
+  if (indiceSeleccionado !== null) {
+    const span = document.querySelector(`#texto span[data-indice="${indiceSeleccionado}"]`);
+    if (span) span.textContent = signo;
+  }
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+// función auxiliar: extrae los signos correctos (en el orden de los nulls)
+// asume que en "resuelto" la puntuación está pegada a la palabra previa
+function extraerSignosCorrectos(parrafo) {
+  const signos = [];
+  let idxResuelto = 0;
+  for (let i = 0; i < parrafo.incompleto.length; i++) {
+    if (parrafo.incompleto[i] === null) {
+      // signo asociado al hueco: buscar en el token resuelto anterior
+      const prev = parrafo.resuelto[idxResuelto - 1] || "";
+      const m = prev.match(/([.,;])$/);
+      signos.push(m ? m[1] : ""); // si no hay signo, empuja cadena vacía (error de datos)
+    } else {
+      idxResuelto++;
+    }
+  }
+  return signos;
+}
+
+function verificarTilde() {
+  // extraemos signos correctos en orden de los huecos
+  const signosCorrectos = extraerSignosCorrectos(parrafoActual);
+
+  const spans = Array.from(document.querySelectorAll("#texto span"));
+  // debug opcional:
+  // console.log('signosCorrectos', signosCorrectos, 'spans', spans.map(s=>s.textContent.trim()));
+
+  let acierto = true;
+  spans.forEach((span, idx) => {
+    const elegido = (span.textContent || "").trim();
+    const correcto = signosCorrectos[idx] || ""; // si no hay, queda ""
+    // marcar visualmente
+    span.classList.remove('err', 'ok');
+    if (elegido !== correcto) {
+      acierto = false;
+      span.classList.add('err');
+    } else {
+      span.classList.add('ok');
+    }
+  });
+
+  if (acierto) {
+    correctos++;
+    try { sonidoCorrecto.play(); } catch(e){}
+  } else {
+    incorrectos++;
+    try { sonidoIncorrecto.play(); } catch(e){}
+  }
+
+  document.getElementById("correctos").textContent = correctos;
+  document.getElementById("incorrectos").textContent = incorrectos;
+
+  // esperar 700ms para que el usuario vea la marca ok/err y luego siguiente
+  setTimeout(() => {
+    mostrarParrafo();
+  }, 700);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota = "F";
+  if (resultadoFinal >= 4) nota = "A";
+  else if (resultadoFinal >= 3) nota = "B";
+  else if (resultadoFinal >= 2) nota = "C";
+  document.getElementById('puntajeFinal').innerText = resultadoFinal;
+  document.getElementById('nota').innerText = nota;
+  document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+  window.location.href = "Espagames.html";
+}
+
+window.onload = () => {
+  iniciarTemporizador();
+  mostrarParrafo();
+};
+</script>
+
+</body>
+</html>

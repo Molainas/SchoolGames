@@ -1,0 +1,246 @@
+body{background-color: #FE8330;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 625px;
+display: flex;
+justify-content: space-around;
+}
+
+.empezar{border: 1px solid #FE8330;
+background-color: #FE8330;
+color: white;
+font-family: cursive;
+font-size: 30px;
+height: 50px;
+width: 200px;
+border-radius: 50px;}
+
+.cubo1{
+width: 80%;
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+align-items: center;}
+
+.derecho{
+width: 200px;}
+
+.casa{
+width: 67%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.baño{border: 1px solid #FE8330; 
+height: 150px;
+width: 70px;
+background-image: url(../imagenes/bano1.png);
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-family: cursive;
+font-size: 10px;
+color: purple;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.sala{border: 1px solid #FE8330; 
+height: 200px;
+width: 400px;
+background-image: url(../imagenes/sala1.png);
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-family: cursive;
+font-size: 15px;
+color: purple;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.cocina{border: 1px solid #FE8330; 
+height: 150px;
+width: 70px;
+background-image: url(../imagenes/cocina1.png);
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-family: cursive;
+font-size: 15px;
+color: purple;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.recamara{border: 1px solid #FE8330; 
+height: 100px;
+width: 200px;
+font-family: cursive;
+font-size: 15px;
+color: purple;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.jardin{border: 1px solid #FE8330; 
+height: 50px;
+width: 300px;
+background-image: url(../imagenes/jardin1.png);
+background-repeat: no-repeat;
+background-size: 100% 100%;
+font-family: cursive;
+font-size: 15px;
+color: purple;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.acomodacion{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.acomodacion1{
+height: 106px;
+width: 200px;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.izquierdo{
+width: 200px;}
+
+.cubo2{
+width: 20%;
+display: flex;
+align-items: center;
+flex-direction: column;}
+
+.tiempo{border: 1px solid #FE8330; 
+height: 100px;
+width: 100%;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.texto{border: 3px solid purple;
+border-radius: 50px;
+color: purple;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 70px;
+width: 220px;
+margin-left: 7px;
+margin-right: 7px;
+margin-top: 5px;}
+
+.img1{height: 270px;
+width: 100%;}
+
+.verificacion{border: 1px solid #FE8330;
+background-color: white;
+color: purple;
+font-family: cursive;
+font-size: 20px;
+height: 100px;
+width: 100%;}
+
+.puntos{border: 1px solid #FE8330;
+display: flex;
+align-items: center;
+justify-content: space-around;
+height: 100px;
+width: 100%;
+}
+
+.correcto{border: 1px solid #FE8330;
+height: 60px;
+width: 60px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid #FE8330;
+height: 60px;
+width: 60px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: #FE8330;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.caja1{
+height: 215px;
+width: 100%;
+display: flex;}
+
+.caja{
+width: 19.8%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;}
+
+.cosas{cursor: grab;
+            width: 80px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background-color: #FE8330;
+            border: 1px solid #FE8330;
+            color: white;
+}
+
+.res{display:none; 
+    position: fixed; 
+    top: 66%; 
+    left: 40%; 
+    transform: translate(-50%, -50%); 
+    background: #FE8330; 
+    height: 400px;
+    width: 550px;
+    border: 2px solid purple; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid #FE8330;
+background-color: white;
+color: purple;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FE8330;
+background-color: white;
+color: purple;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 550px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>NUMEROS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Yo soy el contador de rocas de esta parte la ciudad, mi trabajo es contar las rocas cerca del desierto y registrar cada monton en el lugar registrado en mi tabla 
+		  </li>
+
+		  <li>
+		      Pero puede ser tardado, pero como estas aqui sera mas rapido y no sera tan pesado, yo voy a contar las rocas y tu registras la cantidad 
+		  </li>
+
+		  <li>
+		      Pero voy a decirtelos en ingles por lo que te doy mi libro para que estudies
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      memoriza los numeros y su pronumciado	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem2,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>
+           	los numeros del 11 al 20 se escriben de manera diferente el 11 12 13 pero los demas se escriben igual
+           </li>
+
+           <li>
+           	  Pero del 21 hasta el 100 se debe escribir dos numeros (21 - twenty one) y asi con los demas hasta al 100 (one hundred)
+           </li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen78.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Numeros2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

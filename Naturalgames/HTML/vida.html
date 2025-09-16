@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>VIDA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Es importante saber que las ciencias naturales es una materia acercada a la naturaleza y los seres vivios
+		  </li>
+
+		  <li>
+		      Pero es importante que no toda la naturalesa es un ser vivo, ojo no estoy diciendo que no pertecene a la naturaleza lo que no es un ser vivo,
+		      solo quiero que sepas que es un ser vivo y que no y para esto voy a pasar una carta y tu debes guardarla en su caja
+		  </li>
+
+		  <li>
+		      para que puedas saber que es un ser vivo primero lea en mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Puedes figarte en la imagen para identificar el ser vivo o el ser no vivo
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+            <li>
+            	Un ser vivo es un organismo que presenta las características fundamentales de la vida, como la capacidad de reproducirse, crecer, responder a estímulos y mantener su homeostasis. Los seres vivos incluyen a todas las plantas, animales, hongos, protistas y bacterias.
+            </li>
+
+            <img src="../imagenes/images.jpg" class="tablero">
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <li>
+            	Los seres no vivos son aquellos que no poseen vida y no realizan las funciones vitales que caracterizan a los seres vivos, como nacer, crecer, reproducirse y morir. Ejemplos de seres no vivos son las rocas, el agua, el aire, la arena, los minerales, los objetos hechos por el hombre (como juguetes, mesas, etc.) y cualquier cosa que no pertenezca a un organismo vivo. 
+            </li>
+
+            <img src="../imagenes/images2.jpg" class="tablero">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/vida.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba1.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

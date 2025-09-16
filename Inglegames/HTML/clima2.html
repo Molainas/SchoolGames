@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inglegames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CLIMA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Tengo mucha ropa como para toda la vida, de todos los tipos de ropa que existen, pero solo utilizo la ropa adecuada de acuerdo al clima y la estacion porque no toda la ropa esta hecha para todo
+		  </li>
+
+		  <li>
+		      Vas a mirar en la ventana y luego escoje la ropa correcta dentro del closet
+		  </li>
+
+		  <li>
+		      En el libro esta solo el nombre de las estaciones pero de la ropa tendras que saber
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Practica varias veces hasta que lo logres	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem5,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>Hay temas en el idioma inglés que son fundamentales para mantener cualquier conversación y las estaciones del año es uno de ellos.</li>
+
+           <li>Tanto por si quieres lucirte en tu viaje de vacaciones de verano diciendo "Let's go to the beach", como si tienes que pedir la ropa adecuada para la temporada de invierno a un nativo. Este tipo de vocabulario en inglés es útil en cualquier parte del mundo.</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+           
+           <div class="cubiculo">
+
+           <div class="cubi">
+
+           <li><h2>Spring - primavera</h2></li>
+
+           <img src="../imagenes/primavera.png" class="img3">
+
+           </div>
+
+           <div class="cubi">
+
+           <li><h2>Summer - verano</h2></li>
+
+           <img src="../imagenes/verano.png"
+           class="img3">
+
+           </div>
+
+           </div>
+
+           <div class="cubiculo">
+
+           <div class="cubi">
+         
+           <li><h2>Autumn - otoño</h2></li>
+
+           <img src="../imagenes/otoño.png"
+           class="img3">
+
+           </div>
+
+           <div class="cubi">
+
+            <li><h2>Winter - invierno</h2></li>
+
+           <img src="../imagenes/invierno.png"
+           class="img3">
+
+           </div>
+
+           </div>
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/clima2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba5,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Inglegames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

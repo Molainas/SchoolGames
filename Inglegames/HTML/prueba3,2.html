@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head>
+<body>
+<div class="cubo">
+    <div class="cubo1">
+        <div class="cubo2">
+            <div class="pequeñin">
+                <img src="../imagenes/imagen456.png" class="peque">
+                <div class="mezcla" id="mezcla"></div>
+                <div class="mezcla-final" id="mezclaFinal"></div>
+            </div>
+        <div class="cubo3">
+            <div class="colores">
+                <button class="color" onclick="seleccionarColor('yellow')" style="background-color: yellow;"></button>
+                <button class="color" onclick="seleccionarColor('white')" style="background-color: white;"></button>
+                <button class="color" onclick="seleccionarColor('black')" style="background-color: black;"></button>
+                <button class="color" onclick="seleccionarColor('red')" style="background-color: red;"></button>
+                <button class="color" onclick="seleccionarColor('blue')" style="background-color: blue;"></button>
+                <button class="color" onclick="seleccionarColor('green')" style="background-color: green;"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cubo4">
+        <div class="correcto">C: <span id="correctos">0</span></div>
+        <div class="tiempo" id="tiempo">3:30</div>
+        <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+        <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba3,2.css");
+</style>
+
+
+<script>
+    let tiempo = 210;
+    let interval;
+    let correctos = 0;
+    let incorrectos = 0;
+    let colorCorrecto;
+    let seleccionados = [];
+
+    const sonidosColores = {
+        "purple": { mezcla: ["red", "blue"], resultado: "purple" },
+        "orange": { mezcla: ["red", "yellow"], resultado: "orange" },
+        "gray": { mezcla: ["black", "white"], resultado: "gray" },
+        "brown": { mezcla: ["red", "green"], resultado: "brown" },
+        "pink": { mezcla: ["red", "white"], resultado: "pink" },
+    };
+
+    // Precargar voces al iniciar
+    let vozMasculina;
+    window.speechSynthesis.onvoiceschanged = () => {
+        const voces = speechSynthesis.getVoices();
+        vozMasculina = voces.find(v => v.lang === "en-US" && v.name.toLowerCase().includes("male")) || 
+                       voces.find(v => v.lang === "en-US"); // Fallback a cualquier voz en inglés
+    };
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 210;
+        document.getElementById("tiempo").innerText = "3:30";
+        clearInterval(interval);
+        iniciarTemporizador();
+        reproducirAudio();
+    }
+
+    function reproducirAudio() {
+        const colores = Object.keys(sonidosColores);
+        colorCorrecto = colores[Math.floor(Math.random() * colores.length)];
+
+        const utterance = new SpeechSynthesisUtterance(colorCorrecto);
+        utterance.lang = "en-US";
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        if (vozMasculina) {
+            utterance.voice = vozMasculina;
+        }
+
+        speechSynthesis.speak(utterance);
+    }
+
+    function seleccionarColor(color) {
+        if (seleccionados.length < 2) {
+            seleccionados.push(color);
+            actualizarMezcla();
+        }
+        if (seleccionados.length === 2) {
+            verificarColor();
+        }
+    }
+
+    function actualizarMezcla() {
+        const mezclaDiv = document.getElementById("mezcla");
+        mezclaDiv.innerHTML = seleccionados.map(c => `<div style='width: 100%; height: 100%; background-color: ${c}; display: inline-block;'></div>`).join('');
+    }
+
+    function verificarColor() {
+        let mezclaCorrecta = [...sonidosColores[colorCorrecto].mezcla];
+        seleccionados.sort();
+        mezclaCorrecta.sort();
+
+        if (JSON.stringify(seleccionados) === JSON.stringify(mezclaCorrecta)) {
+            correctos++;
+            document.getElementById("correctos").innerText = correctos;
+            mostrarMezclaFinal(sonidosColores[colorCorrecto].resultado);
+        } else {
+            incorrectos++;
+            document.getElementById("incorrectos").innerText = incorrectos;
+        }
+
+        seleccionados = [];
+        actualizarMezcla();
+        setTimeout(reproducirAudio, 1000);
+    }
+
+    function mostrarMezclaFinal(color) {
+        const mezclaFinalDiv = document.getElementById("mezclaFinal");
+        mezclaFinalDiv.innerHTML = `<div style='width: 100px; height: 100px; background-color: ${color}; display: inline-block; margin: 5px;'></div>`;
+    }
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames2.html";
+    }
+</script>
+
+
+</body>
+</html>

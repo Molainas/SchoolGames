@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CALCULACIONES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      ahora vamos a contar cuantos pasteles sobraron despues de la venta que tuvimos anteriormente
+		  </li>
+
+		  <li>
+		      pero para hacerlo mas facil voy a escoger dos pasteles del mismo tipo para obtener un pastel mas grande y mas ordenado y tambien quitar los que se pudrieron, aunque no todos seran iguales
+		  </li>
+
+		  <li>
+		      Para eso necesito que sepas sobre las operaciones de suma y resta cuando son dos denominadores distintos
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      solo piensa que es una operacion normal	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem8,2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+           <li>
+               La suma y la resta de fracciones con diferente denominador se puede resolver de la siguiente manera, se multiplica en cruz y luego se suma o se resta los numeradores, el pero el denominador se multiplica con el otro denominador
+           </li>
+
+           <li>
+           	   Pero eso solo sucede en la suma y la resta, en la multiplicacion y divicion no es necesario
+           </li>
+
+        </ul>
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+        
+           <img src="../imagenes/imagen56.png" class="img3">
+           <img src="../imagenes/imagen57.png" class="img3">
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/calculaciones2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba8,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+
+  <div class="cubo2">
+    <div class="imagen">
+      <div class="pequeñin1"><img src="../imagenes/pequenin7891.png" class="pequeñin"></div>
+      <div class="situacion"><canvas id="canvas" width="803" height="347"></canvas></div>
+      <div class="pequeñin2"><img src="../imagenes/pequenin7892.png" class="pequeñin"></div>
+    </div>
+
+    <div class="objetos">
+      <div class="colector" onclick="verificarRespuesta(1)"><img src="../imagenes/colector1.png" class="img"></div>
+      <div class="colector" onclick="verificarRespuesta(2)"><img src="../imagenes/colector2.png" class="img"></div>
+      <div class="colector" onclick="verificarRespuesta(3)"><img src="../imagenes/colector3.png" class="img"></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+ <style>
+    @import url("../CSS/prueba7.css");
+  </style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+const estados = [
+  { nombre: "JARDIN DE ROCAS", colector: 1, dibujo: dibujarRoca },
+  { nombre: "RIO", colector: 2, dibujo: dibujarRio },
+  { nombre: "NUBES", colector: 3, dibujo: dibujarNube }
+];
+
+let estadoActual = null;
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText = 
+        `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+// === DIBUJOS ===
+
+function dibujarRoca(ctx) {
+  // Fondo césped
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  // Césped detallado con rectángulos verdes oscuros
+  for (let i = 0; i < 200; i++) {
+    let x = Math.random() * ctx.canvas.width;
+    let y = 200 + Math.random() * 100;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, y, 3, 20);
+  }
+
+  // Varias rocas grises
+  for (let i = 0; i < 6; i++) {
+    let x = 100 + i * 100;
+    let y = 200 + Math.random() * 50;
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.ellipse(x, y, 40, 25, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  
+}
+
+function dibujarRio(ctx) {
+  // Fondo césped
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  // Río azul serpenteante
+  ctx.beginPath();
+  ctx.moveTo(0, 150);
+  ctx.bezierCurveTo(200, 100, 400, 200, 800, 150);
+  ctx.lineTo(800, 344);
+  ctx.lineTo(0, 344);
+  ctx.closePath();
+  ctx.fillStyle = "green";
+  ctx.fill();
+
+  // Líneas blancas (olas del agua)
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 6; i++) {
+    let y = 170 + i * 25;
+    ctx.beginPath();
+    ctx.moveTo(20, y);
+    for (let x = 20; x < ctx.canvas.width; x += 40) {
+      ctx.quadraticCurveTo(x + 10, y - 5, x + 20, y);
+      ctx.quadraticCurveTo(x + 30, y + 5, x + 40, y);
+    }
+    ctx.stroke();
+  }
+
+ 
+}
+
+
+function dibujarNube(ctx) {
+  // Cielo azul
+  ctx.fillStyle = "yellow";
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  // Varias nubes blancas
+  for (let i = 0; i < 5; i++) {
+    let x = 100 + i * 140;
+    let y = 80 + Math.random() * 40;
+    ctx.beginPath();
+    ctx.arc(x, y, 30, 0, Math.PI * 2);
+    ctx.arc(x + 40, y + 10, 35, 0, Math.PI * 2);
+    ctx.arc(x + 80, y, 30, 0, Math.PI * 2);
+    ctx.fillStyle = "green";
+    ctx.fill();
+  }
+
+  // Suelo verde
+  ctx.fillStyle = "green";
+  ctx.fillRect(0, 300, ctx.canvas.width, 44);
+}
+
+// === FIN DIBUJOS ===
+
+function mostrarEstadoAleatorio() {
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  // Animación ligera
+  canvas.classList.add("animate");
+  setTimeout(() => canvas.classList.remove("animate"), 300);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const indice = Math.floor(Math.random() * estados.length);
+  estadoActual = estados[indice];
+
+  // Dibuja el objeto en canvas
+  estadoActual.dibujo(ctx);
+
+  // Texto del estado
+  ctx.font = "20px Cursive";
+  ctx.fillStyle = "green";
+  ctx.textAlign = "center";
+  ctx.fillText(estadoActual.nombre.toUpperCase(), canvas.width / 2, 30);
+}
+
+ const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+
+function verificarRespuesta(colectorSeleccionado) {
+  if (!estadoActual) return;
+  if (colectorSeleccionado === estadoActual.colector) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play(); 
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+  mostrarEstadoAleatorio();
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames.html";
+}
+
+function iniciarJuego() {
+  iniciarTemporizador();
+  mostrarEstadoAleatorio();
+}
+
+window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

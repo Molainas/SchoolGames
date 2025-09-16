@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="sistema">
+      <canvas></canvas>
+    </div>
+    <div class="planetas">
+      <canvas></canvas>
+    </div>
+  </div>
+
+  <div class="cubo2">
+    <img class="pequeñin" src="../imagenes/peque98762.png">
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="puntos">
+      <div class="correcto">C: <span id="correctos">0</span></div>
+      <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<div id="modalLunas" class="modal">
+  <div class="modal-contenido">
+    <h3 id="tituloModal"></h3>
+    <input type="number" id="respuestaLunas" placeholder="Escribe la cantidad">
+    <div class="botones">
+      <button onclick="confirmarLunas()">Aceptar</button>
+      <button onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba9,2.css");
+  </style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+function iniciarTemporizador() {
+  interval = setInterval(function () {
+    if (tiempo > 0) {
+      tiempo--;
+      let minutos = Math.floor(tiempo / 60);
+      let segundos = tiempo % 60;
+      document.getElementById('tiempo').innerText = 
+        `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById('puntajeFinal').innerText = `${resultadoFinal}`;
+  document.getElementById('nota').innerText = nota;
+  document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+  window.location.href = "Naturalgames2.html";
+}
+
+// ================= SISTEMA SOLAR ==================
+const canvasSistema = document.querySelector(".sistema canvas");
+const ctxSistema = canvasSistema.getContext("2d");
+canvasSistema.width = 659;
+canvasSistema.height = 607;
+
+const canvasPlanetas = document.querySelector(".planetas canvas");
+const ctxPlanetas = canvasPlanetas.getContext("2d");
+canvasPlanetas.width = 150;
+canvasPlanetas.height = 500;
+
+const centroX = canvasSistema.width / 2;
+const centroY = canvasSistema.height / 2;
+
+// 🚀 Planetas con cantidad de lunas
+const todosLosPlanetas = [
+  { nombre: "Mercurio", color: "green", radio: 5, distancia: 80, lunas: 0 },
+
+  { nombre: "Venus", color: "green", radio: 7, distancia: 95, lunas: 0 },
+
+  { nombre: "Tierra", color: "green", radio: 8, distancia: 115, lunas: 1 },
+
+  { nombre: "Marte", color: "green", radio: 7, distancia: 135, lunas: 2 },
+
+  { nombre: "Júpiter", color: "green", radio: 14, distancia: 160, lunas: 95 },
+
+  { nombre: "Saturno", color: "green", radio: 13, distancia: 185, lunas: 146 },
+
+  { nombre: "Urano", color: "green", radio: 11, distancia: 210, lunas: 28 },
+
+  { nombre: "Neptuno", color: "green", radio: 11, distancia: 235, lunas: 16 }
+];
+
+let planetasSistema = [];
+let planetasFaltantes = [];
+let planetasDisponibles = [];
+let planetaSeleccionado = null;
+let planetaPendiente = null; // 👈 Para el modal
+
+function iniciarJuego() {
+  planetasSistema = [];
+  planetasDisponibles = [];
+  ctxSistema.clearRect(0, 0, canvasSistema.width, canvasSistema.height);
+  ctxPlanetas.clearRect(0, 0, canvasPlanetas.width, canvasPlanetas.height);
+
+  // Elegir 3 faltantes al azar
+  const copia = [...todosLosPlanetas];
+  planetasFaltantes = [];
+  for (let i = 0; i < 3; i++) {
+    const idx = Math.floor(Math.random() * copia.length);
+    planetasFaltantes.push(copia[idx]);
+    copia.splice(idx, 1);
+  }
+
+  // Guardar planetas en el sistema
+  todosLosPlanetas.forEach(p => {
+    const angulo = Math.random() * Math.PI * 2;
+    planetasSistema.push({
+      ...p,
+      angulo,
+      colocado: !planetasFaltantes.some(f => f.nombre === p.nombre)
+    });
+  });
+
+  // Planetas disponibles (faltantes)
+  planetasDisponibles = planetasFaltantes.map((p, i) => ({
+    ...p,
+    x: canvasPlanetas.width / 2,
+    y: 80 + i * 140
+  }));
+
+  dibujarSistema();
+  dibujarPlanetasDisponibles();
+}
+
+// Sistema solar
+function dibujarSistema() {
+  ctxSistema.clearRect(0, 0, canvasSistema.width, canvasSistema.height);
+
+  // Sol
+  ctxSistema.beginPath();
+  ctxSistema.arc(centroX, centroY, 40, 0, Math.PI * 2);
+  ctxSistema.fillStyle = "green";
+  ctxSistema.fill();
+  ctxSistema.fillStyle = "green";
+  ctxSistema.fillText("Sol", centroX - 15, centroY + 55);
+
+  // Órbitas y planetas
+  planetasSistema.forEach(p => {
+    ctxSistema.strokeStyle = "green";
+    ctxSistema.beginPath();
+    ctxSistema.arc(centroX, centroY, p.distancia, 0, Math.PI * 2);
+    ctxSistema.stroke();
+
+    const x = centroX + p.distancia * Math.cos(p.angulo);
+    const y = centroY + p.distancia * Math.sin(p.angulo);
+
+    if (p.colocado) {
+      // Planeta colocado
+      ctxSistema.beginPath();
+      ctxSistema.arc(x, y, p.radio, 0, Math.PI * 2);
+      ctxSistema.fillStyle = p.color;
+      ctxSistema.fill();
+      ctxSistema.fillStyle = "green";
+      ctxSistema.fillText(p.nombre, x - 20, y + p.radio + 12);
+
+      // 🌙 Lunas visibles
+      const maxLunas = Math.min(p.lunas, 5); 
+      for (let i = 0; i < maxLunas; i++) {
+        const ang = (i / maxLunas) * Math.PI * 2;
+        const lx = x + (p.radio + 12) * Math.cos(ang);
+        const ly = y + (p.radio + 12) * Math.sin(ang);
+
+        ctxSistema.beginPath();
+        ctxSistema.arc(lx, ly, 3, 0, Math.PI * 2);
+        ctxSistema.fillStyle = "green";
+        ctxSistema.fill();
+      }
+
+     
+
+    } else {
+      // HUECO
+      ctxSistema.beginPath();
+      ctxSistema.arc(x, y, p.radio + 4, 0, Math.PI * 2);
+      ctxSistema.strokeStyle = "green";
+      ctxSistema.setLineDash([4, 4]);
+      ctxSistema.stroke();
+      ctxSistema.setLineDash([]);
+    }
+  });
+}
+
+// Planetas disponibles
+function dibujarPlanetasDisponibles() {
+  ctxPlanetas.clearRect(0, 0, canvasPlanetas.width, canvasPlanetas.height);
+  planetasDisponibles.forEach(p => {
+    ctxPlanetas.beginPath();
+    ctxPlanetas.arc(p.x, p.y, p.radio, 0, Math.PI * 2);
+    ctxPlanetas.fillStyle = p.color;
+    ctxPlanetas.fill();
+    ctxPlanetas.fillStyle = "green";
+    ctxPlanetas.fillText(p.nombre, p.x - 25, p.y + p.radio + 20);
+  });
+}
+
+// ================= CLIC EN PLANETAS DISPONIBLES =================
+canvasPlanetas.addEventListener("click", e => {
+  const rect = canvasPlanetas.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+
+  planetaSeleccionado = null;
+  planetasDisponibles.forEach(p => {
+    const dx = mx - p.x, dy = my - p.y;
+    if (Math.sqrt(dx*dx + dy*dy) < p.radio) {
+      planetaSeleccionado = p;
+    }
+  });
+});
+
+// ================= CLIC EN EL SISTEMA =================
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+canvasSistema.addEventListener("click", e => {
+  if (!planetaSeleccionado) return;
+
+  const rectSistema = canvasSistema.getBoundingClientRect();
+  const mx = e.clientX - rectSistema.left;
+  const my = e.clientY - rectSistema.top;
+
+  const planetaSistema = planetasSistema.find(p => p.nombre === planetaSeleccionado.nombre);
+
+  if (planetaSistema) {
+    const esperado = planetaSistema.distancia;
+    const cx = centroX, cy = centroY;
+    const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
+
+    if (Math.abs(dist - esperado) < 25) {
+      // 👇 Abrir modal en lugar de prompt
+      abrirModal(planetaSistema);
+    } else {
+      incorrectos++;
+      document.getElementById("incorrectos").innerText = incorrectos;
+      sonidoIncorrecto.play();
+    }
+  }
+
+  dibujarSistema();
+  dibujarPlanetasDisponibles();
+});
+
+// ================= MODAL =================
+function abrirModal(planeta) {
+  planetaPendiente = planeta;
+  document.getElementById("tituloModal").innerText =
+    `¿Cuántas lunas tiene ${planeta.nombre}?`;
+  document.getElementById("respuestaLunas").value = "";
+  document.getElementById("modalLunas").style.display = "flex";
+}
+
+function cerrarModal() {
+  document.getElementById("modalLunas").style.display = "none";
+  planetaPendiente = null;
+  planetaSeleccionado = null;
+}
+
+function confirmarLunas() {
+  const respuesta = parseInt(document.getElementById("respuestaLunas").value);
+  if (respuesta === planetaPendiente.lunas) {
+    planetaPendiente.colocado = true;
+    planetasDisponibles = planetasDisponibles.filter(p => p !== planetaSeleccionado);
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play();
+
+    if (planetasDisponibles.length === 0) {
+      setTimeout(() => iniciarJuego(), 800);
+    }
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play();
+  }
+
+  cerrarModal();
+  dibujarSistema();
+  dibujarPlanetasDisponibles();
+}
+
+// ================= INICIO DEL JUEGO ==================
+function start() {
+  iniciarTemporizador();
+  iniciarJuego();
+}
+window.onload = start;
+</script>
+
+</body>
+</html>

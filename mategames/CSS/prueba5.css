@@ -1,0 +1,144 @@
+body{background-color: blue;}
+
+img{height: 100%;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 640px;}
+
+.cubo1{border: 3px solid blue; 
+height: 400px;
+display: flex;
+flex-direction:column ;
+justify-content: flex-start;
+align-items: center;}
+
+.pequeñin{
+height: 100px;}
+
+.numero{
+height: 120px;
+width: 300px;
+color: red;
+font-size: 120px;
+font-family: cursive;
+display: flex;
+justify-content: center;
+align-items: center;
+border: 1px solid #ffffbf;
+background-color: #ffffbf;
+}
+
+.cubo2{
+height: 300px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+background-image: url("../imagenes/fondo1,4.png");
+background-size: 50% 100%;
+width: 100%;}
+
+.mesa{
+height: 100%;}
+
+.cabaña{
+height: 100%;}
+
+.cubo3{
+height: 230px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}
+
+.botones1{
+display:flex; 
+align-items: center;
+justify-content: space-evenly;
+width: 250px;}
+
+.boton1{border: 1px solid blue;
+height: 60px;
+width: 80px;
+color: red;
+font-size: 20px;
+font-family: cursive;
+background-color: white;}
+
+.boton2{border: 1px solid blue;
+height: 60px;
+width: 120px;
+color:red;
+font-size: 20px;
+font-family: cursive;
+background-color: white;}
+
+.boton3{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.boton4{border: 1px solid blue;
+background-color: white;
+color: red;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.correcto{border: 3px solid blue;
+height: 200px;
+width: 200px;
+background-color: blue;
+color: white;
+font-size: 80px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.tiempo{border: 3px solid blue;
+background-color: blue;
+width: 300px;
+height: 200px;
+color: white;
+font-size: 50px;
+font-family: cursive;
+display: flex;
+justify-content: center;
+align-items: center;
+justify-content: space-around;
+flex-direction: column;}
+
+.res{display:none; 
+	position: fixed; 
+	top: 70%; 
+	left: 50%; 
+	transform: translate(-50%, -50%); 
+	background: blue; 
+	padding: 20px; 
+	border: 2px solid red; 
+	text-align: center; 
+	color: white; 
+	font-family: cursive;}
+
+.incorrecto{border: 3px solid blue;
+height: 200px;
+width: 200px;
+background-color: blue;
+color: white;
+font-size: 80px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;}

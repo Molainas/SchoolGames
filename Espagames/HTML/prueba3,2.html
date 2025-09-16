@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Espagames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="pequeñin">
+            <img src="../imagenes/pequenin472.png" class="img3">
+        </div>
+        <div class="texto" id="texto">
+             <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">Empezar</button>
+        </div>
+    </div>
+
+    <div class="cubo2">
+        <div class="subcubo">
+            <!-- Combinaciones con L -->
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="PL">PL</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="BL">BL</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="CL">CL</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="FL">FL</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="GL">GL</div>
+
+            <!-- Combinaciones con R -->
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="BR">BR</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="CR">CR</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="FR">FR</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="GR">GR</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="PR">PR</div>
+            <div class="cubito" draggable="true" ondragstart="arrastrarLetra(event)" data-letra="TR">TR</div>
+        </div>
+
+        <div class="subcubo">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="tiempo" id="tiempo">05:00</div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba3,2.css");
+</style>
+
+<script>
+    const palabras = [
+        // Combinaciones con L
+        { texto: "_OR", respuesta: "FL", palabraCompleta: "flor" },
+        { texto: "_ATO", respuesta: "PL", palabraCompleta: "plato" },
+        { texto: "_UMA", respuesta: "CL", palabraCompleta: "cluma" },
+        { texto: "_USA", respuesta: "BL", palabraCompleta: "blusa" },
+        { texto: "_OBO", respuesta: "GL", palabraCompleta: "globo" },
+
+        // Combinaciones con R
+        { texto: "_OTO", respuesta: "BR", palabraCompleta: "broto" },
+        { texto: "_ECO", respuesta: "CR", palabraCompleta: "creco" },
+        { texto: "_EGA", respuesta: "FR", palabraCompleta: "frega" },
+        { texto: "_ITO", respuesta: "GR", palabraCompleta: "grito" },
+        { texto: "_ESO", respuesta: "PR", palabraCompleta: "preso" },
+        { texto: "_ENO", respuesta: "TR", palabraCompleta: "treno" }
+    ];
+
+    let correctos = 0;
+    let incorrectos = 0;
+    let tiempo = 300;
+    let interval;
+    let juegoActivo = false;
+
+    function iniciarTemporizador() {
+        interval = setInterval(() => {
+            if (tiempo > 0) {
+                tiempo--;
+                const minutos = Math.floor(tiempo / 60);
+                const segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = 
+                    `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+    function hablar(texto) {
+        const mensaje = new SpeechSynthesisUtterance(texto);
+        mensaje.lang = "es-ES";
+        speechSynthesis.cancel();
+        speechSynthesis.speak(mensaje);
+    }
+
+    function mostrarPalabra() {
+        const actual = palabras[Math.floor(Math.random() * palabras.length)];
+        document.getElementById('texto').innerText = actual.texto;
+        document.getElementById('texto').dataset.respuesta = actual.respuesta;
+        hablar(actual.palabraCompleta);
+    }
+
+    function verificarRespuesta(opcion) {
+        if (!juegoActivo) return;
+        const respuestaCorrecta = document.getElementById('texto').dataset.respuesta;
+        if (opcion === respuestaCorrecta) {
+            correctos++;
+            document.getElementById('correctos').innerText = correctos;
+        } else {
+            incorrectos++;
+            document.getElementById('incorrectos').innerText = incorrectos;
+        }
+        mostrarPalabra(); // sigue mostrando nuevas palabras hasta acabar el tiempo
+    }
+
+    function finalizarJuego() {
+        juegoActivo = false;
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota = "F";
+        if (resultadoFinal >= 4) nota = "A";
+        else if (resultadoFinal >= 3) nota = "B";
+        else if (resultadoFinal >= 2) nota = "C";
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Espagames2.html";
+    }
+
+    function iniciarJuego() {
+        if (juegoActivo) return; // evitar reinicios dobles
+        juegoActivo = true;
+        document.getElementById("btnEmpezar").style.display = "none";
+        iniciarTemporizador();
+        mostrarPalabra();
+    }
+
+    // Drag & Drop
+    function arrastrarLetra(event) {
+        event.dataTransfer.setData("letra", event.target.dataset.letra);
+    }
+
+    function permitirSoltar(event) {
+        event.preventDefault();
+    }
+
+    function soltarLetra(event) {
+        event.preventDefault();
+        quitarEstilo();
+        const letra = event.dataTransfer.getData("letra");
+        verificarRespuesta(letra);
+    }
+
+    function agregarEstilo() {
+        document.getElementById("texto").classList.add("sobre");
+    }
+
+    function quitarEstilo() {
+        document.getElementById("texto").classList.remove("sobre");
+    }
+</script>
+
+</body>
+</html>

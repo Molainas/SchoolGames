@@ -1,0 +1,195 @@
+body{background-color: green;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 615px;
+display: flex;
+}
+
+ canvas {
+      border: 1px solid yellow;
+      background-color: yellow;
+      display: block;
+    }
+
+
+.cubo1{
+width: 70%;
+display: flex;}
+
+.sistema{border: 3px solid green;
+width: 80%;}
+
+.planetas{border: 1px solid yellow;
+background-color: yellow;
+width: 20%;}
+
+.cubo2{
+width: 30%;
+display: flex;
+flex-direction: column;}
+
+.puntos{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	height: 100px;
+}
+
+.correcto{border: 1px solid green;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 70px;
+width: 70px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.verificacion{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+font-family: cursive;
+font-size: 30px;
+height: 100px;
+width: 100%;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 356px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.texto{border: 3px solid #FFF52D;
+border-radius: 50px;
+height: 100px;
+margin-top: 5px;
+margin-right: 5px;
+margin-left: 5px;
+margin-bottom: 5px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #FFF52D;
+font-family: cursive;
+font-size: 20px;
+}
+
+.pequeñin{width: 100%;
+height: 205px;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 83%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    height: 450px;
+    width: 400px;
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 400px;
+}
+
+ /* === Modal personalizado === */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-contenido {
+      background: green;
+      color: yellow;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+      font-family: cursive;
+    }
+
+    .modal-contenido h3 {
+      margin-bottom: 15px;
+    }
+
+    .modal-contenido input {
+      width: 80%;
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      text-align: center;
+      font-size: 16px;
+      font-family: cursive;
+    }
+
+    .modal-contenido .botones {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .modal-contenido .botones button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: yellow;
+      color: green;
+      font-size: 14px;
+      font-family: cursive; 
+    }
+
+    .modal-contenido .botones button:hover {
+      background: green;
+      color: yellow;
+
+    }

@@ -1,0 +1,167 @@
+body{background-color: red;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 640px;}
+
+.cubo1{border: 3px solid red; 
+height: 400px;
+display: flex;
+flex-direction:column ;
+justify-content: flex-start;
+align-items: center;
+background-image: url("../imagenes/fondo2,4.png");
+background-size: 50% 100%;
+}
+
+.pequeñin{
+height: 100px;}
+
+.peque{height: 100%;}
+
+.numero{
+height: 120px;
+width: 300px;
+color: blue;
+font-size: 100px;
+font-family: cursive;
+display: flex;
+justify-content: center;
+align-items: center;
+border: 1px solid #ffffbf;
+background-color: #ffffbf;
+}
+
+.cubo2{
+height: 270px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+width: 100%;}
+
+.mesa{
+height: 100%;}
+
+.mesita{height: 100%;}
+
+.cabaña{
+height: 100%;}
+
+.cabañita{height: 100%;}
+
+.abajo{
+display: flex;
+justify-content: center;
+width: 100%;
+height: 30px;}
+
+.basurita{height: 100%;
+width: 300px;
+}
+
+.cubo3{
+height: 230px;
+display: flex;
+justify-content: space-around;
+align-items: center;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}
+
+.botones1{
+display:flex; 
+align-items: center;
+justify-content: space-evenly;
+width: 350px;}
+
+.boton1{border: 1px solid red;
+height: 60px;
+width: 80px;
+color: blue;
+font-size: 20px;
+font-family: cursive;
+background-color: white;}
+
+.boton2{border: 1px solid red;
+height: 60px;
+width: 120px;
+color: blue;
+font-size: 20px;
+font-family: cursive;
+background-color: white;}
+
+.boton3{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.boton4{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.boton5{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 60px;
+width: 150px;
+font-family: cursive;
+font-size: 20px;}
+
+.correcto{border: 3px solid red;
+height: 200px;
+width: 200px;
+background-color: red;
+color: white;
+font-size: 80px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.tiempo{border: 3px solid red;
+background-color: red;
+width: 350px;
+height: 200px;
+color: white;
+font-size: 50px;
+font-family: cursive;
+display: flex;
+justify-content: center;
+align-items: center;
+justify-content: space-around;
+flex-direction: column;}
+
+.res{display:none; 
+	position: fixed; 
+	top: 70%; 
+	left: 50%; 
+	transform: translate(-50%, -50%); 
+	background: red; 
+	padding: 20px; 
+	border: 2px solid blue; 
+	text-align: center; 
+	color: white; 
+	font-family: cursive;}
+
+.incorrecto{border: 3px solid red;
+height: 200px;
+width: 200px;
+background-color: red;
+color: white;
+font-size: 80px;
+font-family: cursive;
+display: flex;
+align-items: center;
+justify-content: center;}

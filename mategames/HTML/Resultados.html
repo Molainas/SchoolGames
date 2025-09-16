@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>EJERCICIOS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+				
+            <li>
+            	Ahora que ya tienes conocimiento sobre los operadores, que tal si hacemos unos ejercicios, yo te digo y tu respondes es asi de simplie
+            </li>
+
+            <li>
+            	si tienes problemas con los operadores, no te preocupes tengo el conocimiento aqui en mi libro
+            </li>
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+            
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+            <li>
+            	¿recuerdas las tablas que te di?
+            </li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem4.gif" class="img4"></div>
+		<div class="botones">
+        <button class="boton2" onclick="ir()">EMPEZAR</button>
+        <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+            </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        	<ul>
+        		<li>La suma o adición es una operación matemática fundamental, que consiste en la incorporación de nuevos elementos a un conjunto numérico, esto es, a la fusión de dos números para obtener uno nuevo, que exprese el valor total de los dos anteriores.</li>
+
+        		<li>A los niños podemos explicarles que sumar es juntar 2 o más cosas para saber cuántas hay en total, pueden sumar con los dedos en una mano ponemos 2 palos y en la otra 3 palos, sumamos todos los dedos que tenemos: 2 palos + 3 palos, es igual a 5 palos.</li>
+                          <div class="rt">
+        		<img src="../imagenes/sumar.png" class="img2">
+        	          </div>
+        	</ul>
+
+        	<ul>
+        		<li>La resta o sustracción es una de las cuatro operaciones básicas de la aritmética y consiste en quitar una cantidad a otra, sustraer un determinado número de elementos a un conjunto.</li>
+
+        		<li>si tienes 5 corazones de chocolate y tu amigo se comió 3 corazones, mediante la resta podemos averiguar la cantidad de corazones de chocolate restantes: 5 - 3 = 2</li>
+
+                        <div class="rt">
+                    <img src="../imagenes/restar.png" class="img2">
+                        </div>
+        	</ul>
+          
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+        		<li>Las multiplicaciones son operaciones matemáticas que se realizan para calcular el resultado de sumar un número tantas veces como indique el otro número que compone la operación, por ejemplo:</li>
+                           <div class="rt">
+                        <img src="../imagenes/multiplicacion.png" class="img2">
+                            </div>
+        		<li>Esta operación la podemos expresar como:</li>
+                             <div class="rt">
+                        <img src="../imagenes/ejemplo.png" class="img2">
+                             </div>
+        	</ul>
+
+        	<ul>
+        		<li>La división es una de las operaciones básicas de la aritmética y consiste en separar en partes iguales un total. Es decir, si tenemos una cantidad y queremos dividirla en partes iguales, podemos utilizar la división para determinar cuántas partes iguales obtenemos y qué cantidad corresponde a cada parte.</li>
+
+        		<li>La división es la operación contraria a la multiplicación. Por lo tanto, para saber si una división es correcta, se puede multiplicar el resultado, también llamado cociente, por el divisor. Por ejemplo:
+
+10 ÷ 5 = 2, por lo tanto, 2 x 5 = 10, la división es correcta.</li>
+    <div class="rt">
+<img src="../imagenes/division.png" class="img2"> 
+<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+</div>
+        	</ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+    @import url("../CSS/Resultados.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba4.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

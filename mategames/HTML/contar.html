@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CONTAR</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		  	estoy en mi carro tocando musica miestras condusco y ahora que lo pienso necesito que cuentes las personas que viven el la casas que paso una por una para saber si las personas escucharon mi musica hasta que acabe el tiempo
+		  </li>
+
+		  <li>
+		  	es facil, tienes que escribier el la respuesta el la eticica donde cerca del boton de verificar, una vez escrito puedes verificar tu respuesta usando el boton "verificar"
+		  </li>
+
+		  <li>
+		  	si has acertado ganaras un punto correcto, pero si fallas ganaras un punto incorrecto, hay que recorda que el puntaje final no importa cuantos puntos correctos tengas si tienes puntos incorrectos eso perfudicara tu puntaje
+		  </li>
+
+		  <li>
+		  	si necesitas informacion acerca de contar puedes consultar aqui en mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+				si te dificulca contar en uno en uno, puedes contar en fila en fila si ya sabes cual es la cantidad de la fila
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem1.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <p>Contar es una acción tan común que al hacerlo no nos damos cuenta. Sin embargo, este conocimiento es la base para el aprendizaje de conceptos y operaciones matemáticas. Para los pequeños aprender a contar no es solo recitar los números, es comprender 4 puntos esenciales:</p>
+
+<ul>
+<li>Los números tienen una secuencia preestablecida.</li>
+<li>Cuando se cuentan objetos, solo se puede contar uno y solo una vez por objeto.</li>
+<li>Cada número representa una cantidad o valor.</li>
+<li>El último número que se cuenta representa la cantidad total del conjunto.</li>
+</ul>
+
+<p>Si bien los niños pueden recitar los números desde los 2 años, la mayoría no son capaces de identificarlos o escribirlos hasta los 4 o 5 años. Para enseñarle a nuestros pequeños a contar es importante iniciarlos con los números de 1 a 5 avanzando hasta el 10, asociando los números con las cantidades, haciendo agrupaciones sencillas y utilizando vocabulario básico de cantidad como “más y menos”.</p>
+        </div>
+        <div class="mucho-texto2">
+        	<img src="../imagenes/imagen1.png" class="tablero">
+        	<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/contar.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba1.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

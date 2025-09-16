@@ -1,0 +1,195 @@
+body{background-color: red;}
+
+button{border: 1px solid red;
+background-color: white;
+color: blue;
+height: 70px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;
+}
+
+img{height: 180px;}
+
+.cubo{background-color: white;
+border: 1px solid white;
+height: 640px;}
+
+.cubo1{border: 3px solid red;
+background-image: url("../imagenes/fondo2.png");
+background-repeat: no-repeat;
+background-size: 70% 100%;
+background-position: center;
+height: 400px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+.game{
+    height: 400px;
+    width: 800px;
+    display: flex;
+justify-content: space-around;
+align-items: center;
+flex-direction: column;
+}
+
+.imagen{
+    width: 200px; 
+height: 100%;
+display: flex;
+align-items:center; 
+justify-content: center;
+}
+
+.cubo2{
+width: 800px;
+display: flex;
+justify-content: center;}
+
+.cubo3{
+width: 800px;
+display: flex;
+align-items: center;
+flex-direction: column;}
+
+.arriba{border: 3px solid red;
+background-color: white;
+color: blue;
+font-family: cursive;
+justify-content: space-around;
+width: 800px;
+display: flex;
+font-size: 50px;}
+
+
+
+ .fila {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: flex-end;
+            height: 65px;
+            width: 800px;
+        }
+        .mini-cubos {
+            width: 60px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            margin: 1px;
+        }
+        .mini-cubo {
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            margin: 2px;
+        }
+
+.cubito{border: 2px solid red;
+background-color: white;
+height: 60px;
+width: 60px;
+font-family: cursive;
+font-size: 30px;
+color: blue;
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: bold;}
+
+.cubo4{border: 3px solid red;
+height: 228px;
+display: flex;
+justify-content: space-evenly;
+align-items: center;}
+
+.unidad{
+display: flex;
+justify-content: space-around;
+align-items: center;
+width: 650px;}
+
+.respuesta{border: 1px solid white;
+width: 90px;
+height: 90px;
+color: blue;
+background-color: white;
+font-size: 18px;
+font-family: cursive;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: space-between;}
+
+.num{border: 1px solid red;
+background-color: white;
+color: white;
+background-color: red;
+height: 90px;
+width: 20px;
+font-family: cursive;
+font-size: 20px;
+display: flex;
+justify-content: center;
+align-items: center;}
+
+.correcto{border: 1px solid red;
+height: 200px;
+width: 200px;
+background-color: red;
+color: white;
+font-family: cursive;
+font-size: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.tiempo{border: 1px solid red;
+height: 220px;
+width: 700px;
+display: flex;
+justify-content: center;
+align-items: center;
+justify-content: space-evenly;
+flex-direction: column;
+background-color: red;
+color: white;
+font-family: cursive;
+font-size: 40px;}
+
+.res{display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: red; 
+    width: 500px;
+    padding: 120px; 
+    border: 2px solid blue; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+font-size: 30px;}
+
+.incorrecto{border: 1px solid red;
+height: 200px;
+width: 200px;
+background-color: red;
+color: white;
+font-family: cursive;
+font-size: 50px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.botones{width: 500px;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;}

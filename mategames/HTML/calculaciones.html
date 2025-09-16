@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CALCULACIONES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      ahora vamos a contar cuantos pasteles sobraron despues de la venta que tuvimos anteriormente
+		  </li>
+
+		  <li>
+		      pero para hacerlo mas facil voy a escoger dos pasteles del mismo tipo para obtener un pastel mas grande y mas ordenado y tambien quitar los que se pudrieron
+		  </li>
+
+		  <li>
+		      Para eso necesito que sepas sobre las operaciones con fracciones, puedes usar mi libro si tu quieres
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      solo piensa que es una operacion normal	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem8.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+           <li>
+               La suma de fracciones con el mismo denominador o también conocida como suma de fracciones homogéneas es el procedimiento más simplificado y sencillo, ya que el proceso de la suma se basa en sumar los numeradores y el denominador se mantiene igual.
+           </li>
+
+           <img src="../imagenes/imagen45.png" class="img3">
+
+           <li>
+               La resta de fracciones con el mismo denominador o también conocida como resta de fracciones homogéneas es el procedimiento más simplificado y sencillo, ya que el procedimiento de la resta se basa en restar los numeradores y el denominador se mantiene igual.	
+           </li>
+
+           <img src="../imagenes/imagen46.png" class="img3">
+
+        </ul>
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+           <li>
+               Cuando se multiplican fracciones, se empieza por las dos fracciones que se quieren multiplicar. Se multiplican los numeradores (los números de arriba) juntos, y luego se multiplican los denominadores (los números de abajo) juntos.	
+           </li>
+
+           <img src="../imagenes/imagen47.png" class="img3">
+           <li>
+           	Para dividir fracciones, se puede multiplicar la primera fracción por el recíproco de la segunda, o usar el método de los productos cruzados. 
+           </li>
+
+           <img src="../imagenes/imagen48.png" class="img3">
+
+   </ul>
+        	<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/calculaciones.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba8.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

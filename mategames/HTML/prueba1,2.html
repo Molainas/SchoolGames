@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mategames</title>
+</head>
+<body>
+    <div class="cubo">
+        <div class="game">
+            <div class="fila">
+                <div class="casa">
+                    <img src="../imagenes/casa2.png" alt="Casa">
+                    <div class="personas-container" id="casa1"></div>
+                    <h3>1</h3>
+                </div>
+                <div class="casa">
+                    <img src="../imagenes/casa2.png" alt="Casa">
+                    <div class="personas-container" id="casa2"></div>
+                    <h3>2</h3>
+                </div>
+            </div>
+            <div class="pequeñin"><img src="../imagenes/pequeñin1,2.png" class="peque"></div>
+            <div class="fila">
+                <div class="casa">
+                    <img src="../imagenes/casa2.png" alt="Casa">
+                    <div class="personas-container" id="casa3"></div>
+                    <h3>3</h3>
+                </div>
+                <div class="casa">
+                    <img src="../imagenes/casa2.png" alt="Casa">
+                    <div class="personas-container" id="casa4"></div>
+                    <h3>4</h3>
+                </div>
+            </div>
+        </div>
+            <div class="teclado">
+                <div class="numero">
+                    <input id="respuestaCasa1" type="number" placeholder="1">
+                    <input id="respuestaCasa2" type="number" placeholder="2">
+                    <input id="respuestaCasa3" type="number" placeholder="3">
+                    <input id="respuestaCasa4" type="number" placeholder="4">
+                </div>
+                <button class="boton1" onclick="verificarRespuesta()">Verificar</button>
+            
+
+            <div class="puntos">
+                <div class="correcto">C: <span id="correctos">0</span></div>
+                <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+            </div>
+
+            <div class="tiempo" id="tiempo">1:00</div>
+        </div>
+
+        <div id="resultado" class="res">
+            <h2>Juego terminado</h2>
+            <p>Puntuación final: <span id="puntajeFinal"></span></p>
+            <p>Nota: <span id="nota"></span></p>
+            <div class="botones">
+                <button class="boton2" onclick="location.reload()">Reiniciar</button>
+                <button class="boton2" onclick="salir()">Escoger otro</button>
+            </div>
+        </div>
+    </div>
+
+<style>
+    @import url("../CSS/prueba1,2.css")
+</style>
+
+    <script>
+        let correctos = 0;
+        let incorrectos = 0;
+        let tiempo = 60; 
+        let interval;
+        let personasPorCasa = {}; 
+
+        
+        function generarPersonas() {
+            const casas = ["casa1", "casa2", "casa3", "casa4"];
+            casas.forEach(casa => {
+                const numPersonas = Math.floor(Math.random() * 6) + 1;
+                personasPorCasa[casa] = numPersonas; 
+
+                const container = document.getElementById(casa);
+                container.innerHTML = ''; 
+
+                for (let i = 0; i < numPersonas; i++) {
+                    const imgPersona = document.createElement('img');
+                    imgPersona.src = '../imagenes/persona2.png';
+                    imgPersona.style.top = `${Math.random() * 60}%`;
+                    imgPersona.style.left = `${Math.random() * 60}%`;
+                    container.appendChild(imgPersona);
+                }
+            });
+        }
+
+        
+        function iniciarTemporizador() {
+            interval = setInterval(function() {
+                if (tiempo > 0) {
+                    tiempo--;
+                    let minutos = Math.floor(tiempo / 60);
+                    let segundos = tiempo % 60;
+                    document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+                } else {
+                    clearInterval(interval);
+                    finalizarJuego(); 
+                }
+            }, 1000);
+        }
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+        
+        function verificarRespuesta() {
+            const respuestas = {
+                casa1: parseInt(document.getElementById('respuestaCasa1').value),
+                casa2: parseInt(document.getElementById('respuestaCasa2').value),
+                casa3: parseInt(document.getElementById('respuestaCasa3').value),
+                casa4: parseInt(document.getElementById('respuestaCasa4').value)
+            };
+
+            let respuestasCorrectas = 0;
+            let respuestasIncorrectas = 0;
+
+        
+            Object.keys(respuestas).forEach(casa => {
+                if (respuestas[casa] === personasPorCasa[casa]) {
+                    respuestasCorrectas++;
+                     sonidoCorrecto.play(); 
+                } else {
+                    respuestasIncorrectas++;
+                      sonidoIncorrecto.play();
+                }
+            });
+
+            correctos += respuestasCorrectas;
+            incorrectos += respuestasIncorrectas;
+
+            document.getElementById('correctos').innerText = correctos;
+            document.getElementById('incorrectos').innerText = incorrectos;
+
+        
+            document.getElementById('respuestaCasa1').value = '';
+            document.getElementById('respuestaCasa2').value = '';
+            document.getElementById('respuestaCasa3').value = '';
+            document.getElementById('respuestaCasa4').value = '';
+        }
+
+        
+        function finalizarJuego() {
+            clearInterval(interval); 
+            const resultadoFinal = correctos - incorrectos; 
+            let nota;
+            
+            if (resultadoFinal >= 40) {
+                nota = "A";
+            } else if (resultadoFinal >= 20) {
+                nota = "B";
+            } else if (resultadoFinal >= 10) {
+                nota = "C";
+            } else {
+                nota = "F";
+            }
+
+            document.getElementById('puntajeFinal').innerText = resultadoFinal;
+            document.getElementById('nota').innerText = nota;
+            document.getElementById('resultado').style.display = 'block'; 
+        }
+
+        
+        function salir() {
+            window.location.href = "mategames2.html";
+        }
+
+        
+        function iniciarJuego() {
+            generarPersonas();
+            iniciarTemporizador();
+        }
+
+        window.onload = iniciarJuego;
+    </script>
+
+</body>
+</html>
+
+
+

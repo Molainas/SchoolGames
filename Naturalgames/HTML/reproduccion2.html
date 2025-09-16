@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>REPRODUCCION</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Todo esta pasillo es para las hembras embarazadas y plantas, es importante estar preparado para el momento del nacimiento del bebe , por eso debes escoger la habitacion correcta
+		  </li>
+
+		  <li>
+		      Pero no todo los animales tienen el mismo metodo de tener bebes, algunos tienen otros metodos para tener un bebe por lo que cada habitacion esta hecha para recivir el bebe cuando ya es hora, tambien las plantas tienen otros metodos de reproducir
+		  </li>
+
+		  <li>
+		      Por lo que necesito que leas mi libro antes de avanzar
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		      Primero mira el animal y la planta antes de contestar
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>La reproducción en las plantas puede ser sexual, uniendo gametos para producir semillas y asegurar variabilidad genética, o asexual, que no requiere gametos y genera clones idénticos de la planta madre. Los métodos asexuales incluyen la propagación vegetativa mediante partes como estolones o rizomas, y la producción de esporas en plantas sin semilla. La reproducción sexual en plantas con flor implica la polinización (transferencia de polen) y la fecundación (unión de gametos) para formar una semilla dentro de un fruto.</li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen3.png" class="tablero">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/reproduccion2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba5,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

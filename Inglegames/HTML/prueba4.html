@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+        <div class="bon">
+            <button class="minutos" onclick="cambiarMinutos(-5)"><</button>
+            <p>Minutos</p>
+            <button class="minutos" onclick="cambiarMinutos(5)">></button>
+        </div>
+        <div class="reloj">
+            <div class="marca" data-hora="1"></div>
+            <div class="marca" data-hora="2"></div>
+            <div class="marca" data-hora="3"></div>
+            <div class="marca" data-hora="4"></div>
+            <div class="marca" data-hora="5"></div>
+            <div class="marca" data-hora="6"></div>
+            <div class="marca" data-hora="7"></div>
+            <div class="marca" data-hora="8"></div>
+            <div class="marca" data-hora="9"></div>
+            <div class="marca" data-hora="10"></div>
+            <div class="marca" data-hora="11"></div>
+            <div class="marca" data-hora="12"></div>
+
+            <div class="flecha1"></div>
+            <div class="centro"></div>
+            <div class="flecha2"></div>
+        </div>
+        <div class="bon">
+            <button class="horas" onclick="cambiarHoras(-1)"><</button>
+            <p>Horas</p>
+            <button class="horas" onclick="cambiarHoras(1)">></button>
+        </div>
+    </div>
+
+    <div class="cubo2">
+        <div class="texto">
+            <div id="horaAleatoria"></div>
+            <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+        </div>
+        <img class="pequeñin" src="../imagenes/pequenin12.png"> 
+        <button class="verificacion" onclick="verificarHora()">VERIFICAR</button>
+        <div class="tiempo" id="tiempo">5:00</div>
+        <div class="puntos">
+            <div class="correcto">C: <span id="correctos">0</span></div>
+            <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba4.css");
+</style>
+
+<script>
+    let horaCorrecta, minutosCorrectos;
+    let horaJugador = 12, minutosJugador = 0;
+    let correctos = 0, incorrectos = 0;
+    let racha = 0;
+    let modoDoblePuntos = false;
+    let tiempo = 300;
+    let interval;
+
+    const numerosPalabras = {
+        1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six",
+        7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve"
+    };
+
+    const minutosPalabras = {
+        0: "o'clock", 5: "five", 10: "ten", 15: "quarter", 20: "twenty", 
+        25: "twenty-five", 30: "half", 35: "thirty-five", 40: "forty",
+        45: "quarter to", 50: "fifty", 55: "fifty-five"
+    };
+
+    function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+    function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        racha = 0;
+        modoDoblePuntos = false;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        generarHoraAleatoria();
+    }
+
+    function generarHoraAleatoria() {
+        horaCorrecta = Math.floor(Math.random() * 12) + 1;
+        minutosCorrectos = Math.floor(Math.random() * 12) * 5;
+
+        let horaTexto = numerosPalabras[horaCorrecta];
+        let minutosTexto = minutosPalabras[minutosCorrectos];
+
+        let textoHora = `${horaTexto}`;
+        if (minutosCorrectos !== 0) {
+            textoHora += ` ${minutosTexto}`;
+        }
+
+        const horaElem = document.getElementById("horaAleatoria");
+
+        if (modoDoblePuntos) {
+            horaElem.innerText = ''; // Ocultar texto en racha
+            horaElem.style.color = "";
+        } else {
+            horaElem.innerText = textoHora;
+        }
+
+        // 🔊 Pronunciar siempre el texto, incluso si está oculto
+        pronunciarTexto(textoHora);
+    }
+
+    function pronunciarTexto(texto) {
+        window.speechSynthesis.cancel();
+        const mensaje = new SpeechSynthesisUtterance(texto);
+        mensaje.lang = "en-US";
+        window.speechSynthesis.speak(mensaje);
+    }
+
+    function cambiarHoras(valor) {
+        horaJugador = (horaJugador + valor + 12) % 12 || 12;
+        actualizarReloj();
+    }
+
+    function cambiarMinutos(valor) {
+        minutosJugador = (minutosJugador + valor + 60) % 60;
+        actualizarReloj();
+    }
+
+    function actualizarReloj() {
+        let anguloHora = (horaJugador % 12) * 30;
+        let anguloMinuto = minutosJugador * 6;
+
+        document.querySelector(".flecha1").style.transform = `rotate(${anguloHora}deg)`;
+        document.querySelector(".flecha2").style.transform = `rotate(${anguloMinuto}deg)`;
+    }
+
+   function verificarHora() {
+    const horaElem = document.getElementById("horaAleatoria");
+
+    if (horaJugador === horaCorrecta && minutosJugador === minutosCorrectos) {
+        racha++;
+
+        if (modoDoblePuntos) {
+            correctos += 2;
+        } else {
+            correctos += 1;
+        }
+
+        if (racha >= 5 && !modoDoblePuntos) {
+            modoDoblePuntos = true;
+            horaElem.innerText = "¡Racha! Doble puntaje";
+            horaElem.style.color = "purple";
+        
+        } else {
+            horaElem.innerText = "¡Correcto!";
+            horaElem.style.color = "purple";
+      
+        }
+
+    } else {
+        incorrectos++;
+        racha = 0;
+
+        if (modoDoblePuntos) {
+            modoDoblePuntos = false;
+        }
+
+        horaElem.innerText = "Incorrecto";
+        horaElem.style.color = "purple";
+      
+    }
+
+    document.getElementById("correctos").innerText = correctos;
+    document.getElementById("incorrectos").innerText = incorrectos;
+
+    // Esperar 1 segundo antes de generar una nueva hora
+    setTimeout(() => {
+        horaElem.style.color = ""; // Restaurar color
+        generarHoraAleatoria();
+    }, 1000);
+}
+
+    function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames.html";
+    }
+
+    window.onload = function () {
+        actualizarReloj();
+    };
+</script>
+
+</body>
+</html>

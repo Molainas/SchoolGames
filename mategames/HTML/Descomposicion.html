@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>DESCOMPOSICION</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+				<li>
+					esta es mi casa donde tengo mis dos juguetes favoritos, un tablero y unos bloques con letras y otros con color, y sabes se me ocurrio un juego combinando mis dos juguetes
+				</li>
+                
+                <li>
+                	 yo escribo 4 numeros diferentes y debes colocar la cantidad correcta encima de los bloques con letras (M, C, D, U) usando los bloques con color pero en el orden correcto segun la descomposicion de numeros
+                </li>
+
+                <li>
+                    si necesitas saber sobre la descomposicion de numeros puedes consultarlo en mi libro
+                </li>
+
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png"  class="librote"></button></div>
+                
+</ul>
+                <div class="consejos">CONSEJOS</div>
+            <ul>
+                <li>
+                    no utilises el metodo de figarse en uno en uno, si miras y piensas la idea podras acerlo mas rapido
+                </li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem2.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+	</div>
+</div>
+</div>
+    <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <p>Para descomponer un número de forma correcta, primero tenemos que saber de qué está compuesto. En el sistema decimal, es decir, el que conocemos y usamos normalmente, existe una categoría para cada cifra.</p>
+
+<p>Dependiendo de la posición de las cifras, un número está compuesto por:</p>
+
+<ul>
+
+<li>Unidades. Son las cifras del 0 al 9 que se encuentran a la derecha de un número.</li>
+<li>Decenas. Se trata de aquellas que se encuentran a la izquierda de las unidades. Las encontramos a partir de las 10 unidades.</li>
+<li>Centenas. Representan las 100 unidades y se encuentran a la izquierda de las decenas.</li>
+<li>Unidades de millar. Representan 1.000 unidades. Ocupan la cuarta posición de un número (empezando a contar por la izquierda).</li>
+
+</ul>
+<p>A partir de aquí se repiteel proceso de unidades, decenas y centenas, llegando a decenas de millares, centenas de millares, unidad de millón, etc.<p>
+        </div>
+        <div class="mucho-texto2">
+        	<img src="../imagenes/imagen2.png" class="tablero">
+        	<button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Descomposicion.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block';
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+
+
+</body>
+</html>

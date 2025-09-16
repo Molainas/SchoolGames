@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Espagames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>TILDE</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+		<ul>
+
+		  <li>
+		      Tengo un tablero que lo utilizo para dibujar o escribir lo que yo quiero junto con dos marcadores y un borrador 
+		  </li>
+
+		  <li>
+		      Ten este marcador para jugar, el juego consiste que yo escribe una palabra y tu le agregas la tilde en el vocal correcto
+		  </li>
+
+		  <li>
+		      Pero primero lea mi libro para saber sobre la tilde 
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Escucha la letra alzada	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem1.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>
+           La tilde —también llamada acento gráfico u ortográfico— es una rayita oblicua (ʼ) que, colocada sobre una vocal, indica que la sílaba de la que forma parte es tónica, es decir, es la que porta el acento prosódico de la palabra: códice, lápiz, té.
+           </li>
+
+           <li>
+           	Lee la palabra en voz alta y presta atención a la sílaba que se pronuncia con más fuerza. Esa es la sílaba tónica.
+           </li>
+
+           <li>
+           Agudas: El acento está en la última sílaba (ej. can-CIÓN).
+           </li>
+
+           <li>
+           Graves (Llanas): El acento está en la penúltima sílaba (ej. ÁR-bol).
+           </li>
+
+           <li>
+           Esdrújulas: El acento está en la antepenúltima sílaba (ej. MÚ-si-ca).
+           </li>
+
+           <li>
+           Sobresdrújulas: El acento está antes de la antepenúltima sílaba (ej. DÁ-n-do-me-lo).
+           </li>
+
+
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen6.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/tilde.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba4.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Espagames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ESTADOS</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Los cuerpos de los objetos tienen una manera de representarse en el mundo, dependiendo del estado del objeto 
+		  </li>
+
+		  <li>
+		      Pero por si no lo sabias, existen varias formas de analizar cualquier estado del objeto utilizando los aparatos correctos de coleccion y tu seras el que escoge cual herramienta utilizo segun la situacion
+		  </li>
+
+		  <li>
+		      Si quieres aprender sobre los estados de los objetos puedes leer mi libro
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+		  <li>
+		     Mira la imagen para comprender la situacion
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>
+            Los estados de la materia, que pueden referirse a los objetos, son sólido, líquido, gaseoso y plasma. Estos estados describen cómo la materia se organiza y comporta a diferentes temperaturas y presiones. 
+          </li>
+
+          <li>
+           Sólido:
+           Las partículas están muy juntas y tienen una forma definida. 
+          </li>
+
+          <li>
+           Líquido:
+           Las partículas están más separadas y pueden fluir, pero tienen un volumen definido. 
+          </li>
+
+          <li>
+           Gaseoso:
+           Las partículas están muy separadas y no tienen forma ni volumen definidos. 
+          </li>
+
+          <li>
+           Plasma:
+           Un estado de la materia en el que la materia está ionizada y tiene propiedades especiales, como la capacidad de conducir electricidad. 
+          </li>
+
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen4.png" class="img2">
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/estados.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba7.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Espagames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <div class="pequeñin">
+      <img src="../imagenes/pequenin512.png">
+    </div>
+   
+    <canvas class="texto" id="oracionCanvas"></canvas>
+
+    <div class="caja">
+      <img src="../imagenes/caja2.png">
+    </div>
+  </div>
+
+  <div class="cubo2" id="opciones"></div>
+
+  <div class="cubo3">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">05:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+  @import url("../CSS/prueba7,2.css");
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+let indiceActual = 0;
+let respuestasSeleccionadas = [];
+
+// Ahora cada oración tiene DOS huecos y DOS respuestas correctas
+const oraciones = [
+  { 
+    texto: "Yo ____ al colegio y ____ con mis amigos.", 
+    respuestas: ["voy", "juego"], 
+    opciones: ["voy", "fui", "juego", "comí", "irá"] 
+  },
+  { 
+    texto: "Ellos ____ una pizza y después ____ refrescos.", 
+    respuestas: ["comen", "beben"], 
+    opciones: ["comen", "comió", "beben", "tomó", "jugaban"] 
+  },
+  { 
+    texto: "María ____ la guitarra y ____ canciones nuevas.", 
+    respuestas: ["toca", "canta"], 
+    opciones: ["tocaba", "toca", "tocará", "canta", "bailaba"] 
+  }
+];
+
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById('tiempo').innerText = 
+        `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function dibujarTextoPorPalabras(ctx, texto, x, y, maxWidth, lineHeight) {
+  ctx.font = "22px Cursive";
+  ctx.textBaseline = "#804000";
+
+  const palabras = texto.split(" ");
+  let linea = "";
+  let posY = y;
+
+  for (let i = 0; i < palabras.length; i++) {
+    const pruebaLinea = linea + palabras[i] + " ";
+    const ancho = ctx.measureText(pruebaLinea).width;
+
+    if (ancho > maxWidth && i > 0) {
+      // 🔹 Dibuja la línea completa
+      dibujarLinea(ctx, linea.trim(), x, posY);
+      linea = palabras[i] + " ";
+      posY += lineHeight;
+    } else {
+      linea = pruebaLinea;
+    }
+  }
+
+  // 🔹 Última línea
+  dibujarLinea(ctx, linea.trim(), x, posY);
+}
+
+function dibujarLinea(ctx, texto, x, y) {
+  const palabras = texto.split(" ");
+  let posX = x;
+
+  palabras.forEach(palabra => {
+    const ancho = ctx.measureText(palabra).width;
+
+    if (palabra !== "____") {
+      ctx.fillStyle = "#804000";
+      ctx.fillRect(posX - 3, y - 18, ancho + 6, 30);
+    }
+
+    ctx.fillStyle = "white";
+    ctx.fillText(palabra, posX, y);
+
+    posX += ancho + 15;
+  });
+}
+
+
+function mostrarOracion() {
+  respuestasSeleccionadas = [];
+  const canvas = document.getElementById("oracionCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = 700;
+  canvas.height = 150;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const texto = oraciones[indiceActual].texto;
+  dibujarTextoPorPalabras(ctx, texto, 50, 50, canvas.width - 100, 40);
+
+  // Opciones
+  const opcionesDiv = document.getElementById("opciones");
+  opcionesDiv.innerHTML = "";
+  oraciones[indiceActual].opciones.forEach(opcion => {
+    const boton = document.createElement("div");
+    boton.classList.add("opcion");
+    boton.innerText = opcion;
+    boton.onclick = () => seleccionarRespuesta(opcion);
+    opcionesDiv.appendChild(boton);
+  });
+}
+
+function actualizarTextoConRespuestas() {
+  const textoBase = oraciones[indiceActual].texto;
+  let textoModificado = textoBase;
+  respuestasSeleccionadas.forEach((resp, i) => {
+    textoModificado = textoModificado.replace("____", resp);
+  });
+
+  const canvas = document.getElementById("oracionCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  dibujarTextoPorPalabras(ctx, textoModificado, 50, 50, canvas.width - 100, 40);
+}
+
+
+function actualizarTextoConRespuestas() {
+  const textoBase = oraciones[indiceActual].texto;
+  let textoModificado = textoBase;
+  respuestasSeleccionadas.forEach((resp, i) => {
+    textoModificado = textoModificado.replace("____", resp);
+  });
+
+  const canvas = document.getElementById("oracionCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  dibujarTextoPorPalabras(ctx, textoModificado, 50, 50);
+}
+
+
+function actualizarTextoConRespuestas() {
+  const textoBase = oraciones[indiceActual].texto;
+  let textoModificado = textoBase;
+  respuestasSeleccionadas.forEach((resp, i) => {
+    textoModificado = textoModificado.replace("____", resp);
+  });
+
+  const canvas = document.getElementById("oracionCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = "22px Cursive";
+
+  // 🔹 Solo resaltar si el texto YA no tiene "____"
+  if (!textoModificado.includes("____")) {
+    const anchoTexto = ctx.measureText(textoModificado).width;
+    ctx.fillStyle = "#804000";
+    ctx.fillRect(50, 25, anchoTexto + 20, 35);
+  }
+
+  ctx.fillStyle = "white";
+  ctx.fillText(textoModificado, 55, 55);
+}
+
+
+function actualizarTextoConRespuestas() {
+  const textoBase = oraciones[indiceActual].texto;
+  let textoModificado = textoBase;
+  respuestasSeleccionadas.forEach((resp, i) => {
+    textoModificado = textoModificado.replace("____", resp);
+  });
+
+  const canvas = document.getElementById("oracionCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = "22px Cursive";
+  const anchoTexto = ctx.measureText(textoModificado).width;
+
+  // 🔹 Dibujar rectángulo siempre
+  ctx.fillStyle = "#804000";
+  ctx.fillRect(50, 25, anchoTexto + 20, 35);
+
+  // 🔹 Dibujar texto encima
+  ctx.fillStyle = "white";
+  ctx.fillText(textoModificado, 55, 55);
+}
+
+
+function seleccionarRespuesta(opcion) {
+  if (respuestasSeleccionadas.length < 2) {
+    respuestasSeleccionadas.push(opcion);
+    actualizarTextoConRespuestas(); // Mostrar en el canvas
+  }
+
+  if (respuestasSeleccionadas.length === 2) {
+    setTimeout(verificarRespuestas, 800); // pequeña pausa para ver la segunda palabra
+  }
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarRespuestas() {
+  const correctas = oraciones[indiceActual].respuestas;
+  if (JSON.stringify(respuestasSeleccionadas) === JSON.stringify(correctas)) {
+    correctos++;
+    document.getElementById("correctos").innerText = correctos;
+    sonidoCorrecto.play();  
+  } else {
+    incorrectos++;
+    document.getElementById("incorrectos").innerText = incorrectos;
+    sonidoIncorrecto.play(); 
+  }
+
+  indiceActual++;
+  // 🔹 Si llega al final, vuelve al inicio en vez de terminar
+  if (indiceActual >= oraciones.length) {
+    indiceActual = 0; // reinicia desde la primera
+  }
+  mostrarOracion();
+}
+
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota = "F";
+  if (resultadoFinal >= 4) nota = "A";
+  else if (resultadoFinal >= 3) nota = "B";
+  else if (resultadoFinal >= 2) nota = "C";
+  document.getElementById('puntajeFinal').innerText = resultadoFinal;
+  document.getElementById('nota').innerText = nota;
+  document.getElementById('resultado').style.display = 'block';
+}
+
+function salir() {
+  window.location.href = "Espagames2.html";
+}
+
+window.onload = () => {
+  iniciarTemporizador();
+  mostrarOracion();
+};
+</script>
+
+</body>
+</html>

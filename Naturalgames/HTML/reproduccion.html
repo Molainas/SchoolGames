@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>REPRODUCCION</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+		  <li>
+		      Todo esta pasillo es para las hembras embarazadas, es importante estar preparado para el momento del nacimiento del bebe 
+		  </li>
+
+		  <li>
+		      Pero no todo los animales tienen el mismo metodo de desarrollo de bebes, algunos tienen otros metodos para tener un bebe por lo que cada habitacion esta hecha para recivir el bebe cuando ya es hora
+		  </li>
+
+		  <li>
+		      Por lo que necesito que leas mi libro antes de avanzar
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li>
+		      Si miras primero el animal y lo analisas antes de escoger la puerta
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul>
+          	
+          <li>La reproducción en los animales es el proceso biológico de crear nuevos individuos de la misma especie, y puede ser sexual o asexual. La reproducción sexual, la más común, involucra dos progenitores (macho y hembra), la formación de gametos (óvulos y espermatozoides), su unión en la fecundación para formar un cigoto, y posteriormente el desarrollo de un nuevo ser. La reproducción asexual, en cambio, ocurre a partir de un solo progenitor y genera descendientes idénticos.</li>
+
+          <li>Tipos de Desarrollo Embrionario</li>
+
+          <li>
+Ovíparos:
+El embrión se desarrolla dentro de un huevo puesto por la madre. Ejemplos: pollos, tortugas y peces.
+          </li>
+
+          <li>
+Vivíparos:
+El embrión se desarrolla dentro del útero de la madre y nace vivo. Ejemplos: seres humanos, perros, elefantes y ballenas.
+          </li> 
+
+          <li>
+Ovovivíparos:
+Son un caso intermedio. El huevo se forma, pero el embrión se desarrolla y eclosiona dentro del cuerpo de la madre, antes de que nazca vivo. Ejemplos: algunas serpientes y tiburones. 
+          </li>
+
+          </ul>
+
+
+        </div>
+
+        <div class="mucho-texto2">
+
+
+          <ul>
+          	
+            <img src="../imagenes/imagen2.png" class="tablero">
+
+              <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/reproduccion.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba5.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

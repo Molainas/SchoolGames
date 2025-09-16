@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SCHOOLGAMES</title>
+</head>	
+<body>
+ <div class="cubo">
+        <div class="cubo1">
+            <img src="../portada/Planetas1.png" class="galaxia">
+        </div>
+
+        <div class="cubo2">
+            <div class="Titulo">SCHOOLGAMES</div>
+            <div class="mundo_arriba"><img class="mun" src="../portada/mundo_arriba.png"></div>
+            <div class="mundo">
+                <button class="izquierda" onclick="scrollIzquierda()">&#60;</button>
+                <div class="seleccion" id="scrollContainer">
+                    <div class="planeta1">
+                    	<img src="../portada/mundo1.png" class="mundo1">
+                    	<button onclick="viajar1()" class="viajar1">VIAJAR</button>
+                    </div>
+                    <div class="planeta2">
+                        <img src="../portada/mundo2.png" class="mundo2">
+                        <button onclick="viajar2()" class="viajar2">VIAJAR</button></div>
+                    <div class="planeta3">
+                        <img src="../portada/mundo3.png" class="mundo3">
+                        <button onclick="viajar3()" class="viajar3">VIAJAR</button>
+                    </div>
+                    <div class="planeta4">
+                        <img src="../portada/mundo4.png" class="mundo4">
+                        <button onclick="viajar4()" class="viajar4">VIAJAR</button>
+                    </div>
+                </div>
+                <button class="derecha" onclick="scrollDerecha()">&#62;</button>
+            </div>
+            <div class="mundo_abajo"><img class="mun" src="../portada/mundo_abajo.png"></div>
+        </div>
+
+        <div class="cubo3">
+            <img src="../portada/Planetas2.png" class="galaxia">
+        </div>
+    </div>
+
+
+<style>
+	@import url("../portada/entrada.css")
+</style>
+
+<script>
+         function scrollIzquierda() {
+            let container = document.getElementById('scrollContainer');
+            let itemWidth = container.children[0].offsetWidth + 10; 
+            container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+        }
+
+        function scrollDerecha() {
+            let container = document.getElementById('scrollContainer');
+            let itemWidth = container.children[0].offsetWidth + 10; 
+            container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+        }
+
+        function viajar1() {
+
+window.location.href = "../mategames/HTML/mategames.html"
+
+}
+
+   function viajar2() {
+
+window.location.href = "../Inglegames/HTML/Inglegames.html"
+
+}
+
+function viajar3() {
+
+window.location.href = "../Naturalgames/HTML/Naturalgames.html"
+
+}
+
+function viajar4() {
+
+window.location.href = "../Espagames/HTML/Espagames.html"
+
+}
+
+    </script>
+
+</body>
+</html>

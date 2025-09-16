@@ -1,0 +1,195 @@
+body{background-color: green;}
+
+p{font-family: cursive;
+font-size: 30px;
+color: green;}
+
+input{margin-top: 50px;
+border: 3px solid green;
+border-radius: 30px;
+background: yellow;
+height: 30px;
+width: 70px;
+font-family: cursive;
+color: green;
+text-align: center;
+}
+
+.span{margin-top: 20px;}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 615px;
+display: flex;
+flex-direction: column;}
+
+.cubo1{
+height: 80%;
+display: flex;}
+
+.cubito1{border: 3px solid #FFF52D;
+background-image: url("../imagenes/fondo1,6.png");
+background-repeat: no-repeat;
+background-size: 100% 100%;
+width: 70%;
+display: flex;
+flex-direction: column;
+align-items: center;}
+
+.arriba{
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+height: 60%;
+width: 95%;}
+
+.bolsa{
+background-image: url(../imagenes/bolsa2.png);
+background-repeat: no-repeat;
+background-size: 100%;
+height: 170px;
+width: 200px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+color: green;
+font-family: cursive;
+font-size: 25px;
+}
+
+.contenedor{
+background-image: url(../imagenes/recipiente.png);
+background-repeat: no-repeat;
+background-size: 100%;
+height: 190px;
+width: 200px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+color: green;
+font-family: cursive;
+font-size: 25px;
+}
+
+.peso{
+height: 80px;
+width: 150px;
+margin-top: 120px;
+font-family: cursive;
+font-size: 40px;
+color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.img1{height: 100%;
+width: 100%;}
+
+.abajo{
+width: 98%;
+height: 40%;}
+
+.img2{height: 100%;
+width: 100%;}
+
+.cubito2{border: 3px solid #FFF52D;
+width: 30%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;}
+
+.pequeñin{
+height: 70%;
+display: flex;
+}
+
+.peque{width: 100%;}
+
+.verificacion{border: 1px solid green;
+background-color: green;
+height: 80px;
+font-family: cursive;
+font-size: 40px;
+color: white;
+}
+ 
+.cubo2{
+display: flex;
+justify-content: space-around;
+align-items: center;
+height: 20%;}
+
+.correcto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 37%; 
+    left: 83%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    height: 450px;
+    width: 400px;
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 30px;
+    }
+
+.boton1{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid #FFF52D;
+background-color: white;
+color: green;
+height: 90px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 400px;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mategames</title>
+</head>
+<body>
+    <div class="cubo">
+        <div class="game">
+            <div class="pequeñin"><img src="../imagenes/pequeñin1.png" class="peque"></div>
+            <img src="../imagenes/casa.png" alt="Casa" class="casota">
+            
+            <div id="personas-container">
+                
+            </div>
+        </div>
+
+        <div class="teclado">
+            <div class="escribir">
+                <input id="respuesta" type="number">
+                <button class="boton1" onclick="verificarRespuesta()">Verificar</button>
+            </div>
+            <div class="puntos">
+                <div class="correcto">C: <span id="correctos">0</span></div>
+                <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+            </div>
+            <div class="tiempo" id="tiempo">5:00</div>
+        </div>
+    </div>
+
+    <div id="resultado" class="res">
+        <h2>Juego terminado</h2>
+        <p>Puntuación final: <span id="puntajeFinal"></span></p>
+        <p>Nota: <span id="nota"></span></p>
+        <div class="botones">
+            <button class="boton2" onclick="location.reload()">Reiniciar</button>
+            <button class="boton2" onclick="salir()">Escoger otro</button>
+        </div>
+    </div>
+
+<style>
+    @import url("../CSS/prueba1.css")
+</style>
+
+    <script>
+    let correctos = 0;
+    let incorrectos = 0;
+    let tiempo = 300; 
+    let interval;
+
+    function generarPersonas() {
+        const numPersonas = Math.floor(Math.random() * 10) + 1;
+        const container = document.getElementById('personas-container');
+        container.innerHTML = ''; 
+
+        for (let i = 0; i < numPersonas; i++) {
+            const imgPersona = document.createElement('img');
+            imgPersona.src = '../imagenes/persona.png';
+            container.appendChild(imgPersona);
+        }
+        return numPersonas;
+    }
+
+    function iniciarTemporizador() {
+        interval = setInterval(function() {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = ` ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego(); 
+            }
+        }, 1000);
+    }
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificarRespuesta() {
+    const respuesta = document.getElementById('respuesta').value;
+    const numPersonas = document.getElementById('personas-container').children.length;
+
+    if (parseInt(respuesta) === numPersonas) {
+        correctos++;
+        document.getElementById('correctos').innerText = correctos;
+        sonidoCorrecto.play();  
+    } else {
+        incorrectos++;
+        document.getElementById('incorrectos').innerText = incorrectos;
+        sonidoIncorrecto.play();  
+    }
+
+    generarPersonas();
+    document.getElementById('respuesta').value = '';
+}
+
+
+    function finalizarJuego() {
+        clearInterval(interval); 
+        const resultadoFinal = correctos - incorrectos; 
+        let nota;
+        
+        if (puntajeFinal >= 20) {
+            nota = "A";
+        } else if (puntajeFinal >= 10) {
+            nota = "B";
+        } else if (puntajeFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = ` ${resultadoFinal}`;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block'; 
+    }
+
+    function salir() {
+        window.location.href = "mategames.html";
+    }
+
+    function iniciarJuego() {
+        generarPersonas();
+        iniciarTemporizador();
+    }
+
+    window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>
+
+

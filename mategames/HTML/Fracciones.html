@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mategames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>FRACCIONES</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+				
+				<li>
+					Decidi hacer varias pizzas para tener un mini comercio y ganar dinero pero claro no sera facil, porque no los voy a vender enteros sino en partes para que vaya mas gente debido si lo vendemos entero sera mas caro y habra menos gente
+				</li>
+
+				<li>
+					yo atiendo a los clientes y tu dales los pedasos, sera facil porque las pizzas estan decorados de una forma muy parecida a una fraccion y como solo vendemos en partes yo digo cuantos pedasos quiere el cliente
+				</li>
+
+				<li>
+					si necesitas saber sobre las fraciones puedes consultar en mi libro 
+				</li>
+
+<div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="img1"></button></div>
+				
+            </ul>
+				<div class="consejos">CONSEJOS</div>
+            <ul>
+				<li>
+					solo imaginalo como resta
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="cuadrado1">
+
+		<div class="ejemplo"><img src="../imagenes/ejem7.gif" class="img4"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+<div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+          	<li>
+          		Una fracción es un número, que se obtiene de dividir un entero en partes iguales. Por ejemplo cuando decimos una cuarta parte de la torta, estamos dividiendo  la torta en cuatro partes y consideramos una de ellas.
+          	</li>
+          	
+          	<li>
+          	La fracción está formada por dos términos: el numerador y el denominador. El numerador es el número que está sobre la raya fraccionaria y el denominador es el que está bajo la raya fraccionaria.
+                </li>
+
+                <li>
+                El numerador es el número de partes que se considera de la unidad o total.
+                </li>
+
+                <li>
+                El denominador es el número de partes iguales en que se ha dividido la unidad o total.
+                </li>	
+          	
+                <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+          </ul>
+        </div>
+        <div class="mucho-texto2">
+                <div class="tr"> 
+        	<img class="img2" src="../imagenes/fraccionario.png">
+                </div>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/Fracciones.css")
+</style>
+
+<script>
+	
+function ir() {
+
+window.location.href = "../HTML/prueba7.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/mategames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block';
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+  <div class="cubo1">
+    <canvas id="canvas" width="500" height="500" style="border:1px solid #000;"></canvas>
+  </div>
+
+  <div class="cubo2">
+    <div class="texto" id="partes"></div>
+    <img class="pequeñin" src="../imagenes/peque132.png">
+    <div class="tiempo" id="tiempo">5:00</div>
+    <div class="puntos">
+      <div class="correcto">C: <span id="correctos">0</span></div>
+      <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+<style>
+  @import url("../CSS/prueba4.css");
+</style>
+
+<script>
+let correctos = 0;
+let incorrectos = 0;
+let tiempo = 300;
+let interval;
+
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+// --- PARTES DE LA CÉLULA (ejemplo) ---
+let partes = [
+  { nombre: "Núcleo", x: 250, y: 250, r: 50 },
+  { nombre: "Mitocondria", x: 150, y: 200, w: 80, h: 40 },
+  { nombre: "Ribosoma", x: 300, y: 150, w: 20, h: 20 },
+  { nombre: "Membrana", x: 50, y: 50, w: 400, h: 400 },
+  { nombre: "REL", x: 120, y: 280, w: 230, h: 80 }, // <-- Nuevo
+  { nombre: "RER", x: 170, y: 120, w: 160, h: 100 },
+  { nombre: "Aparato de Golgi", x: 180, y: 360, w: 140, h: 80 }
+];
+
+
+let parteActual = "";
+
+// --- TEMPORIZADOR ---
+function iniciarTemporizador() {
+  interval = setInterval(() => {
+    if (tiempo > 0) {
+      tiempo--;
+      const minutos = Math.floor(tiempo / 60);
+      const segundos = tiempo % 60;
+      document.getElementById("tiempo").innerText =
+        `${minutos.toString().padStart(2,"0")}:${segundos.toString().padStart(2,"0")}`;
+    } else {
+      clearInterval(interval);
+      finalizarJuego();
+    }
+  }, 1000);
+}
+
+function finalizarJuego() {
+  clearInterval(interval);
+  const resultadoFinal = correctos - incorrectos;
+  let nota;
+  if (resultadoFinal >= 20) nota = "A";
+  else if (resultadoFinal >= 10) nota = "B";
+  else if (resultadoFinal >= 5) nota = "C";
+  else nota = "F";
+
+  document.getElementById("puntajeFinal").innerText = resultadoFinal;
+  document.getElementById("nota").innerText = nota;
+  document.getElementById("resultado").style.display = "block";
+}
+
+function salir() {
+  window.location.href = "Naturalgames.html";
+}
+
+function dibujarCelula() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // --- Membrana celular ---
+  let gradiente = ctx.createRadialGradient(250, 250, 100, 250, 250, 220);
+  gradiente.addColorStop(0, "#aee6f7");
+  gradiente.addColorStop(1, "#5bb9e6");
+
+  ctx.beginPath();
+  ctx.ellipse(250, 250, 200, 150, 0, 0, Math.PI * 2);
+  ctx.fillStyle = gradiente;
+  ctx.fill();
+  ctx.strokeStyle = "#2a7aa5";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // --- Núcleo ---
+  ctx.beginPath();
+  ctx.arc(250, 250, 50, 0, Math.PI * 2);
+  ctx.fillStyle = "#d28bf3";
+  ctx.fill();
+  ctx.strokeStyle = "#7a3ba1";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // --- Nucléolo ---
+  ctx.beginPath();
+  ctx.arc(250, 250, 18, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffffffaa";
+  ctx.fill();
+
+  // --- Mitocondrias ---
+  ctx.beginPath();
+  ctx.ellipse(130, 200, 40, 20, 0.5, 0, Math.PI * 2);
+  ctx.fillStyle = "#ff944d";
+  ctx.fill();
+  ctx.strokeStyle = "#994d00";
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.ellipse(370, 300, 35, 18, -0.3, 0, Math.PI * 2);
+  ctx.fillStyle = "#ff944d";
+  ctx.fill();
+  ctx.stroke();
+
+  // --- Ribosomas ---
+  ctx.fillStyle = "#aa0000";
+  for (let i = 0; i < 5; i++) {
+    let rx = 120 + Math.random() * 260;
+    let ry = 120 + Math.random() * 260;
+    ctx.beginPath();
+    ctx.arc(rx, ry, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // --- Retículo endoplasmático rugoso (RER) ---
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(180, 280);
+  ctx.quadraticCurveTo(250, 330, 320, 280);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(180, 290);
+  ctx.quadraticCurveTo(250, 340, 320, 290);
+  ctx.stroke();
+
+  // --- Retículo endoplasmático liso (REL) ---
+  ctx.strokeStyle = "blue";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(180, 300);
+  ctx.quadraticCurveTo(250, 340, 320, 300);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(180, 310);
+  ctx.quadraticCurveTo(250, 360, 320, 310);
+  ctx.stroke();
+
+  // --- Aparato de Golgi ---
+  ctx.strokeStyle = "#cc6600";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(180, 130);
+  ctx.quadraticCurveTo(250, 110, 320, 130);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(180, 140);
+  ctx.quadraticCurveTo(250, 120, 320, 140);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(180, 150);
+  ctx.quadraticCurveTo(250, 130, 320, 150);
+  ctx.stroke();
+}
+
+
+// --- MOSTRAR NUEVA PARTE ---
+function mostrarNuevaParte() {
+  const random = Math.floor(Math.random() * partes.length);
+  parteActual = partes[random].nombre;
+  document.getElementById("partes").innerText = "Haz clic en: " + parteActual;
+}
+
+// --- DETECTAR CLIC ---
+function detectarClic(event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const parte = partes.find(p => {
+    if (p.r !== undefined) {
+      const dx = x - p.x;
+      const dy = y - p.y;
+      return Math.sqrt(dx * dx + dy * dy) <= p.r;
+    } else {
+      return x >= p.x && x <= p.x + p.w && y >= p.y && y <= p.y + p.h;
+    }
+  });
+
+  if (parte) {
+    if (parte.nombre === parteActual) {
+      correctos++;
+      document.getElementById("correctos").innerText = correctos;
+      sonidoCorrecto.play();
+    } else {
+      incorrectos++;
+      document.getElementById("incorrectos").innerText = incorrectos;
+      sonidoIncorrecto.play();
+    }
+    mostrarNuevaParte();
+  }
+}
+
+// --- INICIAR JUEGO ---
+function iniciarJuego() {
+  dibujarCelula();
+  mostrarNuevaParte();
+  iniciarTemporizador();
+}
+
+canvas.addEventListener("click", detectarClic);
+window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

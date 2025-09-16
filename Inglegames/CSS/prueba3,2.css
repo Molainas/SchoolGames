@@ -1,0 +1,134 @@
+body{background-color: purple;}
+
+.cubo{background-color: white;
+border: 1px solid white;
+height: 625px;}
+
+.cubo1{border: 1px solid purple;
+height: 622px;}
+
+.cubo2{
+height: 470px;
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+background-image: url("../imagenes/fondo2,1.png");}
+
+
+.pequeñin{
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.peque{height: 300px;}
+
+.mezcla{border: 1px solid purple;
+height: 180px;
+width: 180px;}
+
+.cubo3{
+height: 110px;
+display: flex;
+justify-content: center;}
+
+.colores{border: 1px solid purple;
+	background-color: purple;
+width: 80%;
+height: 100%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.color{
+border-radius: 50px;
+height: 100px;
+width: 100px;}
+
+.cubo4{border: 1px solid purple;
+height: 150px;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.correcto{border: 1px solid purple;
+height: 110px;
+width: 110px;
+background-color: purple;
+color: white;
+font-family: cursive;
+font-size: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid purple;
+background-color: purple;
+height: 120px;
+width: 300px;
+color: white;
+font-family: cursive;
+font-size: 60px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.empezar{border: 1px solid purple;
+background-color: purple;
+color: white;
+font-family: cursive;
+font-size: 50px;
+height: 120px;
+width: 300px;}
+
+.incorrecto{border: 1px solid purple;
+height: 110px;
+width: 110px;
+background-color: purple;
+color: white;
+font-family: cursive;
+font-size: 30px;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 39%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: purple; 
+    height: 490px;
+    width: 1100px;
+    border: 2px solid #FE8330; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;
+    font-size: 33px;
+    }
+
+.boton1{border: 1px solid purple;
+background-color: white;
+color: #FE8330;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid purple;
+background-color: white;
+color: #FE8330;
+height: 160px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 1200px;
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naturalgames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>CELULA</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+        <p>
+		      Lo que vez aqui es una celula, es una pequeña y microscopica vida que existe en los seres vivos, lo puedes ver gracias a mi microscopio una herramienta untilaza para ver las celulas o otros orgamismos pequeños y analizarlos
+        </p>
+		  </li>
+
+		  <li>
+        <p>
+		      Pero quiero estraer algunas partes de las cedulas que necesito para en caso de ayudar a otros animales que no tengan partes importanto, exepto el nucleo, el centrosoma y las mitocondrias
+        </p>
+		  </li>
+
+		  <li>
+         <p>
+		      necesitas saber sobre las partes de una cedula animal primero antes de entrar
+         </p>
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+
+        <ul>
+
+		  <li> 
+         <p>
+		      puedes mirar la imagen y identificar algunas partes
+         </p>
+		  </li>
+
+		</ul>
+
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/.gif" class="img3"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+
+        <div class="mucho-texto1">
+          
+          <ul class="texto">
+          	
+          <li>
+            Una célula animal es un tipo de célula eucariota, es decir, que tiene un núcleo definido. Las células animales son las que forman los distintos tejidos de los organismos vivos que pertenecen al reino Animalia (animales).
+          </li>
+
+          <li>
+          Núcleo: los animales tienen células con un núcleo definido que contiene casi todo su material genético (ADN) organizado en cromosomas.</li>
+
+          <li>Membrana: Es la membrana lipoproteica que recubre la célula, distingue su interior de su exterior y permite el ingreso de sustancias deseadas y la salida de desechos metabólicos.</li>
+
+          <li>Citoplasma: Abarca desde el núcleo hasta la membrana y está compuesto por agua, iones y biomoléculas. Los orgánulos son estructuras con formas y funciones específicas que están inmersos en el citoplasma.</li>
+
+
+          <li>Mitocondrias: Son los orgánulos donde se genera la mayor parte de la energía (en forma de ATP) de la célula. Las células pueden tener hasta miles de mitocondrias. Mientras mayor sea la actividad de la célula, mayor cantidad de mitocondrias tendrá. En las mitocondrias ocurre la respiración celular, que consiste en la oxidación de compuestos orgánicos, principalmente glucosa, para obtener energía en forma de ATP.</li>
+
+          <li>Lisosomas: Son vesículas que contienen enzimas que degradan el material que ingresa a la célula o el material producido dentro de ella.</li>
+
+          <li>Aparato de Golgi: Está formado por una serie de membranas en forma de sacos aplanados o cisternas. Sirve para transportar, modificar y clasificar las proteínas que se sintetizan en los ribosomas en el retículo endoplasmático rugoso (RER).</li>
+
+          <li>Retículo endoplasmático rugoso (RER): Es una estructura que se extiende desde la envoltura nuclear. Está cubierto de ribosomas, en los que se produce la síntesis de proteínas.</li>
+
+          <li>Retículo endoplasmático liso (REL): Es una estructura en la que se sintetizan ácidos grasos y esteroides. Además, juega un rol fundamental en la desintoxicación celular.</li>
+
+          <li>Centríolo: Es un orgánulo cilíndrico conformado por tres tripletes de microtúbulos, estas estructuras tienen un rol importante en el transporte de orgánulos en la célula.</li>
+
+          <li>Peroxisomas: Son orgánulos que contienen oxidasas, que son enzimas que oxidan determinadas sustancias, como por ejemplo, sustancias tóxicas.</li>
+
+          <li>Centrosoma: Está formado por un par de centríolos y material pericentriolar. El material pericentriolar contiene complejos de la proteína tubulina, que son indispensables en la formación del huso mitótico en la división celular.</li>
+
+          <li>Cilios. Son estructuras formadas por microtúbulos, similares a pelos, que se ubican en la superficie de la célula. Los cilios realizan movimientos similares a remos para mover el líquido que rodea a la célula.</li>
+
+          <li>Flagelos. Son similares a los cilios, pero mucho más largos. Su objetivo es mover a toda la célula, actuando como pequeños propulsores.</li>
+
+          </ul>
+
+        </div>
+
+        <div class="mucho-texto2">
+
+          <ul>
+          	
+          <img src="../imagenes/celula animal.jpg" class="img2">
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+           
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/celula.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba4.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Naturalgames.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

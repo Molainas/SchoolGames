@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Espagames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ABECEDARIO</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      necesito que coloques las consonantes que faltan en los paneles que tengo en el museo
+		  </li>
+
+		  <li>
+		      Lo que tienes que hacer es colocar las consonantes en el sitio correcto pero tambien las que aparecen en el texto original, pero tengo todo los nombres en esta lista asi que sera mas facil saber la vocal  
+		  </li>
+
+		  <li>
+		      En mi libro esta las vocales 
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Escucha el audio para encontrar las vocales	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem1.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li>
+           	En español, las consonantes son letras que, al pronunciarse, requieren una obstrucción o cierre parcial o total del flujo de aire en el tracto vocal. En contraste con las vocales, que permiten un flujo de aire continuo, las consonantes implican algún tipo de contacto o cierre con los órganos de la boca, como los labios, la lengua o los dientes. 
+           </li>
+
+           <li>
+           El alfabeto español cuenta con 22 consonantes: B, C, D, F, G, H, J, K, L, M, N, Ñ, P, Q, R, S, T, V, W, X, Y, y Z. Estas letras se combinan con las vocales (A, E, I, O, U) para formar sílabas y palabras.
+           </li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/imagen452.png" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/abecedario2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba1,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Espagames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

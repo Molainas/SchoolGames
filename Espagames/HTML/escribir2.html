@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Espagames</title>
+</head>	
+<body>
+<div class="cubo">
+<div class="cubo1">
+	<h1>ESCRIBIR</h1>
+</div>
+<div class="cubo2">
+	<div class="cuadrado1">
+		<div class="titulo">INSTRUCIONES</div>
+		<div class="instruc">
+			<ul>
+
+		  <li>
+		      Hay algunas pinturas que no estan terminadas correctamente debido que les falta las lineas negras dentro del controno gris 
+		  </li>
+
+		  <li>
+		      Necesito que hagas la linea negra pero sin salir de la marca gris y estar bien completo sin errores
+		  </li>
+
+		  <li>
+		      Puedes ver mi libro si necesitas ver como se hace
+		  </li>
+
+		  <div class="libro"><button class="boton1" onclick="abri()"><img src="../imagenes/libro.png" class="librote"></button></div>
+
+        </ul>
+          <div class="consejos">CONSEJOS</div>
+        <ul>
+		  <li>
+		      Manten la calma a escribir	
+		  </li>
+		</ul>	
+		</div>
+	</div>
+
+	<div class="cuadrado">
+
+		<div class="ejemplo"><img src="../imagenes/ejem1.gif" class="img2"></div>
+		<div class="botones">
+		<button class="boton2" onclick="ir()">EMPEZAR</button>
+		<button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+	        </div>
+		
+	</div>
+</div>
+</div>
+
+ <div id="open" class="librito">
+ 	<div class="hojas">
+        <div class="mucho-texto1">
+        <ul>
+         
+           <li> la letra cursiva, también llamada letra de carta, letra manuscrita o letra corrida (este último término más frecuente en el español de Hispanoamérica) aunque no toda la escritura manuscrita es en cursiva, es un estilo de escritura cuyas características más comunes son la inclinación de sus letras y, aunque no necesariamente, la concatenación de las mismas dentro de cada palabra. Este estilo permite escribir manualmente con una mayor velocidad.</li>
+
+        </ul>
+
+        <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+
+        </div>
+        <div class="mucho-texto2">
+        	<ul>
+
+           <img src="../imagenes/cursiva.jpg" class="img3">
+         
+
+            </ul>
+        </div>
+      </div>
+    </div>
+
+<style>
+	@import url("../CSS/escribir2.css")
+</style>
+
+<script>
+	
+
+function ir() {
+
+window.location.href = "../HTML/prueba2,2.html"
+
+}
+
+function irse() {
+
+window.location.href = "../HTML/Espagames2.html"
+
+}
+
+function abri(){
+        document.getElementById('open').style.display = 'block'; 
+
+}
+
+function cerrar(){
+        document.getElementById('open').style.display = 'none'; 
+
+}
+
+</script>
+</body>
+</html>

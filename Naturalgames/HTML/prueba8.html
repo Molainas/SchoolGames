@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturalgames</title>
+</head>
+<body>
+
+<div class="cubo">
+
+  <div class="cubo1">
+
+    <div class="cubito1">
+
+    <div class="arriba">
+      <div class="bolsa">
+
+      <div class="peso" id="origenBolsa"></div>
+
+      </div>
+
+      <p>→</p>
+
+      <div class="bolsa">
+
+      <input class="texto" type="number" id="respuesta">
+      <div class="peso" id="destinoBolsa"></div>
+
+      </div>
+    </div>
+
+    <div class="abajo">
+      <img src="../imagenes/balanza.png" class="img2">
+    </div>
+
+   </div>
+
+    <div class="cubito2">
+
+    <button class="verificacion" onclick="verificarRespuesta()">VERIFICAR</button>
+
+    <div class="pequeñin">
+    	
+      <img class="peque" src="../imagenes/pequenin8765.png">
+
+    </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="cubo2">
+
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="tiempo" id="tiempo">05:00</div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+
+  </div>
+
+</div>
+
+<div id="resultado" class="res" style="display:none;">
+  <h2>Juego terminado</h2>
+  <p>Puntuación final: <span id="puntajeFinal"></span></p>
+  <p>Nota: <span id="nota"></span></p>
+  <div class="botones">
+    <button class="boton2" onclick="location.reload()">Reiniciar</button>
+    <button class="boton2" onclick="salir()">Escoger otro</button>
+  </div>
+</div>
+
+  <style>
+   
+  @import url("../CSS/prueba8.css");
+   
+  </style>
+
+<script>
+  const conversiones = [
+    { cantidad: 2000, unidadOrigen: 'g', unidadDestino: 'kg', resultado: 2 },
+    { cantidad: 1.5, unidadOrigen: 'kg', unidadDestino: 'g', resultado: 1500 },
+    { cantidad: 3.5, unidadOrigen: 'kg', unidadDestino: 'g', resultado: 3500 },
+  ];
+
+  let correctos = 0;
+  let incorrectos = 0;
+  let tiempo = 300;
+  let intervalo;
+  let conversionActual;
+
+  function iniciarTemporizador() {
+    intervalo = setInterval(() => {
+      if (tiempo > 0) {
+        tiempo--;
+        const minutos = Math.floor(tiempo / 60);
+        const segundos = tiempo % 60;
+        document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+      } else {
+        finalizarJuego();
+      }
+    }, 1000);
+  }
+
+  function mostrarNuevaConversion() {
+    conversionActual = conversiones[Math.floor(Math.random() * conversiones.length)];
+    document.getElementById('origenBolsa').innerText = `${conversionActual.cantidad} ${conversionActual.unidadOrigen}`;
+    document.getElementById('destinoBolsa').innerText = conversionActual.unidadDestino;
+    document.getElementById('respuesta').value = '';
+  }
+
+ const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+  function verificarRespuesta() {
+    const entrada = parseFloat(document.getElementById('respuesta').value);
+    const esperado = conversionActual.resultado;
+
+    // Comparar con pequeña tolerancia decimal
+    if (Math.abs(entrada - esperado) < 0.01) {
+      correctos++;
+      document.getElementById('correctos').innerText = correctos;
+      sonidoCorrecto.play(); 
+    } else {
+      incorrectos++;
+      document.getElementById('incorrectos').innerText = incorrectos;
+      sonidoIncorrecto.play();
+    }
+
+    mostrarNuevaConversion();
+  }
+
+  function finalizarJuego() {
+    clearInterval(intervalo);
+    const resultadoFinal = correctos - incorrectos;
+    let nota = "F";
+    if (resultadoFinal >= 20) nota = "A";
+    else if (resultadoFinal >= 10) nota = "B";
+    else if (resultadoFinal >= 5) nota = "C";
+
+    document.getElementById('puntajeFinal').innerText = resultadoFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+  }
+
+  function iniciarJuego() {
+    iniciarTemporizador();
+    mostrarNuevaConversion();
+  }
+
+  window.onload = iniciarJuego;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mategames</title>
+</head>
+<body>
+
+<div class="cubo">
+    <div class="cubo1">
+         <div class="imagen"><img src="../imagenes/8.png"></div>
+         <div class="game">
+        <div class="cubo2">
+        <div class="arriba" id="numeroObjetivo"></div>
+        </div>
+        <div class="cubo3">
+        <div class="fila" id="cuadrados">
+            <div class='mini-cubos' id='centenas'></div>
+            <div class='mini-cubos' id='decenas'></div>
+            <div class='mini-cubos' id='unidades'></div>
+            <div class="mini-cubos"></div>
+            <div class='mini-cubos' id='decimas'></div>
+            <div class='mini-cubos' id='centesimas'></div>
+            <div class='mini-cubos' id='milesimas'></div>
+        </div>
+        <div class="fila">
+            <div class="cubito">C</div>
+            <div class="cubito">D</div>
+            <div class="cubito">U</div>
+            <div class="cubito">,</div>
+            <div class="cubito">d</div>
+            <div class="cubito">c</div>
+            <div class="cubito">m</div>
+        </div>
+    </div>
+</div>
+ <div class="imagen"><img src="../imagenes/10.png"></div>
+    </div>
+    <div class="cubo4">
+        <div class="correcto">C: <span id="correctas">0</span></div>
+        <div class="tiempo">
+            <div class="unidad">
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('centenas', 100)">+</button>
+                   <p id="inputCentenas">0</p>
+                    <button class="num" onclick="ajustarCantidad('centenas', -100)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('decenas', 10)">+</button>
+                   <p id="inputDecenas">0</p>
+                    <button class="num" onclick="ajustarCantidad('decenas', -10)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('unidades', 1)">+</button>
+                   <p id="inputUnidades">0</p>
+                    <button class="num" onclick="ajustarCantidad('unidades', -1)">-</button>
+                </div>
+                <p>,</p>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('decimas', 0.1)">+</button>
+                    <p id="inputDecimas">0</p>
+                    <button class="num" onclick="ajustarCantidad('decimas', -0.1)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('centesimas', 0.01)">+</button>
+                   <p id="inputCentesimas">0</p>
+                    <button class="num" onclick="ajustarCantidad('centesimas', -0.01)">-</button>
+                </div>
+                <div class="respuesta">
+                    <button class="num" onclick="ajustarCantidad('milesimas', 0.001)">+</button>
+                    <p id="inputMilesimas">0</p>
+                    <button class="num" onclick="ajustarCantidad('milesimas', -0.001)">-</button>
+                </div>
+            </div>
+            <button onclick="verificar()">Verificar</button>
+            <span id="tiempo">2:30</span>
+        </div>
+        <div class="incorrecto">F: <span id="incorrectas">0</span></div>
+    </div>
+</div>
+
+<div id="resultado" class="res">
+    <h2>Juego terminado</h2>
+    <p>Puntuación final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button onclick="location.reload()">Reiniciar</button>
+        <button onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba2,2.css")
+</style>
+
+<script>
+function salir() {
+    window.location.href = "mategames.html";
+}
+
+let interval;
+let correctas = 0;
+let incorrectas = 0;
+let tiempoRestante = 150;
+let numeroActual = {};
+let cantidades = { centenas: 0, decenas: 0, unidades: 0, decimas: 0, centesimas: 0, milesimas: 0 };
+
+function iniciarTemporizador() {
+    interval = setInterval(() => {
+        tiempoRestante--;
+        let minutos = Math.floor(tiempoRestante / 60);
+        let segundos = tiempoRestante % 60;
+        document.getElementById('tiempo').innerText = `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
+
+        if (tiempoRestante <= 0) {
+            clearInterval(interval); 
+            mostrarResultado();  
+        }
+    }, 1000);
+}
+
+
+function generarNumero() {
+    let centenas = (Math.floor(Math.random() * 9) + 1) * 100;
+    let decenas = (Math.floor(Math.random() * 9) + 1) * 10;
+    let unidades = (Math.floor(Math.random() * 9) + 1);
+    let decimas = (Math.floor(Math.random() * 9) + 1) / 10;
+    let centesimas = (Math.floor(Math.random() * 9) + 1) / 100;
+    let milesimas = (Math.floor(Math.random() * 9) + 1) / 1000;
+
+
+
+    numeroActual = { centenas, decenas, unidades, decimas, centesimas, milesimas };
+
+   
+    let valores = [ centenas, decenas, unidades, decimas, centesimas, milesimas];
+
+   
+    valores.sort(() => Math.random() - 0.5);
+
+    document.getElementById('numeroObjetivo').innerText = valores.join(" - ");
+}
+
+generarNumero();
+
+iniciarTemporizador();
+
+function ajustarCantidad(tipo, cambio) {
+    let maximos = {
+        centenas: 900,
+        decenas: 90,
+        unidades: 9,
+        decimas: 0.9,
+        centesimas: 0.09,
+        milesimas: 0.009
+    };
+
+    
+    cantidades[tipo] = Math.max(0, Math.min(maximos[tipo], cantidades[tipo] + cambio));
+
+  
+    let decimales = tipo === "decimas" ? 1 : tipo === "centesimas" ? 2 : tipo === "milesimas" ? 3 : 0;
+    cantidades[tipo] = parseFloat(cantidades[tipo].toFixed(decimales));
+
+    document.getElementById(`input${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).innerText = cantidades[tipo];
+
+    actualizarCuadrados(tipo);
+}
+
+
+
+function actualizarCuadrados(tipo) {
+    let cantidad = cantidades[tipo] / (tipo === 'centenas' ? 100 : tipo === 'decenas' ? 10 : tipo === 'unidades' ? 1 : tipo === 'decimas' ? 0.1 : tipo === 'centesimas' ? 0.01 : 0.001 );
+    let contenedor = document.getElementById(tipo);
+    contenedor.innerHTML = '';
+    for (let i = 0; i < cantidad; i++) {
+        let div = document.createElement('div');
+        div.classList.add('mini-cubo');
+        contenedor.appendChild(div);
+    }
+}
+
+const sonidoCorrecto = new Audio('../sonidos/correct-156911.mp3');
+const sonidoIncorrecto = new Audio('../sonidos/error-3-125761.mp3');
+
+function verificar() {
+    let respuesta = cantidades.centenas + cantidades.decenas + cantidades.unidades +
+                    cantidades.decimas + cantidades.centesimas + cantidades.milesimas;
+
+    let totalNumeroActual = numeroActual.centenas + numeroActual.decenas + numeroActual.unidades +
+                            numeroActual.decimas + numeroActual.centesimas + numeroActual.milesimas;
+
+    
+    respuesta = parseFloat(respuesta.toFixed(3));
+    totalNumeroActual = parseFloat(totalNumeroActual.toFixed(3));
+
+    if (respuesta === totalNumeroActual) {
+        correctas++;
+        document.getElementById('correctas').innerText = correctas;
+         sonidoCorrecto.play(); 
+    } else {
+        incorrectas++;
+        document.getElementById('incorrectas').innerText = incorrectas;
+          sonidoIncorrecto.play();
+    }
+
+    generarNumero();
+    cantidades = {centenas: 0, decenas: 0, unidades: 0, decimas: 0, centesimas: 0, milesimas: 0};
+
+    document.querySelectorAll(".respuesta p").forEach(p => p.innerText = "0");
+    document.querySelectorAll(".mini-cubos").forEach(c => c.innerHTML = "");
+}
+
+
+function mostrarResultado() {
+    clearInterval(interval); 
+    let puntajeFinal = correctas - incorrectas;
+    let nota = puntajeFinal >= 10 ? "A" : puntajeFinal >= 5 ? "B" : puntajeFinal >= 2 ? "C" : "F";
+    document.getElementById('puntajeFinal').innerText = puntajeFinal;
+    document.getElementById('nota').innerText = nota;
+    document.getElementById('resultado').style.display = 'block';
+}
+</script>
+</body>
+</html>

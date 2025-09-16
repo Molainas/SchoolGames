@@ -1,0 +1,182 @@
+body{background-color: green;
+}
+
+.cubo{border: 1px solid white;
+background-color: white;
+height: 650px;
+display: flex;
+flex-direction: column;}
+
+.cubo1{
+height: 80%;
+display: flex;
+flex-direction: column;}
+
+.pasillo{border-bottom: 3px solid #FFF52D;
+height: 68%;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+
+.cambioPlanta{border: 1px solid #FFF52D;
+background-color: #FFF52D;
+color: white;
+font-size: 30px;
+height: 30%;
+width: 15%;}
+
+.cambioAnimal{border: 1px solid #FFF52D;
+background-color: #FFF52D;
+color: white;
+font-size: 30px;
+height: 30%;
+width: 15%;}
+
+.cubito{border: 3px solid green;
+height: 90%;
+width: 40%;
+display: flex;
+flex-direction: column;
+align-items: center;}
+
+.cubito1{border: 3px solid green;
+height: 30%;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubito2{border: 3px solid green;
+background-image: url(../imagenes/fondo1.png);
+background-repeat: no-repeat;
+height: 70%;
+width: 100%;
+display: flex;
+justify-content: space-around;
+align-items: flex-end;
+}
+
+.cubito1_1{border: 3px solid green;
+height: 30%;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.cubito2_2{border: 3px solid green;
+background-image: url(../imagenes/fondo2.png);
+background-repeat: no-repeat;
+height: 70%;
+width: 100%;
+display: flex;
+justify-content: space-around;
+align-items: flex-end;}
+
+.letrero{border: 1px solid #FFF52D;
+background-color: #FFF52D;
+height: 100%;
+width: 100%;
+margin-bottom: 3px;
+margin-top: 3px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: green;
+font-family: cursive;
+font-size: 50px;}
+
+.puerta{border: 1px solid #FFF52D;
+height: 80%;
+width: 40%;
+display: flex;
+}
+
+.img1{height: 100%;
+width: 50%;}
+
+.piso{
+height: 30%;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.animal{border: 1px solid #FFF52D;
+background-color: #FFF52D;
+height: 150px;
+width: 400px;}
+
+.cubo2{
+height: 20%;
+display: flex;
+align-items: center;
+justify-content: space-around;}
+
+.correcto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.tiempo{border: 1px solid green; 
+height: 100px;
+width: 200px;
+color: white;
+font-family: cursive;
+font-size: 50px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.incorrecto{border: 1px solid green;
+height: 100px;
+width: 100px;
+color: white;
+font-family: cursive;
+font-size: 30px;
+background-color: green;
+display: flex;
+align-items: center;
+justify-content: center;}
+
+.res{display:none; 
+    position: fixed; 
+    top: 75%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: green; 
+    padding: 50px; 
+    border: 2px solid #FFF52D; 
+    text-align: center; 
+    color: white; 
+    font-family: cursive;}
+
+.boton1{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 90px;
+width: 200px;
+font-family: cursive;
+font-size: 40px;
+}
+
+.boton2{border: 1px solid green;
+background-color: white;
+color: #FFF52D;
+height: 60px;
+width: 100px;
+font-family: cursive;
+font-size: 20px;}
+
+.botones{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+width: 450px;}

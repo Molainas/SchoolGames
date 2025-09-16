@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inglegames</title>
+</head> 
+<body>
+
+<div class="cubo">
+
+<div class="cubo1">
+    
+<div class="caja1">
+    <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">MIRROR</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOWEL</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">SOAP</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TOOTHBRUSH</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">CUPBOARD</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">FRIDGE</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BLENDER</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">STOVE</button>
+            </div>
+        </div>
+
+<div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">TELEVISION</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">CARPET</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">COFFE TABLE</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">COUCH</button>
+            </div>
+        </div>
+        <div class="caja">
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">BED</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">LAMP</button>
+            </div>
+            <div class="acomodacion1">
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">DESK</button>
+                <button class="cosas" draggable="true" ondragstart="arrastrar(event)">WARDROBE</button>
+            </div>
+        </div>
+
+        <div class="caja">
+        <div class="acomodacion1">
+            <button class="cosas" draggable="true" ondragstart="arrastrar(event)">PRUNERS</button>
+            <button class="cosas" draggable="true" ondragstart="arrastrar(event)">HOSE</button>
+        </div>
+        <button class="cosas" draggable="true" ondragstart="arrastrar(event)">LAWNMOVER</button>
+    </div>
+
+</div>
+
+<div class="casa">
+        <div class="baño" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">BATHROOM</div>
+        <div class="acomodacion">
+            <div class="recamara" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">BEDROOM</div>
+            <div class="sala" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">LIVING ROOM</div>
+            <div class="jardin" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">GARDEN</div>
+        </div>
+        <div class="cocina" ondragover="permitirDrop(event)" ondrop="soltarLetra(event)">KITCHEN</div>
+    </div>
+
+</div>
+
+<div class="cubo2">
+
+   <div class="texto" id="zonaTexto">
+    <button class="empezar" id="btnEmpezar" onclick="iniciarJuego()">EMPEZAR</button>
+    <div id="objetoActual"></div>
+   </div>
+
+
+    <img src="../imagenes/rethgf.png" class="img1">
+        
+ <div class="puntos">
+    <div class="correcto">C: <span id="correctos">0</span></div>
+    <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+ </div>
+
+<div class="tiempo" id="tiempo">5:00</div>
+
+<div id="mensajeRespuesta" style="font-weight: bold; font-size: 20px; margin-top: 10px;"></div>
+
+</div>
+
+</div>
+
+<div id="resultado" class="res" style="display: none;">
+    <h2>Juego terminado</h2>
+    <p>Puntuacion final: <span id="puntajeFinal"></span></p>
+    <p>Nota: <span id="nota"></span></p>
+    <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+    </div>
+</div>
+
+<style>
+    @import url("../CSS/prueba7.css");
+</style>
+
+<script>
+
+let tiempo = 300;
+let interval;
+const desafios = [
+    { objeto: "MIRROR", habitacion: "BATHROOM" },
+    { objeto: "TOWEL", habitacion: "BATHROOM" },
+    { objeto: "SOAP", habitacion: "BATHROOM" },
+    { objeto: "TOOTHBRUSH", habitacion: "BATHROOM" },
+    { objeto: "CUPBOARD", habitacion: "KITCHEN" },
+    { objeto: "FRIDGE", habitacion: "KITCHEN" },
+    { objeto: "BLENDER", habitacion: "KITCHEN" },
+    { objeto: "STOVE", habitacion: "KITCHEN" },
+    { objeto: "TELEVISION", habitacion: "LIVING ROOM" },
+    { objeto: "CARPET", habitacion: "LIVING ROOM" },
+    { objeto: "COFFE TABLE", habitacion: "LIVING ROOM" },
+    { objeto: "COUCH", habitacion: "LIVING ROOM" },
+    { objeto: "BED", habitacion: "BEDROOM" },
+    { objeto: "LAMP", habitacion: "BEDROOM" },
+    { objeto: "DESK", habitacion: "BEDROOM" },
+    { objeto: "WARDROBE", habitacion: "BEDROOM" },
+    { objeto: "PRUNERS", habitacion: "GARDEN" },
+    { objeto: "HOSE", habitacion: "GARDEN" },
+    { objeto: "LAWNMOVER", habitacion: "GARDEN" }
+];
+
+let desafioActual;
+let correctos = 0;
+let incorrectos = 0;
+
+ function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none";
+        correctos = 0;
+        incorrectos = 0;
+        document.getElementById("correctos").innerText = correctos;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        tiempo = 300;
+        document.getElementById("tiempo").innerText = "5:00";
+
+        clearInterval(interval);
+        iniciarTemporizador();
+        nuevoDesafio();
+    }
+
+function nuevoDesafio() {
+    desafioActual = desafios[Math.floor(Math.random() * desafios.length)];
+    document.getElementById("objetoActual").innerText = `${desafioActual.objeto}`;
+    pronunciar(desafioActual.objeto); // 👈 Agregado aquí
+}
+
+function mostrarMensajeEnTexto(texto, esCorrecto) {
+    const mensaje = document.getElementById("mensajeRespuesta");
+    mensaje.innerText = texto;
+    mensaje.style.color = esCorrecto ? "purple" : "purple";
+    mensaje.style.display = "block";
+
+    setTimeout(() => {
+        mensaje.style.display = "none";
+    }, 1500);
+}
+
+
+function arrastrar(event) {
+    event.dataTransfer.setData("text", event.target.innerText.trim());
+}
+
+
+function permitirDrop(event) {
+    event.preventDefault();
+}
+
+
+
+
+function soltarLetra(event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const habitacion = event.target.innerText.trim();
+
+    if (data === desafioActual.objeto && habitacion === desafioActual.habitacion) {
+        correctos++;
+        document.getElementById("correctos").innerText = correctos;
+        mostrarMensajeEnTexto("¡Correcto!", true);
+    } else {
+        incorrectos++;
+        document.getElementById("incorrectos").innerText = incorrectos;
+        mostrarMensajeEnTexto("Incorrecto", false);
+    }
+
+    nuevoDesafio();
+}
+
+
+function pronunciar(texto) {
+    const mensaje = new SpeechSynthesisUtterance(texto);
+    const voces = speechSynthesis.getVoices();
+    mensaje.voice = voces.find(voz => voz.lang === 'en-US' && voz.name.includes('Male')) || voces[0];
+    mensaje.lang = 'en-US';
+    mensaje.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(mensaje);
+}
+
+function iniciarTemporizador() {
+        interval = setInterval(function () {
+            if (tiempo > 0) {
+                tiempo--;
+                let minutos = Math.floor(tiempo / 60);
+                let segundos = tiempo % 60;
+                document.getElementById('tiempo').innerText = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(interval);
+                finalizarJuego();
+            }
+        }, 1000);
+    }
+
+function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+            nota = "A";
+        } else if (resultadoFinal >= 10) {
+            nota = "B";
+        } else if (resultadoFinal >= 5) {
+            nota = "C";
+        } else {
+            nota = "F";
+        }
+
+        document.getElementById('puntajeFinal').innerText = resultadoFinal;
+        document.getElementById('nota').innerText = nota;
+        document.getElementById('resultado').style.display = 'block';
+    }
+
+    function salir() {
+        window.location.href = "Inglegames.html";
+    }
+
+
+</script>
+
+</body>
+</html>

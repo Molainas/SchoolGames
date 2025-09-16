@@ -1,0 +1,15 @@
+{
+  "rootDirectory": "portada",
+  "builds": [
+    {
+      "src": "entrada.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/entrada.html"
+    }
+  ]
+}

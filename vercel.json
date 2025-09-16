@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "entrada.html",
+      "src": "portada/entrada.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/entrada.html"
+      "dest": "portada/entrada.html"
     }
   ]
 }

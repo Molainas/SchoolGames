@@ -1,14 +1,14 @@
 {
   "builds": [
-    {
-      "src": "portada/entrada.html",
-      "use": "@vercel/static"
-    }
+    { "src": "portada/entrada.html", "use": "@vercel/static" },
+    { "src": "Espagames/HTML/Espagames.html", "use": "@vercel/static" },
+    { "src": "Inglegames/HTML/Inglegames.html", "use": "@vercel/static" },
+    { "src": "mategames/HTML/mategames.html", "use": "@vercel/static" },
+    { "src": "Naturalgames/HTML/Naturalgames.html", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "portada/entrada.html"
-    }
+    { "src": "/portada/(.*)", "dest": "/portada/$1" },
+    { "src": "/Espagames/(.*)", "dest": "/Espagames/$1" },
+    { "src": "/Naturalgames/(.*)", "dest": "/Naturalgames/$1" }
   ]
 }

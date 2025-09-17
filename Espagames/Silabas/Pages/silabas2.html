@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>SILABAS</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                Tengo pasteles largos y bebo cortarlos para que todos caben en
+                la nevera pero se bebe cortar de la siguiente manera
+              </li>
+
+              <li>
+                Cada pastel tiene una palabra y atra vez de esa palabra se puede
+                dividir el pastel, si no esta bien dividida la palabra no esta
+                bien dividido el pastel
+              </li>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>lea atentamente</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/silabas2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba5,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

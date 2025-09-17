@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <div class="imagen">
+          <canvas id="canvas" width="200" height="200"></canvas>
+          <div class="texto" id="texto"></div>
+        </div>
+
+        <div class="letras" id="zona-letras"></div>
+      </div>
+
+      <div class="cubo2">
+        <button class="verificacion" onclick="verificarRespuesta()">
+          VERIFICAR
+        </button>
+        <button id="btnEmpezar" class="empezar" onclick="iniciarJuego()">
+          Empezar
+        </button>
+
+        <div class="puntos">
+          <div class="correcto">C: <span id="correctos">0</span></div>
+          <div class="incorrecto">F: <span id="incorrectos">0</span></div>
+        </div>
+
+        <img src="../imagenes/pequenin452.png" />
+        <div class="tiempo" id="tiempo">5:00</div>
+      </div>
+    </div>
+
+    <div id="resultado" class="res" style="display: none">
+      <h2>Juego terminado</h2>
+      <p>Puntuación final: <span id="puntajeFinal"></span></p>
+      <p>Nota: <span id="nota"></span></p>
+      <div class="botones">
+        <button class="boton2" onclick="location.reload()">Reiniciar</button>
+        <button class="boton2" onclick="salir()">Escoger otro</button>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/prueba1,2.css");
+    </style>
+
+    <script>
+      let correctos = 0;
+      let incorrectos = 0;
+      let tiempo = 300;
+      let interval;
+
+      let palabras = [
+        { texto: "CASA", dibujo: dibujarCasa },
+        { texto: "MESA", dibujo: dibujarMesa },
+        { texto: "PERRO", dibujo: dibujarPerro },
+      ];
+
+      let indiceActual = 0;
+
+      function iniciarJuego() {
+        document.getElementById("btnEmpezar").style.display = "none"; // 👈 Ocultar botón
+        iniciarTemporizador();
+        mostrarPalabraActual();
+        generarConsonantes();
+      }
+
+      function iniciarTemporizador() {
+        interval = setInterval(function () {
+          if (tiempo > 0) {
+            tiempo--;
+            let minutos = Math.floor(tiempo / 60);
+            let segundos = tiempo % 60;
+            document.getElementById("tiempo").innerText = `${minutos
+              .toString()
+              .padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+          } else {
+            clearInterval(interval);
+            finalizarJuego();
+          }
+        }, 1000);
+      }
+
+      function decirPalabra(texto) {
+        const mensaje = new SpeechSynthesisUtterance(texto);
+        mensaje.lang = "es-ES";
+        mensaje.rate = 0.9;
+        mensaje.pitch = 1;
+        window.speechSynthesis.speak(mensaje);
+      }
+
+      function mostrarPalabraActual() {
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, 200, 200);
+
+        const palabra = palabras[indiceActual];
+        palabra.dibujo(ctx);
+        mostrarTextoConEspacios(palabra.texto);
+
+        decirPalabra(palabra.texto);
+      }
+
+      function mostrarTextoConEspacios(palabra) {
+        const contenedor = document.getElementById("texto");
+        contenedor.innerHTML = "";
+        for (let letra of palabra) {
+          const div = document.createElement("div");
+          div.classList.add("espacio");
+
+          if (!"AEIOU".includes(letra)) {
+            div.dataset.correcta = letra;
+            div.ondragover = (e) => e.preventDefault();
+            div.ondrop = soltarLetra;
+          } else {
+            div.textContent = letra;
+          }
+
+          contenedor.appendChild(div);
+        }
+      }
+
+      function arrastrar(e) {
+        e.dataTransfer.setData(
+          "text",
+          e.target.textContent.trim().toUpperCase()
+        );
+      }
+
+      function soltarLetra(e) {
+        const letra = e.dataTransfer.getData("text");
+        if (!["A", "E", "I", "O", "U"].includes(letra)) {
+          e.target.textContent = letra;
+        }
+      }
+
+      const sonidoCorrecto = new Audio("../sonidos/correct-156911.mp3");
+      const sonidoIncorrecto = new Audio("../sonidos/error-3-125761.mp3");
+
+      function verificarRespuesta() {
+        const espacios = document.querySelectorAll(".espacio");
+        let bien = 0;
+        let mal = 0;
+
+        espacios.forEach((div) => {
+          if (div.dataset.correcta) {
+            if (div.textContent === div.dataset.correcta) {
+              bien++;
+            } else {
+              mal++;
+            }
+          }
+        });
+
+        correctos += bien;
+        incorrectos += mal;
+
+        document.getElementById("correctos").textContent = correctos;
+        document.getElementById("incorrectos").textContent = incorrectos;
+
+        if (mal > 0) {
+          sonidoIncorrecto.play();
+        } else if (bien > 0) {
+          sonidoCorrecto.play();
+        }
+
+        setTimeout(() => {
+          avanzarPalabra();
+        }, 1000);
+      }
+
+      function avanzarPalabra() {
+        indiceActual++;
+        if (indiceActual >= palabras.length) {
+          finalizarJuego();
+          return;
+        }
+        mostrarPalabraActual();
+      }
+
+      function finalizarJuego() {
+        clearInterval(interval);
+        const resultadoFinal = correctos - incorrectos;
+        let nota;
+
+        if (resultadoFinal >= 20) {
+          nota = "A";
+        } else if (resultadoFinal >= 10) {
+          nota = "B";
+        } else if (resultadoFinal >= 5) {
+          nota = "C";
+        } else {
+          nota = "F";
+        }
+
+        document.getElementById("puntajeFinal").innerText = resultadoFinal;
+        document.getElementById("nota").innerText = nota;
+        document.getElementById("resultado").style.display = "block";
+      }
+
+      function salir() {
+        window.location.href = "Espagames2.html";
+      }
+
+      // 🎨 Dibujos
+      function dibujarCasa(ctx) {
+        ctx.fillStyle = "brown";
+        ctx.fillRect(60, 100, 80, 80);
+        ctx.beginPath();
+        ctx.moveTo(60, 100);
+        ctx.lineTo(100, 60);
+        ctx.lineTo(140, 100);
+        ctx.fillStyle = "red";
+        ctx.fill();
+      }
+
+      function dibujarMesa(ctx) {
+        ctx.fillStyle = "sienna";
+        ctx.fillRect(40, 100, 120, 20);
+        ctx.fillRect(50, 120, 10, 50);
+        ctx.fillRect(140, 120, 10, 50);
+      }
+
+      function dibujarPerro(ctx) {
+        ctx.fillStyle = "gray";
+        ctx.fillRect(60, 100, 80, 50);
+        ctx.beginPath();
+        ctx.arc(100, 90, 20, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 🎯 Generar todas las consonantes
+      function generarConsonantes() {
+        const zonaLetras = document.getElementById("zona-letras");
+        const letras = "BCDFGHJKLMNÑPQRSTVWXYZ";
+        zonaLetras.innerHTML = "";
+
+        for (let letra of letras) {
+          const div = document.createElement("div");
+          div.className = "letra";
+          div.textContent = letra;
+          div.draggable = true;
+          div.ondragstart = arrastrar;
+          zonaLetras.appendChild(div);
+        }
+      }
+    </script>
+  </body>
+</html>

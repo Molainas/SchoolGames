@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>PERSONAJES</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                Las historias siempre poseen personajes para el desarrollo de
+                todo el relato
+              </li>
+
+              <li>
+                Pero a veces se me olvida los personajes y me confundo por lo
+                que necesito resaltar todos los personajes que se relatan
+              </li>
+
+              <li>
+                Si tienes problemas con identificar personajes puedes consultar
+                mi libro
+              </li>
+
+              <div class="libro">
+                <button class="boton1" onclick="abri()">
+                  <img src="../imagenes/libro.png" class="librote" />
+                </button>
+              </div>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>lea el cuento</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="open" class="librito">
+      <div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+            <li>
+              Los personajes secundarios apoyan la historia del protagonista,
+              sin ser el centro de la trama, mientras que los antagonistas son
+              personajes que se oponen al protagonista, creando el conflicto
+              principal y obstaculizando sus objetivos.
+            </li>
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+          <ul>
+            <img src="../imagenes/imagen2,1.png" class="img3" />
+
+            <img src="../imagenes/imagen2,2.png" class="img3" />
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/personajes2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba9,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

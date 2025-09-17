@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>VERBOS</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                Necesito colocar el soporte de cada tabla escrita para completar
+                la oracion
+              </li>
+
+              <li>
+                Lo que tienes que hacer es colocar el verbo correcto para que se
+                sostenga firmemente
+              </li>
+
+              <li>
+                Si necesitas saber que es un verbo puedes consultar en mi libro
+              </li>
+
+              <div class="libro">
+                <button class="boton1" onclick="abri()">
+                  <img src="../imagenes/libro.png" class="librote" />
+                </button>
+              </div>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>Lea cada palabra si encaja en la oriacion</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="open" class="librito">
+      <div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+            <li></li>
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+          <ul>
+            <img src="../imagenes/" class="img3" />
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/verbos2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba7,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

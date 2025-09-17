@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>PUNTO Y COMA</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                cada texto, cuento, parrafo, poemas y otras escrituras tienen
+                siempre puntos y comas
+              </li>
+
+              <li>
+                La coma sirve como una pausa del lector y el punto como el final
+                de una oracion, por lo que tienes es colocar la coma o el punto
+                en el lugar correcto
+              </li>
+
+              <li>puedes leer mi libro para indetificar la coma y el punto</li>
+
+              <div class="libro">
+                <button class="boton1" onclick="abri()">
+                  <img src="../imagenes/libro.png" class="librote" />
+                </button>
+              </div>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>lea atentamente</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="open" class="librito">
+      <div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+            <li>
+              El punto es un signo ortográfico que señala el fin o término de
+              una oración o enunciado. Por ende, el punto es un signo que
+              permite finalizar una idea y dar paso a otra, ya sea en el mismo
+              párrafo o en uno distinto. Y siempre la primera letra que sigue
+              después irá en mayúsculas.
+            </li>
+
+            <li>
+              La palabra "coma" puede referirse a un estado médico grave de
+              inconsciencia, una pausa en la escritura para separar elementos o
+              aclarar información, o la cabellera de un cometa. También existe
+              un defecto óptico en telescopios y lentes llamado coma, y es un
+              término para una reducción de la conciencia en general.
+            </li>
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+          <ul>
+            <img src="../imagenes/imagen5.png" class="img3" />
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/puntocoma.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba6.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

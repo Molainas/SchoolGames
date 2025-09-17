@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>ADJETIVOS</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                necesito que coloques las etiquetas correctas segun como se
+                siente la sustancia
+              </li>
+
+              <li>
+                Yo te digo como siento la sustancia y tu colocas las etiquetas
+                correctas con un solo adjetivo
+              </li>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+
+            <ul>
+              <li>Lea primero y asocia un adjetivo con la descripcion</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/adjetivos2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba8,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

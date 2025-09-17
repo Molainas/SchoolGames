@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>COMBINACION</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                Las letras g,b,c,f,p tienen una forma diferente cuando se mezcla
+                con la letra l y R, y necesito saber si sabes donde debe estar
+                la l
+              </li>
+
+              <li>
+                Escucha muy bien el audio y las letras correctas para completar
+                el texto
+              </li>
+
+              <li>Aunque puedes ver mi libro para aprender</li>
+
+              <div class="libro">
+                <button class="boton1" onclick="abri()">
+                  <img src="../imagenes/libro.png" class="librote" />
+                </button>
+              </div>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>Escucha antes de actuar</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="open" class="librito">
+      <div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+            <li>
+              Las "combinaciones con la r" pueden ser con otras consonantes,
+              como en los grupos pr, tr, cr, dr, fr, gr, br, etc., que forman
+              sílabas como pra, tre, cri, dro, fro, gre, bra.
+            </li>
+
+            <li>
+              Estas son las combinaciones de la letra "R" con otra consonante,
+              formando grupos como los siguientes:
+            </li>
+
+            <li>
+              Pra, pre, pri, pro, pru: como en proyecto, presidente, prima,
+              profesor, prueba.
+            </li>
+
+            <li>
+              Tra, tre, tri, tro, tru: como en tren, treinta, triste, trono,
+              trueno.
+            </li>
+
+            <li>
+              Cra, cre, cri, cro, cru: como en cruz, creema, crítica, crómez,
+              crudo.
+            </li>
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+          <ul>
+            <li>
+              Dra, dre, dri, dro, dru: como en drama, dreams, drisa, dromo,
+              druma.
+            </li>
+
+            <li>
+              Fra, fre, fri, fro, fru: como en frío, frente, fríjol, frotón,
+              fruta.
+            </li>
+
+            <li>
+              Gra, gre, gri, gro, gru: como en grande, greeno, gritar, grosero,
+              grupo.
+            </li>
+
+            <li>
+              Bra, bre, bri, bro, bru: como en brazo, breva, brillo, brojos,
+              bruma.
+            </li>
+
+            <img src="../imagenes/imagen3,2.jpg" class="img3" />
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/combinacion2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba3,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

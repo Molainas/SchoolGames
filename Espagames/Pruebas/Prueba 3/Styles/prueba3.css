@@ -1,0 +1,165 @@
+body {
+  background-color: #804000;
+}
+
+.cubo {
+  background-color: white;
+  border: 1px solid white;
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cubo1 {
+  border: 1px solid #804000;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url(../imagenes/fondo13.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.pequeñin {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.texto {
+  border: 3px solid black;
+  background-color: white;
+  border-radius: 30px;
+  height: 30%;
+  width: 70%;
+  font-family: cursive;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.empezar {
+  border: none;
+  background-color: white;
+  height: 100%;
+  width: 80%;
+  font-family: cursive;
+  font-size: 30px;
+}
+
+.cubo2 {
+  border: 1px solid #804000;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.subcubo {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cubito {
+  border: 1px solid #804000;
+  background-color: #804000;
+  cursor: grab;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  height: 60px;
+  width: 60px;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.correcto {
+  border: 1px solid #804000;
+  height: 70px;
+  width: 70px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiempo {
+  border: 1px solid #804000;
+  height: 70px;
+  width: 357px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.incorrecto {
+  border: 1px solid #804000;
+  height: 70px;
+  width: 70px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.res {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #804000;
+  height: 450px;
+  width: 1020px;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-family: cursive;
+  font-size: 35px;
+}
+
+.boton1 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 40px;
+}
+
+.boton2 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 20px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 1000px;
+}

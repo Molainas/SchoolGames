@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <h1>PUNTO Y COMA</h1>
+      </div>
+      <div class="cubo2">
+        <div class="cuadrado1">
+          <div class="titulo">INSTRUCIONES</div>
+          <div class="instruc">
+            <ul>
+              <li>
+                cada texto, cuento, parrafo, poemas y otras escrituras tienen
+                siempre puntos y comas
+              </li>
+
+              <li>
+                La coma sirve como una pausa del lector y el punto como el final
+                de una oracion, por lo que tienes es colocar la coma o el punto
+                en el lugar correcto
+              </li>
+
+              <li>puedes leer mi libro para indetificar la coma y el punto</li>
+
+              <div class="libro">
+                <button class="boton1" onclick="abri()">
+                  <img src="../imagenes/libro.png" class="librote" />
+                </button>
+              </div>
+            </ul>
+            <div class="consejos">CONSEJOS</div>
+            <ul>
+              <li>lea atentamente</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cuadrado">
+          <div class="ejemplo">
+            <img src="../imagenes/ejem1.gif" class="img2" />
+          </div>
+          <div class="botones">
+            <button class="boton2" onclick="ir()">EMPEZAR</button>
+            <button class="boton4" onclick="irse()">ESCOGER OTRO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="open" class="librito">
+      <div class="hojas">
+        <div class="mucho-texto1">
+          <ul>
+            <li>
+              El punto y coma (;) se usa principalmente para separar elementos
+              en enumeraciones complejas (cuando los elementos ya contienen
+              comas) y para unir dos oraciones sintácticamente independientes
+              pero relacionadas semánticamente, creando una pausa mayor que la
+              coma y menor que el punto. También se emplea para vincular
+              oraciones que incluyen conectores adversativos o disyuntivos y
+              puede sustituir verbos en elipsis, es decir, en una lista donde se
+              omite el verbo principal de cada elemento.
+            </li>
+          </ul>
+
+          <button class="boton3" onclick="cerrar()">Dejar de leer</button>
+        </div>
+        <div class="mucho-texto2">
+          <ul>
+            <img src="../imagenes/imagen4.png" class="img3" />
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/puntocoma2.css");
+    </style>
+
+    <script>
+      function ir() {
+        window.location.href = "../HTML/prueba6,2.html";
+      }
+
+      function irse() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function abri() {
+        document.getElementById("open").style.display = "block";
+      }
+
+      function cerrar() {
+        document.getElementById("open").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

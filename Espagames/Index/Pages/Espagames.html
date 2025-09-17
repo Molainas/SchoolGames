@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Espagames</title>
+  </head>
+  <body>
+    <div class="cubo">
+      <div class="cubo1">
+        <div class="cambio">
+          <img src="../imagenes/cambio.png" class="sigma" />
+          <button class="boton1" onclick="cambiar()">
+            si te sientes mayor podemos cambiar a otro modo
+          </button>
+        </div>
+        <h1>ESPAGAMES</h1>
+        <div class="cambio">
+          <button class="boton1" onclick="salir()">volver a la tierra</button>
+          <img src="../imagenes/salir.png" class="sigma" />
+        </div>
+      </div>
+
+      <div class="cubo2">
+        <div class="dificultad">
+          <h3>calentamiento nivel: facil</h3>
+        </div>
+
+        <div class="fila">
+          <div class="cubiculo">
+            <div class="sub">ABECEDARIO</div>
+            <div class="imgma">
+              <a href="../HTML/abecedario.html"
+                ><img src="../imagenes/abecedario.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">ESCRIBIR</div>
+            <div class="imgma">
+              <a href="../HTML/escribir.html"
+                ><img src="../imagenes/escribir.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">COMBINACION</div>
+            <div class="imgma">
+              <a href="../HTML/combinacion.html"
+                ><img src="../imagenes/combinacion.png"
+              /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dificultad">
+          <h3>nivel: medio facil</h3>
+        </div>
+
+        <div class="fila">
+          <div class="cubiculo">
+            <div class="sub">TILDE</div>
+            <div class="imgma">
+              <a href="../HTML/tilde.html"
+                ><img src="../imagenes/tilde.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">SILABAS</div>
+            <div class="imgma">
+              <a href="../HTML/silabas.html"
+                ><img src="../imagenes/silabas.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">PUNTO Y COMA</div>
+            <div class="imgma">
+              <a href="../HTML/puntocoma.html"
+                ><img src="../imagenes/punto coma.png"
+              /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dificultad">
+          <h3>nivel: medio</h3>
+        </div>
+
+        <div class="fila">
+          <div class="cubiculo">
+            <div class="sub">VERBOS</div>
+            <div class="imgma">
+              <a href="../HTML/verbos.html"
+                ><img src="../imagenes/verbos.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">ADJETIVOS</div>
+            <div class="imgma">
+              <a href="../HTML/adjetivos.html"
+                ><img src="../imagenes/adjetivos.png"
+              /></a>
+            </div>
+          </div>
+          <div class="cubiculo">
+            <div class="sub">PERSONAJES</div>
+            <div class="imgma">
+              <a href="../HTML/personajes.html"
+                ><img src="../imagenes/personajes.png"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @import url("../CSS/Espagames.css");
+    </style>
+
+    <script>
+      function cambiar() {
+        window.location.href = "../HTML/Espagames2.html";
+      }
+
+      function salir() {
+        window.location.href = "../../portada/entrada.html";
+      }
+    </script>
+  </body>
+</html>

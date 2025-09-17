@@ -1,0 +1,157 @@
+body {
+  background-color: #804000;
+}
+
+.cubo {
+  background-color: white;
+  border: 1px solid white;
+  height: 625px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cubo1 {
+  height: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pequeñin {
+  width: 20%;
+  display: flex;
+}
+
+.img1 {
+  height: 100%;
+  width: 100%;
+}
+
+.texto {
+  border: 3px solid black;
+  background-image: url(../imagenes/fondo17.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.caja {
+  border: 3px solid black;
+  width: 20%;
+  display: flex;
+  margin-left: 10px;
+}
+
+.img2 {
+  height: 100%;
+  width: 100%;
+}
+
+.cubo2 {
+  height: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.opcion {
+  border: 1px solid black;
+  background-color: black;
+  height: 90%;
+  width: 30%;
+  cursor: pointer;
+  font-family: cursive;
+  font-size: 50px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cubo3 {
+  height: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.correcto {
+  border: 1px solid #804000;
+  height: 70px;
+  width: 70px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiempo {
+  border: 1px solid #804000;
+  height: 50%;
+  width: 356px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.incorrecto {
+  border: 1px solid #804000;
+  height: 70px;
+  width: 70px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.res {
+  display: none;
+  position: fixed;
+  top: 35%;
+  left: 49.1%;
+  transform: translate(-50%, -50%);
+  background: #804000;
+  height: 420px;
+  width: 750px;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+}
+
+.boton1 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 40px;
+}
+
+.boton2 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 20px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}

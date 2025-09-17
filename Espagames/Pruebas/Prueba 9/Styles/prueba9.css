@@ -1,0 +1,160 @@
+body {
+  background-color: #804000;
+}
+
+.cubo {
+  background-color: white;
+  border: 1px solid white;
+  height: 620px;
+  display: flex;
+}
+
+.cubo1 {
+  background-image: url("../imagenes/fondo1,9.png");
+  background-size: 50% 100%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.libro {
+  display: flex;
+  width: 90%;
+  height: 80%;
+  border: 4px solid saddlebrown;
+  background: #e6d8ad;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hojas {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  font-family: cursive;
+  font-size: 28px;
+  line-height: 1.6;
+  background: #fffbe6;
+  border-left: 1px solid #d1bfa7;
+}
+
+.hojas:first-child {
+  border-left: none;
+}
+
+.palabra {
+  cursor: pointer;
+  padding: 2px 3px;
+  border-radius: 3px;
+}
+
+.marcada {
+  background-color: yellow;
+}
+
+.cubo2 {
+  border-left: 1px solid #804000;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.verificacion {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  font-family: cursive;
+  font-size: 30px;
+  height: 100px;
+  width: 100%;
+}
+
+.puntos {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 422px;
+}
+
+.correcto {
+  border: 1px solid #804000;
+  height: 100px;
+  width: 100px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.incorrecto {
+  border: 1px solid #804000;
+  height: 100px;
+  width: 100px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiempo {
+  border: 1px solid #804000;
+  height: 100px;
+  width: 356px;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+  background-color: #804000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.res {
+  display: none;
+  position: fixed;
+  top: 48%;
+  left: 84.5%;
+  transform: translate(-50%, -50%);
+  background: #804000;
+  height: 600px;
+  width: 360px;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-family: cursive;
+  font-size: 30px;
+}
+
+.boton1 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 40px;
+}
+
+.boton2 {
+  border: 1px solid #804000;
+  background-color: white;
+  color: black;
+  height: 90px;
+  width: 100px;
+  font-family: cursive;
+  font-size: 20px;
+}
+
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
